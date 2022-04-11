@@ -1,6 +1,11 @@
 # GOV.UK Frontend Flask
 
-This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) and [GOV.UK Design System](https://design-system.service.gov.uk/). You can [generate a new repository](https://github.com/LandRegistry/govuk-frontend-flask/generate) using this template to get a new project started quicker
+This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) and [GOV.UK Design System](https://design-system.service.gov.uk/) which is designed to get a new project started quicker. It is also the reference implementation of two core packages:
+
+- [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) which provides Jinja macros of GOV.UK components
+- [GOV.UK Frontend WTForms](https://github.com/LandRegistry/govuk-frontend-wtf) which provides WTForms widgets to integrate the above Jinja macros into form generation and validation
+
+The app is provided intentionally bare, with just the essential parts that all new services need such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It implements a number of other packages to provide the [features](#features) described below in an opinionated and best-practice way. Please read the [next steps](#next-steps) section for guidance on how to start building out your own app on top of this template.
 
 ## Prerequisites
 
@@ -13,6 +18,10 @@ This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV
 - Redis 4.0.x or higher (for rate limiting, otherwise in-memory storage is used)
 
 ## Getting started
+
+### Create a new repository
+
+[Create a new repository](https://github.com/LandRegistry/govuk-frontend-flask/generate) using this template, with the same directory structure and files. Then clone a local copy of your newly created repository.
 
 ### Create venv and install requirements
 
@@ -28,15 +37,29 @@ pip3 install -r requirements.txt ; pip3 install -r requirements_dev.txt
 ./build.sh
 ```
 
+### Set local environment variables
+
+In the `.flaskenv` file you will find a number of environment variables. These are injected as global variables into the app and templates, so all you have to do is supply your specific information for the following:
+
+- CONTACT_EMAIL
+- CONTACT_PHONE
+- DEPARTMENT_NAME
+- DEPARTMENT_URL
+- PHASE
+- SERVICE_NAME
+- SERVICE_URL
+
 ### Run app
 
 ```shell
 flask run
 ```
 
+You should now have the app running on <http://localhost:5000/>
+
 ## Testing
 
-Run the test suite
+To run the tests:
 
 ```shell
 python -m pytest --cov=app --cov-report=term-missing --cov-branch
@@ -68,7 +91,7 @@ Uses [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/) to enable [Cross S
 
 Uses [Flask Talisman](https://github.com/GoogleCloudPlatform/flask-talisman) to set HTTP headers that can help protect against a few common web application security issues.
 
-- Forces all connects to `https`, unless running with debug enabled.
+- Forces all connections to `https`, unless running with debug enabled.
 - Enables [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security).
 - Sets Flask's session cookie to `secure`, so it will never be set if your application is somehow accessed via a non-secure connection.
 - Sets Flask's session cookie to `httponly`, preventing JavaScript from being able to access its content.
@@ -87,7 +110,7 @@ Uses [Flask Compress](https://github.com/colour-science/flask-compress) to compr
 
 ### Rate limiting
 
-Uses [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) to set request rate limits on routes. The default rate limit is 2 requests per second _and_ 60 requests per minite (whichever is hit first) based on the clients remote IP address. Every time a request exceeds the rate limit, the view function will not get called and instead a [HTTP 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) status will be returned. If you're implementing user authentication using [Flask Login](https://flask-login.readthedocs.io/en/latest/) you should also use a `key_func` to identify users on routes that require authentication, for example:
+Uses [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) to set request rate limits on routes. The default rate limit is 2 requests per second _and_ 60 requests per minute (whichever is hit first) based on the client's remote IP address. Every time a request exceeds the rate limit, the view function will not get called and instead a [HTTP 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) status will be returned. If you're implementing user authentication using [Flask Login](https://flask-login.readthedocs.io/en/latest/) you should also use a `key_func` to identify users on routes that require authentication, for example:
 
 ```python
 @login_required
@@ -97,3 +120,9 @@ Uses [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) to set req
 This fixes the issue of rate limiting multiple users behind a single IP NAT or proxy, since the request is identified using a different unique value for each user.
 
 Rate limit storage can be backed by [Redis](https://redis.io/) using the `RATELIMIT_STORAGE_URL` config value in `config.py`, or fall back to in-memory if not present. Rate limit information will also be added to various [response headers](https://flask-limiter.readthedocs.io/en/stable/#rate-limiting-headers).
+
+## Next steps
+
+### Add your own blueprint
+
+### Deploy to Heroku
