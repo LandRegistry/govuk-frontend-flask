@@ -45,8 +45,8 @@ In the `.flaskenv` file you will find a number of environment variables. These a
 - CONTACT_PHONE
 - DEPARTMENT_NAME
 - DEPARTMENT_URL
-- PHASE
 - SERVICE_NAME
+- SERVICE_PHASE
 - SERVICE_URL
 
 ### Run app

@@ -72,8 +72,8 @@ def create_app(config_class=Config):
             contact_phone=app.config["CONTACT_PHONE"],
             department_name=app.config["DEPARTMENT_NAME"],
             department_url=app.config["DEPARTMENT_URL"],
-            phase=app.config["PHASE"],
             service_name=app.config["SERVICE_NAME"],
+            service_phase=app.config["SERVICE_PHASE"],
             service_url=app.config["SERVICE_URL"],
         )
 
