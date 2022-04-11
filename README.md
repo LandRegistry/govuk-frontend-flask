@@ -1,11 +1,11 @@
 # GOV.UK Frontend Flask
 
-This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) and [GOV.UK Design System](https://design-system.service.gov.uk/) which is designed to get a new project started quicker. It is also the reference implementation of two core packages:
+This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) and [GOV.UK Design System](https://design-system.service.gov.uk/) which is designed to get a new project started quicker. It is also a reference implementation of two core packages:
 
 - [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) which provides Jinja macros of GOV.UK components
 - [GOV.UK Frontend WTForms](https://github.com/LandRegistry/govuk-frontend-wtf) which provides WTForms widgets to integrate the above Jinja macros into form generation and validation
 
-The app is provided intentionally bare, with just the essential parts that all new services need such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It implements a number of other packages to provide the [features](#features) described below in an opinionated and best-practice way. Please read the [next steps](#next-steps) section for guidance on how to start building out your own app on top of this template.
+The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults. Please read the [next steps](#next-steps) section for guidance on how to start building out your own app on top of this template.
 
 ## Prerequisites
 
@@ -67,7 +67,7 @@ python -m pytest --cov=app --cov-report=term-missing --cov-branch
 
 ## Features
 
-This template app uses a number of packages to provide the following features with sensible defaults. Please refer to the specific packages documentation for more details.
+Please refer to the specific packages documentation for more details.
 
 ### Asset compression
 
@@ -83,9 +83,19 @@ Merged and compressed assets are browser cache busted on update by modifying the
 
 Uses [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/) and [WTForms](https://wtforms.readthedocs.io) to define and validate forms. Forms are rendered in your template using regular Jinja syntax.
 
+### Form validation errors
+
+If a submitted form has any validation errors, an [error summary component](https://design-system.service.gov.uk/components/error-summary/) is shown at the top of the page, along with individual field [error messages](https://design-system.service.gov.uk/components/error-message/). This follows the GOV.UK Design System [validation pattern](https://design-system.service.gov.uk/patterns/validation/) and is built in to the base page template.
+
+### Flash messages
+
+Messages created with Flask's `flash` function will be rendered using the GOV.UK Design System [notification banner component](https://design-system.service.gov.uk/components/notification-banner/). By default the blue "important" banner style will be used, unless a category of "success" is passed to use the green version.
+
 ### CSRF protection
 
 Uses [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/) to enable [Cross Site Request Forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection per form and for the whole app.
+
+CSRF errors are handled by creating a [flash message](#flash-messages) notification banner to inform the user that the form they submitted has expired.
 
 ### Security headers
 
