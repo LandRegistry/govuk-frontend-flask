@@ -1,0 +1,10 @@
+bandit==1.7.4
+black==22.3.0
+flake8-bugbear==22.3.23
+hacking==4.1.0
+isort==5.10.1
+pep8-naming<0.12.0
+pip-tools==6.6.0
+piprot==0.9.11
+pytest-cov==3.0.0
+safety==1.10.3

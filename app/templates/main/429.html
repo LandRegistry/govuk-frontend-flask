@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}Too many requests – {{service_name}} – GOV.UK{% endblock %}
+
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Sorry, there is a problem</h1>
+        <p class="govuk-body">There have been too many attempts to access this page.</p>
+        <p class="govuk-body">Try again later.</p>
+    </div>
+</div>
+{% endblock %}

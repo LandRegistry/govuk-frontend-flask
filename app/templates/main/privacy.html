@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
+
+{% block pageTitle %}Privacy notice – {{service_name}} – GOV.UK{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBackLink({
+    'text': "Back",
+    'href': url_for('main.index')
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {{ super() }}
+        <h1 class="govuk-heading-xl">Privacy notice</h1>
+    </div>
+</div>
+{% endblock %}
