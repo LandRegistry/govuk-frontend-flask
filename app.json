@@ -1,0 +1,52 @@
+{
+  "name": "GOV.UK Frontend Flask",
+  "description": "Flask based GOV.UK Frontend template app",
+  "keywords": ["GOV.UK", "Flask", "Jinja", "WTForms"],
+  "website": "https://govuk-frontend-flask.herokuapp.com/",
+  "repository": "https://github.com/LandRegistry/govuk-frontend-flask",
+  "env": {
+    "CONTACT_EMAIL": {
+      "description": "Contact email address used by the service team for feedback and support",
+      "value": "[contact email]"
+    },
+    "CONTACT_PHONE": {
+      "description": "Contact phone number used by the service team for feedback and support",
+      "value": "[contact phone]"
+    },
+    "DEPARTMENT_NAME": {
+      "description": "Name of the department providing this service, e,g. HM Land Registry, Ministry of Justice, etc",
+      "value": "[name of department]"
+    },
+    "DEPARTMENT_URL": {
+      "description": "URL of the department providing this service",
+      "value": "[url of department]"
+    },
+    "SECRET_KEY": {
+      "description": "A secret key used for securely signing the session cookie and CSRF token",
+      "generator": "secret"
+    },
+    "SERVICE_NAME": {
+      "description": "Name of this service, e.g. Apply for driving licence, Apply for student visa, etc",
+      "value": "[name of service]"
+    },
+    "SERVICE_PHASE": {
+      "description": "Phase the service is currently in, e.g. Alpha, Beta, etc",
+      "value": "[phase]"
+    },
+    "SERVICE_URL": {
+      "description": "URL of this service, e.g. https://something.service.gov.uk",
+      "value": "[url of service]"
+    }
+  },
+  "addons": [],
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
