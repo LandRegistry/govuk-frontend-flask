@@ -5,7 +5,7 @@ This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV
 - [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) which provides Jinja macros of GOV.UK components
 - [GOV.UK Frontend WTForms](https://github.com/LandRegistry/govuk-frontend-wtf) which provides WTForms widgets to integrate the above Jinja macros into form generation and validation
 
-The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults. Please read the [next steps](#next-steps) section for guidance on how to start building out your own app on top of this template.
+The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults. Please read the [next steps](#next-steps) section for guidance on how to start building out your app on top of this template.
 
 ## Prerequisites
 
@@ -33,13 +33,15 @@ pip3 install -r requirements.txt ; pip3 install -r requirements_dev.txt
 
 ### Get GOV.UK Frontend assets
 
+For convenience a shell script has been provided to download and extract the GOV.UK Frontend distribution assets
+
 ```shell
 ./build.sh
 ```
 
 ### Set local environment variables
 
-In the `.flaskenv` file you will find a number of environment variables. These are injected as global variables into the app and templates, so all you have to do is supply your specific information for the following:
+In the `.flaskenv` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific information for the following:
 
 - CONTACT_EMAIL
 - CONTACT_PHONE
@@ -69,7 +71,7 @@ python -m pytest --cov=app --cov-report=term-missing --cov-branch
 
 Please refer to the specific packages documentation for more details.
 
-### Asset compression
+### Asset management
 
 Custom CSS and JavaScript files are merged and compressed using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). This takes all `*.css` files in `app/static/src/css` and all `*.js` files in `app/static/src/js` and outputs a single compressed file to both `app/static/dist/css` and `app/static/dist/js` respectively.
 
@@ -79,13 +81,13 @@ CSS is [minified](https://en.wikipedia.org/wiki/Minification_(programming)) usin
 
 Merged and compressed assets are browser cache busted on update by modifying their URL with their MD5 hash using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). The MD5 hash is appended to the file name, for example `custom-d41d8cd9.css` instead of a query string, to support certain older browsers and proxies that ignore the querystring in their caching behaviour.
 
-### Forms
+### Forms generation and validation
 
 Uses [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/) and [WTForms](https://wtforms.readthedocs.io) to define and validate forms. Forms are rendered in your template using regular Jinja syntax.
 
-### Form validation errors
+### Form error handling
 
-If a submitted form has any validation errors, an [error summary component](https://design-system.service.gov.uk/components/error-summary/) is shown at the top of the page, along with individual field [error messages](https://design-system.service.gov.uk/components/error-message/). This follows the GOV.UK Design System [validation pattern](https://design-system.service.gov.uk/patterns/validation/) and is built in to the base page template.
+If a submitted form has any validation errors, an [error summary component](https://design-system.service.gov.uk/components/error-summary/) is shown at the top of the page, along with individual field [error messages](https://design-system.service.gov.uk/components/error-message/). This follows the GOV.UK Design System [validation pattern](https://design-system.service.gov.uk/patterns/validation/) and is built into the base page template.
 
 ### Flash messages
 
@@ -97,7 +99,7 @@ Uses [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/) to enable [Cross S
 
 CSRF errors are handled by creating a [flash message](#flash-messages) notification banner to inform the user that the form they submitted has expired.
 
-### Security headers
+### HTTP security headers
 
 Uses [Flask Talisman](https://github.com/GoogleCloudPlatform/flask-talisman) to set HTTP headers that can help protect against a few common web application security issues.
 
@@ -120,7 +122,19 @@ Uses [Flask Compress](https://github.com/colour-science/flask-compress) to compr
 
 ### Rate limiting
 
-Uses [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) to set request rate limits on routes. The default rate limit is 2 requests per second _and_ 60 requests per minute (whichever is hit first) based on the client's remote IP address. Every time a request exceeds the rate limit, the view function will not get called and instead a [HTTP 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) status will be returned. If you're implementing user authentication using [Flask Login](https://flask-login.readthedocs.io/en/latest/) you should also use a `key_func` to identify users on routes that require authentication, for example:
+Uses [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) to set request rate limits on routes. The default rate limit is 2 requests per second _and_ 60 requests per minute (whichever is hit first) based on the client's remote IP address. Every time a request exceeds the rate limit, the view function will not get called and instead a [HTTP 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) status will be returned.
+
+Rate limit storage can be backed by [Redis](https://redis.io/) using the `RATELIMIT_STORAGE_URL` config value in `config.py`, or fall back to in-memory if not present. Rate limit information will also be added to various [response headers](https://flask-limiter.readthedocs.io/en/stable/#rate-limiting-headers).
+
+## Next steps
+
+### Add your own blueprint
+
+### Add database functionality
+
+### Add user authentication
+
+If you're implementing user authentication using [Flask Login](https://flask-login.readthedocs.io/en/latest/) you should also use a `key_func` to identify users on routes that require authentication, for example:
 
 ```python
 @login_required
@@ -128,11 +142,5 @@ Uses [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) to set req
 ```
 
 This fixes the issue of rate limiting multiple users behind a single IP NAT or proxy, since the request is identified using a different unique value for each user.
-
-Rate limit storage can be backed by [Redis](https://redis.io/) using the `RATELIMIT_STORAGE_URL` config value in `config.py`, or fall back to in-memory if not present. Rate limit information will also be added to various [response headers](https://flask-limiter.readthedocs.io/en/stable/#rate-limiting-headers).
-
-## Next steps
-
-### Add your own blueprint
 
 ### Deploy to Heroku

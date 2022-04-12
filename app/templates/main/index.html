@@ -10,10 +10,75 @@
     <h1 class="govuk-heading-l">Hello, World!</h1>
     <p class="govuk-body-l">This is a template <a href="https://flask.palletsprojects.com" class="govuk-link">Flask</a>
       app using the <a href="https://frontend.design-system.service.gov.uk/" class="govuk-link">GOV.UK Frontend</a> and
-      <a href="https://design-system.service.gov.uk/" class="govuk-link">GOV.UK Design System</a>. You can <a
-        href="https://github.com/LandRegistry/govuk-frontend-flask/generate" class="govuk-link">generate a new repository</a>
-      using this template to get a new project started quicker.
+      <a href="https://design-system.service.gov.uk/" class="govuk-link">GOV.UK Design System</a> which is designed to
+      get a new project started quicker.
     </p>
+    <p class="govuk-body">It is also a reference implementation of two core packages:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a class="govuk-link" href="https://github.com/LandRegistry/govuk-frontend-jinja">GOV.UK Frontend Jinja</a>
+        which provides Jinja macros of GOV.UK components</li>
+      <li><a class="govuk-link" href="https://github.com/LandRegistry/govuk-frontend-wtf">GOV.UK Frontend WTForms</a>
+        which provides WTForms widgets to integrate the above Jinja macros into form generation and validation</li>
+    </ul>
+    <p class="govuk-body">The app is provided intentionally bare, with just the essential parts that all services need,
+      such as error pages, accessibility statement, cookie banner, cookie page and privacy notice.</p>
+
+    <h2 class="govuk-heading-m">Features</h2>
+    <p class="govuk-body">A number of other packages are used to provide the features listed below with sensible and
+      best-practice defaults:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Asset management</li>
+      <li>Cache busting</li>
+      <li>Form generation and validation</li>
+      <li>Form error handing</li>
+      <li>Flash messages</li>
+      <li>CSRF protection</li>
+      <li>HTTP security headers</li>
+      <li>Content Security Policy (CSP)</li>
+      <li>Response compression</li>
+      <li>Rate limiting</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">Getting started</h2>
+    <h3 class="govuk-heading-s">Create a new repository</h3>
+    <p class="govuk-body"><a class="govuk-link"
+        href="https://github.com/LandRegistry/govuk-frontend-flask/generate">Generate a new repository</a> using this
+      template, with the same directory structure and files. Then clone a local copy of your newly created repository.
+    </p>
+    <h3 class="govuk-heading-s">Create venv and install requirements</h3>
+    <p class="govuk-body">Run the following commands in your terminal, in the directory you cloned the app into:</p>
+    <p class="govuk-body">
+      <code>
+        python3 -m venv venv<br>
+        source venv/bin/activate<br>
+        pip3 install -r requirements.txt ; pip3 install -r requirements_dev.txt
+      </code>
+    </p>
+    <h3 class="govuk-heading-s">Get GOV.UK Frontend assets</h3>
+    <p class="govuk-body">For convenience a shell script has been provided to download and extract the GOV.UK Frontend
+      distribution assets. In your terminal run:</p>
+    <p class="govuk-body"><code>./build.sh</code></p>
+    <h3 class="govuk-heading-s">Set local environment variables</h3>
+    <p class="govuk-body">In the <code>.flaskenv</code> file you will find a number of environment variables. These are
+      injected as global variables into the app and pre-populated into page templates as appropriate. Enter your
+      specific information for the following:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>CONTACT_EMAIL</li>
+      <li>CONTACT_PHONE</li>
+      <li>DEPARTMENT_NAME</li>
+      <li>DEPARTMENT_URL</li>
+      <li>SERVICE_NAME</li>
+      <li>SERVICE_PHASE</li>
+      <li> SERVICE_URL</li>
+    </ul>
+    <h3 class="govuk-heading-s">Run the app</h3>
+    <p class="govuk-body">In your terminal run:</p>
+    <p class="govuk-body"><code>flask run</code></p>
+    <p class="govuk-body">You should now have the app running on http://localhost:5000/</p>
+
+    <h2 class="govuk-heading-m">Documentation</h2>
+    <p class="govuk-body">Detailed documentation on the features listed above and the next steps to start building out your app on top of this template is on <a class="govuk-link"
+        href="https://github.com/LandRegistry/govuk-frontend-flask#readme">GitHub</a></p>
   </div>
 </div>
 {% endblock %}
