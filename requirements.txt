@@ -10,12 +10,16 @@ brotli==1.0.9
     # via flask-compress
 click==8.1.2
     # via flask
+commonmark==0.9.1
+    # via rich
 cssmin==0.2.0
     # via -r requirements.in
 deepmerge==1.0.1
     # via govuk-frontend-wtf
 deprecated==1.2.13
-    # via redis
+    # via
+    #   limits
+    #   redis
 dnspython==2.2.1
     # via email-validator
 email-validator==1.1.3
@@ -32,7 +36,7 @@ flask-assets==2.0
     # via -r requirements.in
 flask-compress==1.11
     # via -r requirements.in
-flask-limiter==2.3.0
+flask-limiter==2.4.0
     # via -r requirements.in
 flask-talisman==1.0.0
     # via -r requirements.in
@@ -59,20 +63,31 @@ jinja2==3.1.1
     #   govuk-frontend-wtf
 jsmin==3.0.1
     # via -r requirements.in
-limits==2.4.0
+limits==2.5.2
     # via flask-limiter
 markupsafe==2.1.1
     # via
     #   jinja2
     #   wtforms
 packaging==21.3
-    # via redis
+    # via
+    #   limits
+    #   redis
+pygments==2.11.2
+    # via rich
 pyparsing==3.0.8
     # via packaging
 python-dotenv==0.20.0
     # via -r requirements.in
 redis==4.2.2
     # via -r requirements.in
+rich==12.2.0
+    # via flask-limiter
+typing-extensions==4.2.0
+    # via
+    #   flask-limiter
+    #   limits
+    #   rich
 webassets==2.0
     # via flask-assets
 werkzeug==2.1.1
