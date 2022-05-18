@@ -3,7 +3,7 @@
 {%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
 {%- from 'govuk_frontend_jinja/components/inset-text/macro.html' import govukInsetText -%}
 
-{% block pageTitle %}Accessibility statement – {{service_name}} – GOV.UK{% endblock %}
+{% block pageTitle %}Accessibility statement – {{config['SERVICE_NAME']}} – GOV.UK{% endblock %}
 
 {% block beforeContent %}
   {{ super() }}
@@ -17,7 +17,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {{ super() }}
-    <h1 class="govuk-heading-xl">Accessibility statement for {{service_name}}</h1>
+    <h1 class="govuk-heading-xl">Accessibility statement for {{config['SERVICE_NAME']}}</h1>
 
     {{ govukInsetText({
       'text': "Note: start with a brief explanation of which websites or mobile apps the statement covers.
@@ -25,13 +25,13 @@
       You can have a single accessibility statement that covers multiple domains, or a separate statement for each domain or subdomain. As long as the user can access relevant accessibility information easily from any page on your website."
     }) }}
 
-    <p class="govuk-body">This accessibility statement applies to {{service_url}}.</p>
+    <p class="govuk-body">This accessibility statement applies to {{config['SERVICE_URL']}}.</p>
     
     {{ govukInsetText({
       'text': "Note: use this section to make a brief, general statement about what the website allows disabled users to do. Base it on the evaluation covered in detail in the ‘Technical information about this website’s accessibility’ section. If you’re not confident that something is accurate, leave it out. If you’re not confident enough to say anything specific here, leave this section out completely."
     }) }}
     
-    <p class="govuk-body">This website is run by {{department_name}}. We want as many people as possible to be able
+    <p class="govuk-body">This website is run by {{config['DEPARTMENT_NAME']}}. We want as many people as possible to be able
       to use this website. For example, that means you should be able to:</p>
     <ul class="govuk-list govuk-list--bullet">
       <li>change colours, contrast levels and fonts</li>
@@ -66,8 +66,8 @@
     <p class="govuk-body">If you need information on this website in a different format like accessible PDF, large
       print, easy read, audio recording or braille:</p>
     <ul class="govuk-list govuk-list--bullet">
-      <li>email {{contact_email}}</li>
-      <li>call {{contact_phone}}</li>
+      <li>email {{config['CONTACT_EMAIL']}}</li>
+      <li>call {{config['CONTACT_PHONE']}}</li>
       <li>[add any other contact details]</li>
     </ul>
     <p class="govuk-body">We’ll consider your request and get back to you in [number] days.</p>
@@ -107,7 +107,7 @@
       'text': "Note: this form of wording is legally required, so do not change it."
     }) }}
 
-    <p class="govuk-body">{{department_name}} is committed to making its website accessible, in accordance with the
+    <p class="govuk-body">{{config['DEPARTMENT_NAME']}} is committed to making its website accessible, in accordance with the
       Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.</p>
     
     <h3 class="govuk-heading-m">Compliance status</h3>

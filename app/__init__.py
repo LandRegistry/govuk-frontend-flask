@@ -65,16 +65,4 @@ def create_app(config_class=Config):
 
     app.register_blueprint(main_bp)
 
-    @app.context_processor
-    def inject_global_values():
-        return dict(
-            contact_email=app.config["CONTACT_EMAIL"],
-            contact_phone=app.config["CONTACT_PHONE"],
-            department_name=app.config["DEPARTMENT_NAME"],
-            department_url=app.config["DEPARTMENT_URL"],
-            service_name=app.config["SERVICE_NAME"],
-            service_phase=app.config["SERVICE_PHASE"],
-            service_url=app.config["SERVICE_URL"],
-        )
-
     return app

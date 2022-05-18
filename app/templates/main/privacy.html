@@ -2,7 +2,7 @@
 
 {%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
 
-{% block pageTitle %}Privacy notice – {{service_name}} – GOV.UK{% endblock %}
+{% block pageTitle %}Privacy notice – {{config['SERVICE_NAME']}} – GOV.UK{% endblock %}
 
 {% block beforeContent %}
   {{ super() }}

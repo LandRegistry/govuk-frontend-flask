@@ -7,14 +7,14 @@
 
 {% set assetPath = url_for('static', filename='').rstrip('/') %}
 
-{% block pageTitle %}{{service_name}} – GOV.UK{% endblock %}
+{% block pageTitle %}{{config['SERVICE_NAME']}} – GOV.UK{% endblock %}
 
 {% block head %}
-  <meta name="description" content="{{service_name}}">
+  <meta name="description" content="{{config['SERVICE_NAME']}}">
   <meta name="keywords" content="GOV.UK, govuk, gov, government, uk, frontend, ui, user interface, jinja, python, flask, port, template, templating, macro, component, design system, html, forms, wtf, wtforms, widget, widgets, demo, example">
-  <meta name="author" content="{{department_name}}">
-  <!--[if gt IE 8]><!--><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-4.0.1.min.css') }}" /><!--<![endif]-->
-  <!--[if IE 8]><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-ie8-4.0.1.min.css') }}" /><![endif]-->
+  <meta name="author" content="{{config['DEPARTMENT_NAME']}}">
+  <!--[if gt IE 8]><!--><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-4.1.0.min.css') }}" /><!--<![endif]-->
+  <!--[if IE 8]><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-ie8-4.1.0.min.css') }}" /><![endif]-->
   {% assets "css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
 {% endblock %}
 
@@ -34,7 +34,7 @@
     {% endset %}
 
     {{ govukCookieBanner({
-      'ariaLabel': "Cookies on " + service_name,
+      'ariaLabel': "Cookies on " + config['SERVICE_NAME'],
       'attributes': {
         'id': "cookie-banner"
       },
@@ -43,7 +43,7 @@
           'attributes': {
             'id': "default-message"
           },
-          'headingText': "Cookies on " + service_name,
+          'headingText': "Cookies on " + config['SERVICE_NAME'],
           'html': html,
           'actions': [
             {
@@ -110,7 +110,7 @@
 {% block header %}
   {{ govukHeader({
     'homepageUrl': url_for('main.index'),
-    'serviceName': service_name,
+    'serviceName': config['SERVICE_NAME'],
     'serviceUrl': url_for('main.index')
   }) }}
 {% endblock %}
@@ -118,9 +118,9 @@
 {% block beforeContent %}
   {{ govukPhaseBanner({
     'tag': {
-      'text': service_phase
+      'text': config['SERVICE_PHASE']
     },
-    'html': 'This is a new service – your <a class="govuk-link" href="mailto:' + contact_email +'?subject=Feedback">feedback</a> will help us to improve it.'
+    'html': 'This is a new service – your <a class="govuk-link" href="mailto:' + config['CONTACT_EMAIL'] +'?subject=Feedback">feedback</a> will help us to improve it.'
   }) }}
 {% endblock %}
 
@@ -155,14 +155,14 @@
             'text': "Privacy"
           }
       ],
-      'html': 'Built by <a href="' + department_url +'" class="govuk-footer__link">' + department_name + '</a>'
+      'html': 'Built by <a href="' + config['DEPARTMENT_URL'] +'" class="govuk-footer__link">' + config['DEPARTMENT_NAME'] + '</a>'
     }
   }) }}
 {% endblock %}
 
 {% block bodyEnd %}
   <!--[if gt IE 8]><!-->
-  <script src="{{ url_for('static', filename='govuk-frontend-4.0.1.min.js') }}"> </script>
+  <script src="{{ url_for('static', filename='govuk-frontend-4.1.0.min.js') }}"> </script>
   <script>window.GOVUKFrontend.initAll()</script>
   <!--<![endif]-->
   {% assets "js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
