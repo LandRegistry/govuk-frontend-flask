@@ -63,7 +63,7 @@ pep517==0.12.0
     # via pip-tools
 pep8-naming==0.11.1
     # via -r requirements_dev.in
-pip-tools==6.6.1
+pip-tools==6.6.2
     # via -r requirements_dev.in
 piprot==0.9.11
     # via -r requirements_dev.in
