@@ -7,7 +7,7 @@ class Config(object):
     DEPARTMENT_NAME = os.environ.get("DEPARTMENT_NAME")
     DEPARTMENT_URL = os.environ.get("DEPARTMENT_URL")
     RATELIMIT_HEADERS_ENABLED = True
-    RATELIMIT_STORAGE_URL = os.environ.get("REDIS_URL") or "memory://"
+    RATELIMIT_STORAGE_URL = os.environ.get("REDIS_URL")
     SECRET_KEY = os.environ.get("SECRET_KEY")
     SERVICE_NAME = os.environ.get("SERVICE_NAME")
     SERVICE_PHASE = os.environ.get("SERVICE_PHASE")
