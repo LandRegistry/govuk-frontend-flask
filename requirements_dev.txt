@@ -10,7 +10,7 @@ attrs==21.4.0
     #   pytest
 bandit==1.7.4
     # via -r requirements_dev.in
-black==22.3.0
+black==22.6.0
     # via -r requirements_dev.in
 certifi==2021.10.8
     # via requests
