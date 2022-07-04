@@ -30,7 +30,7 @@ flake8==3.8.4
     #   flake8-bugbear
     #   flake8-polyfill
     #   hacking
-flake8-bugbear==22.4.25
+flake8-bugbear==22.7.1
     # via -r requirements_dev.in
 flake8-polyfill==1.0.2
     # via pep8-naming
