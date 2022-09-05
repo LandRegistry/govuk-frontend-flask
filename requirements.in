@@ -9,5 +9,5 @@ govuk-frontend-jinja==2.3.0
 govuk-frontend-wtf==2.1.0
 gunicorn==20.1.0
 jsmin==3.0.1
-python-dotenv==0.20.0
+python-dotenv==0.21.0
 redis==4.3.4
