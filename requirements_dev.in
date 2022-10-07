@@ -1,5 +1,5 @@
 bandit==1.7.4
-black==22.6.0
+black==22.10.0
 flake8-bugbear==22.7.1
 hacking==4.1.0
 isort==5.10.1
