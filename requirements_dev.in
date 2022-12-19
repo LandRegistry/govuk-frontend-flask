@@ -2,9 +2,9 @@ bandit==1.7.4
 black==22.12.0
 flake8-bugbear==22.12.6
 hacking==5.0.0
-isort==5.10.1
+isort==5.11.3
 pep8-naming==0.13.2
-pip-tools==6.11.0
+pip-tools==6.12.1
 pur==7.0.0
 pytest-cov==4.0.0
 safety==2.3.5
