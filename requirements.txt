@@ -34,7 +34,7 @@ flask-assets==2.0
     # via -r requirements.in
 flask-compress==1.13
     # via -r requirements.in
-flask-limiter==2.8.1
+flask-limiter==2.9.0
     # via -r requirements.in
 flask-talisman==1.0.0
     # via -r requirements.in
@@ -68,6 +68,8 @@ markupsafe==2.1.1
     #   jinja2
     #   werkzeug
     #   wtforms
+ordered-set==4.1.0
+    # via flask-limiter
 packaging==22.0
     # via limits
 pygments==2.13.0
