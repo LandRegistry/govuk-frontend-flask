@@ -35,7 +35,7 @@ flake8==4.0.1
     #   flake8-bugbear
     #   hacking
     #   pep8-naming
-flake8-bugbear==22.12.6
+flake8-bugbear==23.1.14
     # via -r requirements_dev.in
 gitdb==4.0.10
     # via gitpython
@@ -108,8 +108,6 @@ tomli==2.0.1
     #   coverage
     #   pyproject-hooks
     #   pytest
-typing-extensions==4.4.0
-    # via black
 urllib3==1.26.14
     # via requests
 wheel==0.38.4
