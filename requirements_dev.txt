@@ -65,7 +65,7 @@ pbr==5.11.1
     # via stevedore
 pep8-naming==0.13.2
     # via -r requirements_dev.in
-pip-tools==6.12.1
+pip-tools==6.12.2
     # via -r requirements_dev.in
 platformdirs==2.6.2
     # via black
@@ -108,8 +108,6 @@ tomli==2.0.1
     #   coverage
     #   pyproject-hooks
     #   pytest
-typing-extensions==4.4.0
-    # via black
 urllib3==1.26.14
     # via requests
 wheel==0.38.4
