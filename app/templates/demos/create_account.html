@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
+
+{% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Create an account – GOV.UK Frontend WTForms Demo{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBackLink({
+    'text': "Back",
+    'href': url_for('main.index')
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {{ super() }}
+    <span class="govuk-caption-xl">Example form</span>
+    <h1 class="govuk-heading-xl">Create an account</h1>
+
+    <form action="" method="post" novalidate>
+      {{ form.csrf_token }}
+
+      {{ form.first_name(params={
+        'spellcheck': false,
+        'autocomplete': 'given-name'
+      }) }}
+
+      {{ form.last_name(params={
+        'spellcheck': false,
+        'autocomplete': 'family-name'
+      }) }}
+
+      {{ form.date_of_birth }}
+
+      {{ form.national_insurance_number(params={
+        'classes': 'govuk-input--width-10',
+        'spellcheck': false
+      }) }}
+
+      {{ form.email_address(params={
+        'type': 'email',
+        'spellcheck': false,
+        'autocomplete': 'email'
+      }) }}
+
+      {{ form.telephone_number(params={
+        'classes': 'govuk-input--width-20',
+        'type': 'tel',
+        'spellcheck': false,
+        'autocomplete': 'tel'
+      }) }}
+
+      {{ form.password(params={
+        'spellcheck': false
+      }) }}
+
+      {{ form.confirm_password(params={
+        'spellcheck': false
+      }) }}
+
+      {{ form.terms_and_conditions }}
+
+      {{ form.submit}}
+    </form>
+  </div>
+</div>
+{% endblock %}

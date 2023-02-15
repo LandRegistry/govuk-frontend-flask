@@ -13,7 +13,7 @@ from config import Config
 assets = Environment()
 compress = Compress()
 csrf = CSRFProtect()
-limiter = Limiter(key_func=get_remote_address, default_limits=["2 per second", "60 per minute"])
+limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per minute"])
 talisman = Talisman()
 
 
@@ -61,8 +61,10 @@ def create_app(config_class=Config):
         assets.register("js", js)
 
     # Register blueprints
+    from app.demos import bp as demo_bp
     from app.main import bp as main_bp
 
+    app.register_blueprint(demo_bp)
     app.register_blueprint(main_bp)
 
     return app
