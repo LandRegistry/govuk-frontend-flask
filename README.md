@@ -65,7 +65,7 @@ You should now have the app running on <http://localhost:5000/>
 
 ## Demos
 
-There are some helpful demos included by default that show all of the components available from GOV.UK Frontend Jinja and a selection of forms and validation patterns from GOV.UK Frontend WTForms. These are located in the `app/demos` and `app/templates/demos` directories, along with the `demos` blueprint. Use them for reference whilst building your service, but be sure to delete them, along with the relevant section in `build.sh`, before deploying the app.
+There are some helpful demos included by default that show all of the components available from GOV.UK Frontend Jinja and a selection of forms and validation patterns from GOV.UK Frontend WTForms. These are located in the `app/demos` and `app/templates/demos` directories, along with the `demos` blueprint. Use them for reference whilst building your service, but make sure to delete them, along with the relevant section in `build.sh`, before deploying the app.
 
 ## Testing
 
