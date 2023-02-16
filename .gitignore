@@ -3,9 +3,10 @@
 
 ### GOV.UK Frontend ###
 app/static/fonts*
-app/static/images*
 app/static/govuk-frontend*
+app/static/images*
 app/static/VERSION.txt
+govuk_components*
 
 ### Flask ###
 instance/*
