@@ -1,14 +1,26 @@
 {% extends "base.html" %}
 
-{%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
+{%- from 'govuk_frontend_jinja/components/breadcrumbs/macro.html' import govukBreadcrumbs -%}
 
 {% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Kitchen sink – GOV.UK{% endblock %}
 
 {% block beforeContent %}
   {{ super() }}
-  {{ govukBackLink({
-    'text': "Back",
-    'href': url_for('main.index')
+  {{ govukBreadcrumbs({
+    'collapseOnMobile': True,
+    'items': [
+        {
+            'text': "Home",
+            'href': url_for('main.index')
+        },
+        {
+            'text': "Forms",
+            'href': url_for('demos.forms')
+        },
+        {
+            'text': "Kitchen sink"
+        }
+    ]
   }) }}
 {% endblock %}
 
@@ -16,7 +28,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {{ super() }}
-    <span class="govuk-caption-xl">Example form</span>
+    <span class="govuk-caption-xl">Demo form</span>
     <h1 class="govuk-heading-xl">Kitchen sink</h1>
 
     <p class="govuk-body">

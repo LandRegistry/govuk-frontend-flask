@@ -1,7 +1,35 @@
+import json
+import os
+
 from flask import flash, redirect, render_template, url_for
+from werkzeug.exceptions import NotFound
 
 from app.demos import bp
 from app.demos.forms import BankDetailsForm, ConditionalRevealForm, CreateAccountForm, KitchenSinkForm
+
+
+@bp.route("/components", methods=["GET"])
+def components():
+    components = os.listdir("govuk_components")
+    components.sort()
+
+    return render_template("components.html", components=components)
+
+
+@bp.route("/components/<string:component>", methods=["GET"])
+def component(component):
+    try:
+        with open("govuk_components/{}/fixtures.json".format(component)) as json_file:
+            fixtures = json.load(json_file)
+    except FileNotFoundError:
+        raise NotFound
+
+    return render_template("component.html", fixtures=fixtures)
+
+
+@bp.route("/forms", methods=["GET"])
+def forms():
+    return render_template("forms.html")
 
 
 @bp.route("/forms/bank-details", methods=["GET", "POST"])
