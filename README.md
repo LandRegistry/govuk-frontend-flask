@@ -1,5 +1,9 @@
 # GOV.UK Frontend Flask
 
+![govuk-frontend 4.5.0](https://img.shields.io/badge/govuk--frontend%20version-4.5.0-005EA5?logo=gov.uk&style=flat)
+
+**GOV.UK Frontend Flask is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
+
 This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) and [GOV.UK Design System](https://design-system.service.gov.uk/) which is designed to get a new project started quicker. It is also a reference implementation of two core packages:
 
 - [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) which provides Jinja macros of GOV.UK components
@@ -144,3 +148,17 @@ If you're implementing user authentication using [Flask Login](https://flask-log
 This fixes the issue of rate limiting multiple users behind a single IP NAT or proxy, since the request is identified using a different unique value for each user.
 
 ### Deploy to Heroku
+
+// TODO
+
+## Contributors
+
+- [Matt Shaw](https://github.com/matthew-shaw) (Primary maintainer)
+
+## Support
+
+This software is provided _"as-is"_ without warranty. Support is provided on a _"best endeavours"_ basis by the maintainers and open source community.
+
+If you are a civil servant you can sign up to the [UK Government Digital Slack](https://ukgovernmentdigital.slack.com/signup) workspace to contact the maintainers listed [above](#contributors) and the community of people using this project in the [#govuk-design-system](https://ukgovernmentdigital.slack.com/archives/C6DMEH5R6) channel.
+
+Otherwise, please see the [contribution guidelines](CONTRIBUTING.md) for how to raise a bug report or feature request.
