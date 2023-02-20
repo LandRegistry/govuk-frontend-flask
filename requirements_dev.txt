@@ -38,7 +38,7 @@ flake8-bugbear==23.2.13
     # via -r requirements_dev.in
 gitdb==4.0.10
     # via gitpython
-gitpython==3.1.30
+gitpython==3.1.31
     # via bandit
 idna==3.4
     # via requests
