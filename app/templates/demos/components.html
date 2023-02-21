@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{%- from 'govuk_frontend_jinja/components/breadcrumbs/macro.html' import govukBreadcrumbs -%}
+
+{% block beforeContent %}
+    {{ super() }}
+    {{ govukBreadcrumbs({
+        'collapseOnMobile': True,
+        'items': [
+            {
+                'text': "Home",
+                'href': url_for('main.index')
+            },
+            {
+                'text': "Components"
+            }
+        ]
+    }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-xl">Demo</span>
+    <h1 class="govuk-heading-l">Components</h1>
+    <ul class="govuk-list govuk-list--bullet">
+      {% for component in components %}
+      <li>
+        <a class="govuk-link" href="{{ url_for('demos.component', component=component) }}">{{component | replace("-", " ") | capitalize}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

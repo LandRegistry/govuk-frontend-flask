@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{%- from 'govuk_frontend_jinja/components/breadcrumbs/macro.html' import govukBreadcrumbs -%}
+
+{% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Kitchen sink – GOV.UK{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    'collapseOnMobile': True,
+    'items': [
+        {
+            'text': "Home",
+            'href': url_for('main.index')
+        },
+        {
+            'text': "Forms",
+            'href': url_for('demos.forms')
+        },
+        {
+            'text': "Kitchen sink"
+        }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {{ super() }}
+    <span class="govuk-caption-xl">Demo form</span>
+    <h1 class="govuk-heading-xl">Kitchen sink</h1>
+
+    <p class="govuk-body">
+      This form demonstrates a variety of <a href="https://wtforms.readthedocs.io/fields/" class="govuk-link">WTForm fields</a> rendered
+      using widgets provided by <a href="https://github.com/LandRegistry/govuk-frontend-wtf" class="govuk-link">GOV.UK Frontend WTForm</a>.
+    </p>
+
+    <form action="" method="post" novalidate>
+      {{ form.csrf_token }}
+      {{ form.string_field }}
+      {{ form.email_field(params={'type': 'email', 'spellcheck': false, 'autocomplete': 'email'}) }}
+      {{ form.float_field }}
+      {{ form.integer_field }}
+      {{ form.decimal_field }}
+      {{ form.password_field(params={'spellcheck': false}) }}
+      {{ form.textarea_field }}
+      {{ form.charactercount_field(params={'maxlength': '200'}) }}
+      {{ form.boolean_field }}
+      {{ form.select_field }}
+      {{ form.select_multiple_field }}
+      {{ form.radio_field }}
+      {{ form.file_field }}
+      {{ form.multiple_file_field }}
+      {{ form.date_field }}
+      {{ form.date_time_field }}
+
+      <p class="govuk-body">The following is a WTForm SubmitField rendered using a GovSubmitInput widget:</p>
+      {{ form.submit_button }}
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{%- from 'govuk_frontend_jinja/components/breadcrumbs/macro.html' import govukBreadcrumbs -%}
+
+{% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Bank details – GOV.UK{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    'collapseOnMobile': True,
+    'items': [
+        {
+            'text': "Home",
+            'href': url_for('main.index')
+        },
+        {
+            'text': "Forms",
+            'href': url_for('demos.forms')
+        },
+        {
+            'text': "Bank details"
+        }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {{ super() }}
+    <span class="govuk-caption-xl">Demo form</span>
+    <h1 class="govuk-heading-xl">Bank or building society account details</h1>
+
+    <form action="" method="post" novalidate>
+      {{ form.csrf_token }}
+
+      {{ form.name_on_the_account(params={
+        'spellcheck': false
+      }) }}
+
+      {{ form.sort_code(params={
+        'classes': 'govuk-input--width-5',
+        'inputmode': 'numeric',
+        'pattern': '[0-9]*',
+        'spellcheck': false
+      }) }}
+
+      {{ form.account_number(params={
+        'classes': 'govuk-input--width-10',
+        'inputmode': 'numeric',
+        'pattern': '[0-9]*',
+        'spellcheck': false
+      }) }}
+
+      {{ form.roll_number(params={
+        'classes': 'govuk-input--width-10',
+        'spellcheck': false
+      }) }}
+
+      {{ form.submit }}
+    </form>
+  </div>
+</div>
+{% endblock %}
