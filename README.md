@@ -134,27 +134,6 @@ Uses [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) to set req
 
 Rate limit storage can be backed by [Redis](https://redis.io/) using the `RATELIMIT_STORAGE_URL` config value in `config.py`, or fall back to in-memory if not present. Rate limit information will also be added to various [response headers](https://flask-limiter.readthedocs.io/en/stable/#rate-limiting-headers).
 
-## Next steps
-
-### Add your own blueprint
-
-### Add database functionality
-
-### Add user authentication
-
-If you're implementing user authentication using [Flask Login](https://flask-login.readthedocs.io/en/latest/) you should also use a `key_func` to identify users on routes that require authentication, for example:
-
-```python
-@login_required
-@limiter.limit("2 per second", key_func=lambda: current_user.id)
-```
-
-This fixes the issue of rate limiting multiple users behind a single IP NAT or proxy, since the request is identified using a different unique value for each user.
-
-### Deploy to Heroku
-
-// TODO
-
 ## Contributors
 
 - [Matt Shaw](https://github.com/matthew-shaw) (Primary maintainer)
