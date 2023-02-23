@@ -61,7 +61,7 @@ jsmin==3.0.1
     # via -r requirements.in
 limits==3.2.0
     # via flask-limiter
-markdown-it-py==2.1.0
+markdown-it-py==2.2.0
     # via rich
 markupsafe==2.1.2
     # via
