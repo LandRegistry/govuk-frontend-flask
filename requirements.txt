@@ -76,7 +76,7 @@ packaging==23.0
     # via limits
 pygments==2.14.0
     # via rich
-python-dotenv==0.21.1
+python-dotenv==1.0.0
     # via -r requirements.in
 redis==4.5.1
     # via -r requirements.in
