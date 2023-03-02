@@ -62,7 +62,7 @@ pbr==5.11.1
     # via stevedore
 pep8-naming==0.13.3
     # via -r requirements_dev.in
-pip-tools==6.12.2
+pip-tools==6.12.3
     # via -r requirements_dev.in
 platformdirs==3.0.0
     # via black
