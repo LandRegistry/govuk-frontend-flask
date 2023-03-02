@@ -93,6 +93,7 @@ class CreateAccountForm(FlaskForm):
     date_of_birth = DateField(
         "Date of birth",
         widget=GovDateInput(),
+        format="%d %m %Y",
         validators=[InputRequired(message="Enter your date of birth")],
         description="For example, 31 3 1980",
     )
