@@ -68,7 +68,7 @@ platformdirs==3.0.0
     # via black
 pluggy==1.0.0
     # via pytest
-pur==7.0.0
+pur==7.1.0
     # via -r requirements_dev.in
 pycodestyle==2.10.0
     # via flake8
