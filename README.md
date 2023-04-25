@@ -15,7 +15,7 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 ### Required
 
-- Python 3.7.x or higher
+- Python 3.8.x or higher
 
 ### Optional
 
