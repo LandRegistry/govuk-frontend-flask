@@ -36,8 +36,8 @@ def forms():
 def bank_details():
     form = BankDetailsForm()
     if form.validate_on_submit():
-        flash("Form successfully submitted", "success")
-        return redirect(url_for("main.index"))
+        flash("Demo form successfully submitted", "success")
+        return redirect(url_for("demos.forms"))
     return render_template("bank_details.html", form=form)
 
 
@@ -45,8 +45,8 @@ def bank_details():
 def create_account():
     form = CreateAccountForm()
     if form.validate_on_submit():
-        flash("Form successfully submitted", "success")
-        return redirect(url_for("main.index"))
+        flash("Demo form successfully submitted", "success")
+        return redirect(url_for("demos.forms"))
     return render_template("create_account.html", form=form)
 
 
@@ -54,8 +54,8 @@ def create_account():
 def kitchen_sink():
     form = KitchenSinkForm()
     if form.validate_on_submit():
-        flash("Form successfully submitted", "success")
-        return redirect(url_for("main.index"))
+        flash("Demo form successfully submitted", "success")
+        return redirect(url_for("demos.forms"))
     return render_template("kitchen_sink.html", form=form)
 
 
@@ -63,6 +63,6 @@ def kitchen_sink():
 def conditional_reveal():
     form = ConditionalRevealForm()
     if form.validate_on_submit():
-        flash("Form successfully submitted", "success")
-        return redirect(url_for("main.index"))
+        flash("Demo form successfully submitted", "success")
+        return redirect(url_for("demos.forms"))
     return render_template("conditional_reveal.html", form=form)
