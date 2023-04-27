@@ -294,40 +294,42 @@ class KitchenSinkForm(FlaskForm):
 
 
 class ConditionalRevealForm(FlaskForm):
-    how_prefer_contacted = RadioField(
+    contact = RadioField(
         "How would you prefer to be contacted?",
         widget=GovRadioInput(),
-        validators=[InputRequired(message="Choose how you would prefer to be contacted")],
+        validators=[InputRequired(message="Select how you would prefer to be contacted")],
         choices=[
             ("email", "Email"),
             ("phone", "Phone"),
-            ("text_message", "Text message"),
+            ("text", "Text message"),
         ],
         description="Select one option.",
     )
 
-    email_address = StringField(
+    contact_by_email = StringField(
         "Email address",
         widget=GovTextInput(),
         # Set up the validation for each of the conditional fields with a custom RequiredIf validator
         # This will mark this field as required if the how_prefer_contacted is set to email
-        validators=[RequiredIf("how_prefer_contacted", "email", message="Enter an email address")],
+        validators=[
+            RequiredIf("contact", "email", message="Enter an email address in the correct format, like name@example.com")
+        ],
     )
 
-    phone = StringField(
+    contact_by_phone = StringField(
         "Phone number",
         widget=GovTextInput(),
-        validators=[RequiredIf("how_prefer_contacted", "phone", message="Enter a phone number")],
+        validators=[RequiredIf("contact", "phone", message="Enter a telephone number, like 01632 960 001 or +44 808 157 0192")],
     )
 
-    mobile_phone = StringField(
+    contact_by_text = StringField(
         "Mobile phone number",
         widget=GovTextInput(),
         validators=[
             RequiredIf(
-                "how_prefer_contacted",
-                "text_message",
-                message="Enter a mobile phone number",
+                "contact",
+                "text",
+                message="Enter a mobile phone number, like 07700 900 982",
             )
         ],
     )

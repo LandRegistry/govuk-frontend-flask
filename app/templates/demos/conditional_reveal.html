@@ -35,16 +35,29 @@
       {{ form.csrf_token }}
 
       <!-- Grab html for conditional fields -->
-      {% set email_address %}
-        {{ form.email_address() }}
+      {% set emailHtml %}
+        {{ form.contact_by_email(params={
+          'type': 'email',
+          'autocomplete': 'email',
+          'spellcheck': false,
+          'classes': 'govuk-!-width-one-third'
+        }) }}
       {% endset %}
 
-      {% set phone %}
-        {{ form.phone() }}
+      {% set phoneHtml %}
+        {{ form.contact_by_phone(params={
+          'type': 'tel',
+          'autocomplete': 'tel',
+          'classes': 'govuk-!-width-one-third'
+        }) }}
       {% endset %}
 
-      {% set mobile_phone %}
-        {{ form.mobile_phone() }}
+      {% set textHtml %}
+        {{ form.contact_by_text(params={
+          'type': 'tel',
+          'autocomplete': 'tel',
+          'classes': 'govuk-!-width-one-third'
+        }) }}
       {% endset %}
 
       <!--
@@ -58,21 +71,21 @@
       The field definition in ConditionalRevealForm has three options.
       Therefore we have an array of three items here to match.
       -->
-      {{ form.how_prefer_contacted(params={
+      {{ form.contact(params={
         'items': [
           {
             'conditional': {
-              'html': email_address
+              'html': emailHtml
             }
           },
           {
             'conditional': {
-              'html': phone
+              'html': phoneHtml
             }
           },
           {
             'conditional': {
-              'html': mobile_phone
+              'html': textHtml
             }
           }
         ]
