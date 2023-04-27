@@ -64,7 +64,7 @@ pep8-naming==0.13.3
     # via -r requirements_dev.in
 pip-tools==6.13.0
     # via -r requirements_dev.in
-platformdirs==3.3.0
+platformdirs==3.4.0
     # via black
 pluggy==1.0.0
     # via pytest
@@ -86,7 +86,7 @@ pytest-cov==4.0.0
     # via -r requirements_dev.in
 pyyaml==6.0
     # via bandit
-requests==2.28.2
+requests==2.29.0
     # via safety
 rich==13.3.4
     # via bandit
