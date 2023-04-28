@@ -11,7 +11,7 @@ from app.demos.forms import BankDetailsForm, ConditionalRevealForm, CreateAccoun
 
 
 @bp.route("/components", methods=["GET"])
-def components() -> Union[str, Response]:
+def components() -> str:
     components = os.listdir("govuk_components")
     components.sort()
 
@@ -19,7 +19,7 @@ def components() -> Union[str, Response]:
 
 
 @bp.route("/components/<string:component>", methods=["GET"])
-def component(component) -> Union[str, Response]:
+def component(component) -> str:
     try:
         with open("govuk_components/{}/fixtures.json".format(component)) as json_file:
             fixtures = json.load(json_file)
