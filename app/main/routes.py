@@ -1,5 +1,8 @@
+from typing import Union
+
 from flask import flash, json, make_response, redirect, render_template, request
 from flask_wtf.csrf import CSRFError
+from werkzeug import Response
 from werkzeug.exceptions import HTTPException
 
 from app.main import bp
@@ -7,17 +10,17 @@ from app.main.forms import CookiesForm
 
 
 @bp.route("/", methods=["GET"])
-def index():
+def index() -> str:
     return render_template("index.html")
 
 
 @bp.route("/accessibility", methods=["GET"])
-def accessibility():
+def accessibility() -> str:
     return render_template("accessibility.html")
 
 
 @bp.route("/cookies", methods=["GET", "POST"])
-def cookies():
+def cookies() -> Union[str, Response]:
     form = CookiesForm()
     # Default cookies policy to reject all categories of cookie
     cookies_policy = {"functional": "no", "analytics": "no"}
@@ -50,16 +53,16 @@ def cookies():
 
 
 @bp.route("/privacy", methods=["GET"])
-def privacy():
+def privacy() -> str:
     return render_template("privacy.html")
 
 
 @bp.app_errorhandler(HTTPException)
-def http_exception(error):
+def http_exception(error) -> str:
     return render_template(f"{error.code}.html"), error.code
 
 
 @bp.app_errorhandler(CSRFError)
-def csrf_error(error):
+def csrf_error(error) -> Response:
     flash("The form you were submitting has expired. Please try again.")
     return redirect(request.full_path)

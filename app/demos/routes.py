@@ -1,7 +1,9 @@
 import json
 import os
+from typing import Union
 
 from flask import flash, redirect, render_template, url_for
+from werkzeug import Response
 from werkzeug.exceptions import NotFound
 
 from app.demos import bp
@@ -9,7 +11,7 @@ from app.demos.forms import BankDetailsForm, ConditionalRevealForm, CreateAccoun
 
 
 @bp.route("/components", methods=["GET"])
-def components():
+def components() -> Union[str, Response]:
     components = os.listdir("govuk_components")
     components.sort()
 
@@ -17,7 +19,7 @@ def components():
 
 
 @bp.route("/components/<string:component>", methods=["GET"])
-def component(component):
+def component(component) -> Union[str, Response]:
     try:
         with open("govuk_components/{}/fixtures.json".format(component)) as json_file:
             fixtures = json.load(json_file)
@@ -28,12 +30,12 @@ def component(component):
 
 
 @bp.route("/forms", methods=["GET"])
-def forms():
+def forms() -> str:
     return render_template("forms.html")
 
 
 @bp.route("/forms/bank-details", methods=["GET", "POST"])
-def bank_details():
+def bank_details() -> Union[str, Response]:
     form = BankDetailsForm()
     if form.validate_on_submit():
         flash("Demo form successfully submitted", "success")
@@ -42,7 +44,7 @@ def bank_details():
 
 
 @bp.route("/forms/create-account", methods=["GET", "POST"])
-def create_account():
+def create_account() -> Union[str, Response]:
     form = CreateAccountForm()
     if form.validate_on_submit():
         flash("Demo form successfully submitted", "success")
@@ -51,7 +53,7 @@ def create_account():
 
 
 @bp.route("/forms/kitchen-sink", methods=["GET", "POST"])
-def kitchen_sink():
+def kitchen_sink() -> Union[str, Response]:
     form = KitchenSinkForm()
     if form.validate_on_submit():
         flash("Demo form successfully submitted", "success")
@@ -60,7 +62,7 @@ def kitchen_sink():
 
 
 @bp.route("/forms/conditional-reveal", methods=["GET", "POST"])
-def conditional_reveal():
+def conditional_reveal() -> Union[str, Response]:
     form = ConditionalRevealForm()
     if form.validate_on_submit():
         flash("Demo form successfully submitted", "success")
