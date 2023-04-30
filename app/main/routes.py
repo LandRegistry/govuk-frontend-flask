@@ -58,11 +58,11 @@ def privacy() -> str:
 
 
 @bp.app_errorhandler(HTTPException)
-def http_exception(error) -> str:
+def http_exception(error: HTTPException) -> str:
     return render_template(f"{error.code}.html"), error.code
 
 
 @bp.app_errorhandler(CSRFError)
-def csrf_error(error) -> Response:
+def csrf_error(error: CSRFError) -> Response:
     flash("The form you were submitting has expired. Please try again.")
     return redirect(request.full_path)

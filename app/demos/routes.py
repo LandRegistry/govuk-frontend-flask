@@ -19,7 +19,7 @@ def components() -> str:
 
 
 @bp.route("/components/<string:component>", methods=["GET"])
-def component(component) -> str:
+def component(component: str) -> str:
     try:
         with open("govuk_components/{}/fixtures.json".format(component)) as json_file:
             fixtures = json.load(json_file)
