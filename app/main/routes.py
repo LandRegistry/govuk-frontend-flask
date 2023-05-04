@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Tuple, Optional
 
 from flask import flash, json, make_response, redirect, render_template, request
 from flask_wtf.csrf import CSRFError
@@ -27,8 +27,8 @@ def cookies() -> Union[str, Response]:
 
     if form.validate_on_submit():
         # Update cookies policy consent from form data
-        cookies_policy["functional"] = form.functional.data
-        cookies_policy["analytics"] = form.analytics.data
+        cookies_policy["functional"] = str(form.functional.data)
+        cookies_policy["analytics"] = str(form.analytics.data)
 
         # Create flash message confirmation before rendering template
         flash("You’ve set your cookie preferences.", "success")
@@ -58,7 +58,7 @@ def privacy() -> str:
 
 
 @bp.app_errorhandler(HTTPException)
-def http_exception(error: HTTPException) -> str:
+def http_exception(error: HTTPException) -> Tuple[str, Optional[int]]:
     return render_template(f"{error.code}.html"), error.code
 
 
