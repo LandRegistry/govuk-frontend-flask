@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{%- from 'govuk_frontend_jinja/components/breadcrumbs/macro.html' import govukBreadcrumbs -%}
+
+{% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Autocomplete – GOV.UK{% endblock %}
+
+{% block beforeContent %}
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    'collapseOnMobile': True,
+    'items': [
+        {
+            'text': "Home",
+            'href': url_for('main.index')
+        },
+        {
+            'text': "Forms",
+            'href': url_for('demos.forms')
+        },
+        {
+            'text': "Autocomplete"
+        }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {{ super() }}
+    <span class="govuk-caption-xl">Demo form</span>
+    <h1 class="govuk-heading-xl">Autocomplete</h1>
+
+    <form action="" method="post" novalidate>
+      {{ form.csrf_token }}
+
+      {{ form.country(params={
+        'spellcheck': true,
+        'attributes': {
+            'list': "countries"
+        },
+      }) }}
+
+      <datalist id="countries">
+        {% for country in form.countries %}
+          <option value="{{country}}">
+        {% endfor %}
+      </datalist>
+
+      {{ form.submit }}
+    </form>
+  </div>
+</div>
+{% endblock %}

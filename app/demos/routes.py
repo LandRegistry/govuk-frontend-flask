@@ -5,7 +5,7 @@ from flask import flash, redirect, render_template, url_for
 from werkzeug.exceptions import NotFound
 
 from app.demos import bp
-from app.demos.forms import BankDetailsForm, ConditionalRevealForm, CreateAccountForm, KitchenSinkForm
+from app.demos.forms import AutocompleteForm, BankDetailsForm, ConditionalRevealForm, CreateAccountForm, KitchenSinkForm
 
 
 @bp.route("/components", methods=["GET"])
@@ -66,3 +66,12 @@ def conditional_reveal():
         flash("Demo form successfully submitted", "success")
         return redirect(url_for("demos.forms"))
     return render_template("conditional_reveal.html", form=form)
+
+
+@bp.route("/forms/autocomplete", methods=["GET", "POST"])
+def autocomplete():
+    form = AutocompleteForm()
+    if form.validate_on_submit():
+        flash("Demo form successfully submitted", "success")
+        return redirect(url_for("demos.forms"))
+    return render_template("autocomplete.html", form=form)
