@@ -22,7 +22,7 @@ dnspython==2.3.0
     # via email-validator
 email-validator==2.0.0.post2
     # via -r requirements.in
-flask==2.3.1
+flask==2.3.2
     # via
     #   -r requirements.in
     #   flask-assets
@@ -34,7 +34,7 @@ flask-assets==2.0
     # via -r requirements.in
 flask-compress==1.13
     # via -r requirements.in
-flask-limiter==3.3.0
+flask-limiter==3.3.1
     # via -r requirements.in
 flask-talisman==1.0.0
     # via -r requirements.in
@@ -92,7 +92,7 @@ typing-extensions==4.5.0
     #   limits
 webassets==2.0
     # via flask-assets
-werkzeug==2.3.2
+werkzeug==2.3.3
     # via flask
 wrapt==1.15.0
     # via deprecated
