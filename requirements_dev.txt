@@ -86,7 +86,7 @@ pytest-cov==4.0.0
     # via -r requirements_dev.in
 pyyaml==6.0
     # via bandit
-requests==2.29.0
+requests==2.31.0
     # via safety
 rich==13.3.4
     # via bandit
