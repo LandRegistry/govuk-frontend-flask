@@ -44,7 +44,7 @@ govuk-frontend-jinja==2.7.0
     #   govuk-frontend-wtf
 govuk-frontend-wtf==2.5.0
     # via -r requirements.in
-gunicorn==20.1.0
+gunicorn==21.2.0
     # via -r requirements.in
 idna==3.4
     # via email-validator
@@ -75,7 +75,9 @@ mdurl==0.1.2
 ordered-set==4.1.0
     # via flask-limiter
 packaging==23.1
-    # via limits
+    # via
+    #   gunicorn
+    #   limits
 pygments==2.15.1
     # via rich
 python-dotenv==1.0.0
