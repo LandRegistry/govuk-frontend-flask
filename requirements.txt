@@ -8,7 +8,7 @@ blinker==1.6.2
     # via flask
 brotli==1.0.9
     # via flask-compress
-click==8.1.4
+click==8.1.6
     # via flask
 cssmin==0.2.0
     # via -r requirements.in
@@ -16,7 +16,7 @@ deepmerge==1.1.0
     # via govuk-frontend-wtf
 deprecated==1.2.14
     # via limits
-dnspython==2.3.0
+dnspython==2.4.1
     # via email-validator
 email-validator==2.0.0.post2
     # via -r requirements.in
@@ -44,7 +44,7 @@ govuk-frontend-jinja==2.7.0
     #   govuk-frontend-wtf
 govuk-frontend-wtf==2.5.0
     # via -r requirements.in
-gunicorn==20.1.0
+gunicorn==21.2.0
     # via -r requirements.in
 idna==3.4
     # via email-validator
@@ -75,7 +75,9 @@ mdurl==0.1.2
 ordered-set==4.1.0
     # via flask-limiter
 packaging==23.1
-    # via limits
+    # via
+    #   gunicorn
+    #   limits
 pygments==2.15.1
     # via rich
 python-dotenv==1.0.0
