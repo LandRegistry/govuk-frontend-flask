@@ -48,10 +48,12 @@ mccabe==0.7.0
     # via flake8
 mdurl==0.1.2
     # via markdown-it-py
-mypy==1.4.1
+mypy==1.5.1
     # via -r requirements_dev.in
 mypy-extensions==1.0.0
-    # via black
+    # via
+    #   black
+    #   mypy
 packaging==23.1
     # via
     #   black
@@ -101,6 +103,8 @@ smmap==5.0.1
     # via gitdb
 stevedore==5.1.0
     # via bandit
+typing-extensions==4.8.0
+    # via mypy
 urllib3==2.0.5
     # via requests
 wheel==0.41.2
