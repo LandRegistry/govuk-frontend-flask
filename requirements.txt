@@ -6,9 +6,9 @@
 #
 blinker==1.6.2
     # via flask
-brotli==1.0.9
+brotli==1.1.0
     # via flask-compress
-click==8.1.6
+click==8.1.7
     # via flask
 cssmin==0.2.0
     # via -r requirements.in
@@ -16,11 +16,11 @@ deepmerge==1.1.0
     # via govuk-frontend-wtf
 deprecated==1.2.14
     # via limits
-dnspython==2.4.1
+dnspython==2.4.2
     # via email-validator
 email-validator==2.0.0.post2
     # via -r requirements.in
-flask==2.3.2
+flask==2.3.3
     # via
     #   -r requirements.in
     #   flask-assets
@@ -30,11 +30,11 @@ flask==2.3.2
     #   govuk-frontend-wtf
 flask-assets==2.0
     # via -r requirements.in
-flask-compress==1.13
+flask-compress==1.14
     # via -r requirements.in
-flask-limiter==3.3.1
+flask-limiter==3.5.0
     # via -r requirements.in
-flask-talisman==1.0.0
+flask-talisman==1.1.0
     # via -r requirements.in
 flask-wtf==1.1.1
     # via govuk-frontend-wtf
@@ -48,7 +48,7 @@ gunicorn==21.2.0
     # via -r requirements.in
 idna==3.4
     # via email-validator
-importlib-resources==6.0.0
+importlib-resources==6.1.0
     # via limits
 itsdangerous==2.1.2
     # via
@@ -61,7 +61,7 @@ jinja2==3.1.2
     #   govuk-frontend-wtf
 jsmin==3.0.1
     # via -r requirements.in
-limits==3.5.0
+limits==3.6.0
     # via flask-limiter
 markdown-it-py==3.0.0
     # via rich
@@ -78,21 +78,21 @@ packaging==23.1
     # via
     #   gunicorn
     #   limits
-pygments==2.15.1
+pygments==2.16.1
     # via rich
 python-dotenv==1.0.0
     # via -r requirements.in
-redis==4.6.0
+redis==5.0.1
     # via -r requirements.in
-rich==13.4.2
+rich==13.5.3
     # via flask-limiter
-typing-extensions==4.7.1
+typing-extensions==4.8.0
     # via
     #   flask-limiter
     #   limits
 webassets==2.0
     # via flask-assets
-werkzeug==2.3.6
+werkzeug==2.3.7
     # via flask
 wrapt==1.15.0
     # via deprecated
@@ -100,6 +100,3 @@ wtforms==3.0.1
     # via
     #   flask-wtf
     #   govuk-frontend-wtf
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools
