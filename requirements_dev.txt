@@ -99,7 +99,7 @@ smmap==5.0.1
     # via gitdb
 stevedore==5.1.0
     # via bandit
-urllib3==2.0.5
+urllib3==2.0.6
     # via requests
 wheel==0.41.2
     # via pip-tools
