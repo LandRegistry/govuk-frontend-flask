@@ -30,9 +30,9 @@ The app is provided intentionally bare, with just the essential parts that all s
 ### Create venv and install requirements
 
 ```shell
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate
-pip3 install -r requirements.txt ; pip3 install -r requirements_dev.txt
+pip install -r requirements.txt ; pip install -r requirements_dev.txt
 ```
 
 ### Get GOV.UK Frontend assets
