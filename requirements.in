@@ -4,10 +4,11 @@ flask-assets
 flask-compress
 flask-limiter
 flask-talisman
-flask
+flask<3.0.0
 govuk-frontend-jinja
 govuk-frontend-wtf
 gunicorn
 jsmin
 python-dotenv
 redis
+werkzeug<3.0.0

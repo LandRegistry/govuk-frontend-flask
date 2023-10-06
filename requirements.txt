@@ -20,7 +20,7 @@ dnspython==2.4.2
     # via email-validator
 email-validator==2.0.0.post2
     # via -r requirements.in
-flask==3.0.0
+flask==2.3.3
     # via
     #   -r requirements.in
     #   flask-assets
@@ -92,8 +92,10 @@ typing-extensions==4.8.0
     #   limits
 webassets==2.0
     # via flask-assets
-werkzeug==3.0.0
-    # via flask
+werkzeug==2.3.7
+    # via
+    #   -r requirements.in
+    #   flask
 wrapt==1.15.0
     # via deprecated
 wtforms==3.0.1
