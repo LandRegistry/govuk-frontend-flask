@@ -15,11 +15,7 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 ### Required
 
-- Python 3.8.x or higher
-
-### Optional
-
-- Redis 4.0.x or higher (for rate limiting, otherwise in-memory storage is used)
+- Docker
 
 ## Getting started
 
@@ -27,25 +23,9 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 [Create a new repository](https://github.com/LandRegistry/govuk-frontend-flask/generate) using this template, with the same directory structure and files. Then clone a local copy of your newly created repository.
 
-### Create venv and install requirements
-
-```shell
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt ; pip install -r requirements_dev.txt
-```
-
-### Get GOV.UK Frontend assets
-
-For convenience a shell script has been provided to download and extract the GOV.UK Frontend distribution assets
-
-```shell
-./build.sh
-```
-
 ### Set local environment variables
 
-In the `.flaskenv` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific information for the following:
+In the `Dockerfile` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific information for the following:
 
 - CONTACT_EMAIL
 - CONTACT_PHONE
@@ -55,13 +35,19 @@ In the `.flaskenv` file you will find a number of environment variables. These a
 - SERVICE_PHASE
 - SERVICE_URL
 
-### Run app
+### Build container image
 
 ```shell
-flask run
+docker build -t govuk-frontend-flask:latest .
 ```
 
-You should now have the app running on <http://localhost:5000/>
+### Run container
+
+```shell
+docker run --name govuk-frontend-flask -p 8000:5000 --rm govuk-frontend-flask:latest
+```
+
+You should now have the app running on <https://localhost:8000/>
 
 ## Demos
 
