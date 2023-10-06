@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,macos,osx,linux,jetbrains+all,visualstudio,visualstudiocode,python,flask,git,venv
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,osx,linux,jetbrains+all,visualstudio,visualstudiocode,python,flask,git,venv
+# Created by https://www.toptal.com/developers/gitignore/api/git,osx,venv,flask,linux,macos,python,windows,certificates,visualstudio,jetbrains+all,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=git,osx,venv,flask,linux,macos,python,windows,certificates,visualstudio,jetbrains+all,visualstudiocode
 
 ### GOV.UK Frontend ###
 app/static/fonts*
@@ -7,6 +7,14 @@ app/static/govuk-frontend*
 app/static/images*
 app/static/VERSION.txt
 govuk_components*
+
+### certificates ###
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.priv
 
 ### Flask ###
 instance/*
@@ -872,4 +880,4 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,macos,osx,linux,jetbrains+all,visualstudio,visualstudiocode,python,flask,git,venv
+# End of https://www.toptal.com/developers/gitignore/api/git,osx,venv,flask,linux,macos,python,windows,certificates,visualstudio,jetbrains+all,visualstudiocode
