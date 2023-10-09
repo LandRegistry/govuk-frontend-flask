@@ -89,9 +89,9 @@ requests==2.31.0
     # via safety
 rich==13.6.0
     # via bandit
-ruamel-yaml==0.17.33
+ruamel-yaml==0.17.35
     # via safety
-ruamel-yaml-clib==0.2.7
+ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
 safety==2.3.4
     # via -r requirements_dev.in
