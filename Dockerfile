@@ -4,15 +4,13 @@ RUN useradd containeruser
 
 WORKDIR /home/containeruser
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-
 # Generate HTTPS Cert
 RUN openssl req -new -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365 -subj "/C=GB/ST=Devon/L=Plymouth/O=HM Land Registry/OU=DDaT/CN=localhost"
 
 COPY app app
-COPY govuk-frontend-flask.py config.py docker-entrypoint.sh cert.pem key.pem ./
-RUN chmod +x docker-entrypoint.sh \
+COPY govuk-frontend-flask.py config.py docker-entrypoint.sh cert.pem key.pem requirements.txt ./
+RUN pip install -r requirements.txt \
+    && chmod +x docker-entrypoint.sh \
     && chown -R containeruser:containeruser ./
 
 # Set environment variables
