@@ -12,8 +12,8 @@ RUN python -m venv venv \
 RUN openssl req -new -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365 -subj "/C=GB/ST=Devon/L=Plymouth/O=HM Land Registry/OU=DDaT/CN=localhost"
 
 COPY app app
-COPY govuk-frontend-flask.py config.py run.sh cert.pem key.pem ./
-RUN chmod +x run.sh \
+COPY govuk-frontend-flask.py config.py docker-entrypoint.sh cert.pem key.pem ./
+RUN chmod +x docker-entrypoint.sh \
     && chown -R containeruser:containeruser ./
 
 # Set environment variables
@@ -33,4 +33,4 @@ ENV CONTACT_EMAIL="[contact email]" \
 USER containeruser
 
 EXPOSE 5000
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
