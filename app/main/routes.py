@@ -27,8 +27,8 @@ def cookies() -> Union[str, Response]:
 
     if form.validate_on_submit():
         # Update cookies policy consent from form data
-        cookies_policy["functional"] = form.functional.data
-        cookies_policy["analytics"] = form.analytics.data
+        cookies_policy["functional"] = str(form.functional.data)
+        cookies_policy["analytics"] = str(form.analytics.data)
 
         # Create flash message confirmation before rendering template
         flash("You’ve set your cookie preferences.", "success")

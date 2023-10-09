@@ -29,7 +29,7 @@ from wtforms.fields import (
     SubmitField,
     TextAreaField,
 )
-from wtforms.validators import Email, EqualTo, InputRequired, Length, Optional, Regexp
+from wtforms.validators import Email, EqualTo, InputRequired, Length, Optional, Regexp, ValidationError
 
 from app.demos.custom_validators import RequiredIf
 
@@ -345,3 +345,32 @@ class ConditionalRevealForm(FlaskForm):
     )
 
     submit = SubmitField("Continue", widget=GovSubmitInput())
+
+
+class AutocompleteForm(FlaskForm):
+    # Manually added list here, but could be dynamically assigned in server route
+    countries = [
+        "Canada",
+        "China",
+        "France",
+        "Germany",
+        "India",
+        "Italy",
+        "Japan",
+        "South Korea",
+        "United Kingdom",
+        "United States",
+    ]
+
+    country = StringField(
+        "Country",
+        widget=GovTextInput(),
+        validators=[InputRequired(message="Enter a country")],
+        description="Start typing and select a suggestion",
+    )
+
+    submit = SubmitField("Continue", widget=GovSubmitInput())
+
+    def validate_country(self, country):
+        if country.data.title() not in self.countries:
+            raise ValidationError(f"{country.data} is not a valid country")

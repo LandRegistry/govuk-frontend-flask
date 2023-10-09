@@ -11,6 +11,7 @@
 {%- from 'govuk_frontend_jinja/components/details/macro.html' import govukDetails -%}
 {%- from 'govuk_frontend_jinja/components/error-message/macro.html' import govukErrorMessage -%}
 {%- from 'govuk_frontend_jinja/components/error-summary/macro.html' import govukErrorSummary -%}
+{%- from 'govuk_frontend_jinja/components/exit-this-page/macro.html' import govukExitThisPage -%}
 {%- from 'govuk_frontend_jinja/components/fieldset/macro.html' import govukFieldset -%}
 {%- from 'govuk_frontend_jinja/components/file-upload/macro.html' import govukFileUpload -%}
 {%- from 'govuk_frontend_jinja/components/footer/macro.html' import govukFooter -%}
@@ -98,6 +99,8 @@
               {{ govukErrorMessage(fixture.options)}}
             {% elif fixtures.component == 'error-summary' %}
               {{ govukErrorSummary(fixture.options)}}
+            {% elif fixtures.component == 'exit-this-page' %}
+              {{ govukExitThisPage(fixture.options)}}
             {% elif fixtures.component == 'fieldset' %}
               {{ govukFieldset(fixture.options)}}
             {% elif fixtures.component == 'file-upload' %}
