@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Optional, Tuple, Union
 
 from flask import flash, json, make_response, redirect, render_template, request
 from flask_wtf.csrf import CSRFError
@@ -58,7 +58,7 @@ def privacy() -> str:
 
 
 @bp.app_errorhandler(HTTPException)
-def http_exception(error: HTTPException) -> str:
+def http_exception(error: HTTPException) -> Tuple[str, Optional[int]]:
     return render_template(f"{error.code}.html"), error.code
 
 

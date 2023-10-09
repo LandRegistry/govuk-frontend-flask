@@ -1,3 +1,5 @@
+from typing import Type
+
 from flask import Flask
 from flask_assets import Bundle, Environment
 from flask_compress import Compress
@@ -17,7 +19,7 @@ limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per mi
 talisman = Talisman()
 
 
-def create_app(config_class: Config = Config) -> Flask:
+def create_app(config_class: Type[Config] = Config) -> Flask:
     app = Flask(__name__, static_url_path="/assets")
     app.config.from_object(config_class)
     app.jinja_env.lstrip_blocks = True
