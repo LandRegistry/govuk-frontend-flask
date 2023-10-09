@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements.in
 #
-blinker==1.6.2
+blinker==1.6.3
     # via flask
 brotli==1.1.0
     # via flask-compress
@@ -36,7 +36,7 @@ flask-limiter==3.5.0
     # via -r requirements.in
 flask-talisman==1.1.0
     # via -r requirements.in
-flask-wtf==1.1.1
+flask-wtf==1.2.1
     # via govuk-frontend-wtf
 govuk-frontend-jinja==2.7.0
     # via
@@ -74,7 +74,7 @@ mdurl==0.1.2
     # via markdown-it-py
 ordered-set==4.1.0
     # via flask-limiter
-packaging==23.1
+packaging==23.2
     # via
     #   gunicorn
     #   limits
@@ -84,7 +84,7 @@ python-dotenv==1.0.0
     # via -r requirements.in
 redis==5.0.1
     # via -r requirements.in
-rich==13.5.3
+rich==13.6.0
     # via flask-limiter
 typing-extensions==4.8.0
     # via
@@ -92,7 +92,7 @@ typing-extensions==4.8.0
     #   limits
 webassets==2.0
     # via flask-assets
-werkzeug==2.3.7
+werkzeug==3.0.0
     # via flask
 wrapt==1.15.0
     # via deprecated
