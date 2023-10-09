@@ -4,6 +4,8 @@ services:
     build: .
     ports:
       - "8000:5000"
+    volumes:
+      - .:/home/containeruser
   redis:
     container_name: redis
     image: "redis:7.0-alpine"
