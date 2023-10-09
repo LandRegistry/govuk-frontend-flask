@@ -35,19 +35,19 @@ In the `Dockerfile` file you will find a number of environment variables. These 
 - SERVICE_PHASE
 - SERVICE_URL
 
-### Build container image
+### Get the latest GOV.UK Frontend assets
 
 ```shell
-docker build -t govuk-frontend-flask:latest .
+./build.sh
 ```
 
-### Run container
+### Run containers
 
 ```shell
-docker run --name govuk-frontend-flask -p 8000:5000 --rm govuk-frontend-flask:latest
+docker compose up
 ```
 
-You should now have the app running on <https://localhost:8000/>
+You should now have the app running on <https://localhost:8000/>.
 
 ## Demos
 
