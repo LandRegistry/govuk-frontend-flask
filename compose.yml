@@ -1,12 +1,16 @@
 services:
-  govuk-frontend-flask:
+  web:
     container_name: govuk-frontend-flask
     build: .
     ports:
       - "8000:5000"
     volumes:
       - .:/home/containeruser
+    depends_on:
+      - redis
   redis:
     container_name: redis
     image: "redis:7.0-alpine"
+    ports:
+      - 6379:6379
   
