@@ -23,5 +23,5 @@ ENV CONTACT_EMAIL="[contact email]" \
 
 USER containeruser
 
-EXPOSE 5000
+EXPOSE 8000
 ENTRYPOINT ["./docker-entrypoint.sh"]
