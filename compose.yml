@@ -2,6 +2,8 @@ services:
   web:
     container_name: govuk-frontend-flask
     build: .
+    environment:
+      - REDIS_URL=redis://redis:6379
     ports:
       - "8000:5000"
     volumes:
