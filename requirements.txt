@@ -32,7 +32,7 @@ flask-assets==2.0
     # via -r requirements.in
 flask-compress==1.14
     # via -r requirements.in
-flask-limiter==3.5.0
+flask-limiter[redis]==3.5.0
     # via -r requirements.in
 flask-talisman==1.1.0
     # via -r requirements.in
@@ -61,7 +61,7 @@ jinja2==3.1.2
     #   govuk-frontend-wtf
 jsmin==3.0.1
     # via -r requirements.in
-limits==3.6.0
+limits[redis]==3.6.0
     # via flask-limiter
 markdown-it-py==3.0.0
     # via rich
@@ -83,7 +83,7 @@ pygments==2.16.1
 python-dotenv==1.0.0
     # via -r requirements.in
 redis==5.0.1
-    # via -r requirements.in
+    # via limits
 rich==13.6.0
     # via flask-limiter
 typing-extensions==4.8.0
@@ -92,10 +92,8 @@ typing-extensions==4.8.0
     #   limits
 webassets==2.0
     # via flask-assets
-werkzeug==2.3.7
-    # via
-    #   -r requirements.in
-    #   flask
+werkzeug==3.0.0
+    # via flask
 wrapt==1.15.0
     # via deprecated
 wtforms==3.0.1
