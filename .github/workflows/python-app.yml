@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install safety flake8 black bandit isort
+          pip install -r requirements_dev.txt
           pip install -r requirements.txt
       - name: Check dependencies for known security vulnerabilities
         run: safety check -r requirements.txt
