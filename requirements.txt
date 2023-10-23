@@ -28,7 +28,7 @@ flask==3.0.0
     #   flask-limiter
     #   flask-wtf
     #   govuk-frontend-wtf
-flask-assets==2.0
+flask-assets==2.1.0
     # via -r requirements.in
 flask-compress==1.14
     # via -r requirements.in
