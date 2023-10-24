@@ -18,7 +18,7 @@ deprecated==1.2.14
     # via limits
 dnspython==2.4.2
     # via email-validator
-email-validator==2.0.0.post2
+email-validator==2.1.0.post1
     # via -r requirements.in
 flask==2.3.3
     # via
@@ -28,7 +28,7 @@ flask==2.3.3
     #   flask-limiter
     #   flask-wtf
     #   govuk-frontend-wtf
-flask-assets==2.0
+flask-assets==2.1.0
     # via -r requirements.in
 flask-compress==1.14
     # via -r requirements.in
@@ -80,8 +80,6 @@ packaging==23.2
     #   limits
 pygments==2.16.1
     # via rich
-python-dotenv==1.0.0
-    # via -r requirements.in
 redis==5.0.1
     # via limits
 rich==13.6.0
@@ -96,7 +94,7 @@ werkzeug==3.0.0
     # via flask
 wrapt==1.15.0
     # via deprecated
-wtforms==3.0.1
+wtforms==3.1.0
     # via
     #   flask-wtf
     #   govuk-frontend-wtf
