@@ -21,7 +21,7 @@ services:
       - cache
   cache:
     container_name: redis
-    image: "redis:7.0-alpine"
+    image: redis:7.0-alpine
     restart: always
     ports:
       - 6379:6379
