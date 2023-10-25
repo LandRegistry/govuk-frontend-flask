@@ -13,8 +13,8 @@
   <meta name="description" content="{{config['SERVICE_NAME']}}">
   <meta name="keywords" content="GOV.UK, govuk, gov, government, uk, frontend, ui, user interface, jinja, python, flask, port, template, templating, macro, component, design system, html, forms, wtf, wtforms, widget, widgets, demo, example">
   <meta name="author" content="{{config['DEPARTMENT_NAME']}}">
-  <!--[if gt IE 8]><!--><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-4.7.0.min.css') }}" /><!--<![endif]-->
-  <!--[if IE 8]><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-ie8-4.7.0.min.css') }}" /><![endif]-->
+  <!--[if gt IE 8]><!--><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-5.0.0-internal.0.min.css') }}" /><!--<![endif]-->
+  <!--[if IE 8]><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-ie8-5.0.0-internal.0.min.css') }}" /><![endif]-->
   {% assets "css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
 {% endblock %}
 
@@ -162,7 +162,7 @@
 
 {% block bodyEnd %}
   <!--[if gt IE 8]><!-->
-  <script src="{{ url_for('static', filename='govuk-frontend-4.7.0.min.js') }}"> </script>
+  <script src="{{ url_for('static', filename='govuk-frontend-5.0.0-internal.0.min.js') }}"> </script>
   <script>window.GOVUKFrontend.initAll()</script>
   <!--<![endif]-->
   {% assets "js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
