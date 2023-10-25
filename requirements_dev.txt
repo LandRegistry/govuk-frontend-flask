@@ -81,7 +81,7 @@ pygments==2.16.1
     # via rich
 pyproject-hooks==1.0.0
     # via build
-pytest==7.4.2
+pytest==7.4.3
     # via pytest-cov
 pytest-cov==4.1.0
     # via -r requirements_dev.in
@@ -91,7 +91,7 @@ requests==2.31.0
     # via safety
 rich==13.6.0
     # via bandit
-ruamel-yaml==0.18.1
+ruamel-yaml==0.18.2
     # via safety
 ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
