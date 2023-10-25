@@ -25,7 +25,7 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 ### Set local environment variables
 
-In the `Dockerfile` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific information for the following:
+In the `compose.yml` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific service information for the following:
 
 - CONTACT_EMAIL
 - CONTACT_PHONE
@@ -34,6 +34,12 @@ In the `Dockerfile` file you will find a number of environment variables. These 
 - SERVICE_NAME
 - SERVICE_PHASE
 - SERVICE_URL
+
+You must also set a new unique `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python comand to generate a new key:
+
+```shell
+python -c 'import secrets; print(secrets.token_hex())'
+```
 
 ### Get the latest GOV.UK Frontend assets
 
@@ -44,10 +50,10 @@ In the `Dockerfile` file you will find a number of environment variables. These 
 ### Run containers
 
 ```shell
-docker compose up
+docker compose up --build
 ```
 
-You should now have the app running on <https://localhost:8000/>.
+You should now have the app running on <https://localhost:8000/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
 
 ## Demos
 
