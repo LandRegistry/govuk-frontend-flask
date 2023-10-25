@@ -350,20 +350,29 @@ class ConditionalRevealForm(FlaskForm):
 class AutocompleteForm(FlaskForm):
     # Manually added list here, but could be dynamically assigned in server route
     countries = [
+        "Argentina",
+        "Australia",
+        "Brazil",
         "Canada",
         "China",
         "France",
         "Germany",
         "India",
+        "Indonesia",
         "Italy",
         "Japan",
+        "Mexico",
+        "Russia",
+        "Saudi Arabia",
+        "South Africa",
         "South Korea",
+        "Turkey",
         "United Kingdom",
         "United States",
     ]
 
     country = StringField(
-        "Country",
+        "G20 Countries",
         widget=GovTextInput(),
         validators=[InputRequired(message="Enter a country")],
         description="Start typing and select a suggestion",

@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements.in
 #
-blinker==1.6.2
+blinker==1.6.3
     # via flask
 brotli==1.1.0
     # via flask-compress
@@ -18,7 +18,7 @@ deprecated==1.2.14
     # via limits
 dnspython==2.4.2
     # via email-validator
-email-validator==2.0.0.post2
+email-validator==2.1.0.post1
     # via -r requirements.in
 flask==3.0.0
     # via
@@ -28,11 +28,11 @@ flask==3.0.0
     #   flask-limiter
     #   flask-wtf
     #   govuk-frontend-wtf
-flask-assets==2.0
+flask-assets==2.1.0
     # via -r requirements.in
 flask-compress==1.14
     # via -r requirements.in
-flask-limiter==3.5.0
+flask-limiter[redis]==3.5.0
     # via -r requirements.in
 flask-talisman==1.1.0
     # via -r requirements.in
@@ -61,7 +61,7 @@ jinja2==3.1.2
     #   govuk-frontend-wtf
 jsmin==3.0.1
     # via -r requirements.in
-limits==3.6.0
+limits[redis]==3.6.0
     # via flask-limiter
 markdown-it-py==3.0.0
     # via rich
@@ -80,10 +80,8 @@ packaging==23.2
     #   limits
 pygments==2.16.1
     # via rich
-python-dotenv==1.0.0
-    # via -r requirements.in
 redis==5.0.1
-    # via -r requirements.in
+    # via limits
 rich==13.6.0
     # via flask-limiter
 typing-extensions==4.8.0
@@ -92,11 +90,11 @@ typing-extensions==4.8.0
     #   limits
 webassets==2.0
     # via flask-assets
-werkzeug==3.0.0
+werkzeug==3.0.1
     # via flask
 wrapt==1.15.0
     # via deprecated
-wtforms==3.0.1
+wtforms==3.1.0
     # via
     #   flask-wtf
     #   govuk-frontend-wtf

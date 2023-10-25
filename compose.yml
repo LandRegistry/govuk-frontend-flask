@@ -1,0 +1,28 @@
+services:
+  web:
+    container_name: govuk-frontend-flask
+    build: .
+    restart: always
+    environment:
+      - CONTACT_EMAIL=[contact email]
+      - CONTACT_PHONE=[contact phone]
+      - DEPARTMENT_NAME=[name of department]
+      - DEPARTMENT_URL=[url of department]
+      - REDIS_URL=redis://cache:6379
+      - SECRET_KEY=4f378500459bb58fecf903ea3c113069f11f150b33388f56fc89f7edce0e6a84
+      - SERVICE_NAME=[name of service]
+      - SERVICE_PHASE=[phase]
+      - SERVICE_URL=[url of service]
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/home/containeruser
+    depends_on:
+      - cache
+  cache:
+    container_name: redis
+    image: redis:7.0-alpine
+    restart: always
+    ports:
+      - 6379:6379
+  
