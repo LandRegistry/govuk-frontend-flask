@@ -42,7 +42,7 @@ idna==3.4
     # via requests
 iniconfig==2.0.0
     # via pytest
-isort==5.12.0
+isort==5.13.1
     # via -r requirements_dev.in
 markdown-it-py==3.0.0
     # via rich
