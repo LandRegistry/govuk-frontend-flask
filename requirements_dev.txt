@@ -6,7 +6,7 @@
 #
 attrs==23.1.0
     # via flake8-bugbear
-bandit==1.7.5
+bandit==1.7.7
     # via -r requirements_dev.in
 black==23.10.1
     # via -r requirements_dev.in
@@ -34,10 +34,6 @@ flake8==6.1.0
     #   pep8-naming
 flake8-bugbear==23.9.16
     # via -r requirements_dev.in
-gitdb==4.0.11
-    # via gitpython
-gitpython==3.1.40
-    # via bandit
 idna==3.4
     # via requests
 iniconfig==2.0.0
@@ -97,8 +93,6 @@ ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
 safety==2.3.4
     # via -r requirements_dev.in
-smmap==5.0.1
-    # via gitdb
 stevedore==5.1.0
     # via bandit
 urllib3==2.0.7
