@@ -14,7 +14,7 @@ services:
       - SERVICE_PHASE=[phase]
       - SERVICE_URL=[url of service]
     ports:
-      - "8000:8000"
+      - "9876:9876"
     volumes:
       - .:/home/containeruser
     depends_on:
