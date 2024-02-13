@@ -164,42 +164,42 @@ class KitchenSinkForm(FlaskForm):
         "StringField",
         widget=GovTextInput(),
         validators=[InputRequired(message="StringField is required")],
-        description="Hint text: WTForm StringField rendered using a GovTextInput widget.",
+        description="StringField rendered using a GovTextInput widget.",
     )
 
     email_field = StringField(
         "EmailField",
         widget=GovTextInput(),
         validators=[InputRequired(message="EmailField is required"), Email()],
-        description="Hint text: WTForm StringField rendered using a GovTextInput widget.",
+        description="StringField rendered using a GovTextInput widget.",
     )
 
     float_field = FloatField(
         "FloatField",
         widget=GovTextInput(),
         validators=[InputRequired(message="FloatField is required")],
-        description="Hint text: WTForm FloatField rendered using a GovTextInput widget.",
+        description="FloatField rendered using a GovTextInput widget.",
     )
 
     integer_field = IntegerField(
         "IntegerField",
         widget=GovTextInput(),
         validators=[InputRequired(message="IntegerField is required")],
-        description="Hint text: WTForm IntegerField rendered using a GovTextInput widget.",
+        description="IntegerField rendered using a GovTextInput widget.",
     )
 
     decimal_field = DecimalField(
         "DecimalField",
         widget=GovTextInput(),
         validators=[InputRequired(message="DecimalField is required")],
-        description="Hint text: WTForm DecimalField rendered using a GovTextInput widget.",
+        description="DecimalField rendered using a GovTextInput widget.",
     )
 
     textarea_field = TextAreaField(
         "TextAreaField",
         widget=GovTextArea(),
         validators=[InputRequired(message="TextAreaField is required")],
-        description="Hint text: WTForm TextAreaField rendered using a GovTextArea widget.",
+        description="TextAreaField rendered using a GovTextArea widget.",
     )
 
     charactercount_field = TextAreaField(
@@ -209,14 +209,14 @@ class KitchenSinkForm(FlaskForm):
             InputRequired(message="CharacterCountField is required"),
             Length(max=200, message="CharacterCountField must be 200 characters or fewer "),
         ],
-        description="Hint text: WTForm TextAreaField rendered using a GovCharacterCount widget.",
+        description="TextAreaField rendered using a GovCharacterCount widget.",
     )
 
     boolean_field = BooleanField(
         "BooleanField",
         widget=GovCheckboxInput(),
         validators=[InputRequired(message="Please tick the box")],
-        description="Hint text: WTForm BooleanField rendered using a GovCheckboxInput widget.",
+        description="BooleanField rendered using a GovCheckboxInput widget.",
     )
 
     select_field = SelectField(
@@ -230,7 +230,7 @@ class KitchenSinkForm(FlaskForm):
             ("three", "Three"),
         ],
         default="",
-        description="Hint text: WTForm SelectField rendered using a GovSelect widget.",
+        description="SelectField rendered using a GovSelect widget.",
     )
 
     select_multiple_field = SelectMultipleField(
@@ -238,7 +238,7 @@ class KitchenSinkForm(FlaskForm):
         widget=GovCheckboxesInput(),
         validators=[InputRequired(message="Please select an option")],
         choices=[("one", "One"), ("two", "Two"), ("three", "Three")],
-        description="Hint text: WTForm SelectMultipleField rendered using a GovCheckboxesInput widget.",
+        description="SelectMultipleField rendered using a GovCheckboxesInput widget.",
     )
 
     radio_field = RadioField(
@@ -246,21 +246,21 @@ class KitchenSinkForm(FlaskForm):
         widget=GovRadioInput(),
         validators=[InputRequired(message="Please select an option")],
         choices=[("one", "One"), ("two", "Two"), ("three", "Three")],
-        description="Hint text: WTForm RadioField rendered using a GovRadioInput widget.",
+        description="RadioField rendered using a GovRadioInput widget.",
     )
 
     file_field = FileField(
         "FileField",
         widget=GovFileInput(),
         validators=[InputRequired(message="Please upload a file")],
-        description="Hint text: WTForm FileField rendered using a GovFileInput widget.",
+        description="FileField rendered using a GovFileInput widget.",
     )
 
     multiple_file_field = MultipleFileField(
         "MultipleFileField",
         widget=GovFileInput(multiple=True),
         validators=[InputRequired(message="Please upload a file")],
-        description="Hint text: WTForm MultipleFileField rendered using a MultipleFileField widget.",
+        description="MultipleFileField rendered using a MultipleFileField widget.",
     )
 
     password_field = PasswordField(
@@ -273,21 +273,21 @@ class KitchenSinkForm(FlaskForm):
                 message="Please ensure both password fields match",
             ),
         ],
-        description="Hint text: WTForm PasswordField rendered using a GovPasswordInput widget.",
+        description="PasswordField rendered using a GovPasswordInput widget.",
     )
 
     date_field = DateField(
         "DateField",
         widget=GovDateInput(),
         validators=[InputRequired(message="DateField is required")],
-        description="Hint text: WTForm DateField rendered using a GovDateInput widget.",
+        description="DateField rendered using a GovDateInput widget.",
     )
 
     date_time_field = DateTimeField(
         "DateTimeField",
         widget=GovDateInput(),
         validators=[InputRequired(message="DateTimeField is required")],
-        description="Hint text: WTForm DateTimeField rendered using a GovDateInput widget.",
+        description="DateTimeField rendered using a GovDateInput widget.",
     )
 
     submit_button = SubmitField("SubmitField", widget=GovSubmitInput())
