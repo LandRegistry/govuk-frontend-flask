@@ -42,7 +42,7 @@ govuk-frontend-jinja==3.0.0
     # via
     #   -r requirements.in
     #   govuk-frontend-wtf
-govuk-frontend-wtf==2.5.0
+govuk-frontend-wtf==3.0.0
     # via -r requirements.in
 gunicorn==21.2.0
     # via -r requirements.in
