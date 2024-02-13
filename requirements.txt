@@ -32,7 +32,7 @@ flask-assets==2.1.0
     # via -r requirements.in
 flask-compress==1.14
     # via -r requirements.in
-flask-limiter[redis]==3.5.0
+flask-limiter[redis]==3.5.1
     # via -r requirements.in
 flask-talisman==1.1.0
     # via -r requirements.in
