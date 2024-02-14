@@ -1,6 +1,6 @@
-import json
 import os
 
+import yaml
 from flask import flash, redirect, render_template, url_for
 from werkzeug.exceptions import NotFound
 
@@ -19,12 +19,12 @@ def components():
 @bp.route("/components/<string:component>", methods=["GET"])
 def component(component):
     try:
-        with open("govuk_components/{}/fixtures.json".format(component)) as json_file:
-            fixtures = json.load(json_file)
+        with open(f"govuk_components/{component}/{component}.yaml") as yaml_file:
+            fixtures = yaml.safe_load(yaml_file)
     except FileNotFoundError:
         raise NotFound
 
-    return render_template("component.html", fixtures=fixtures)
+    return render_template("component.html", component=component, fixtures=fixtures)
 
 
 @bp.route("/forms", methods=["GET"])

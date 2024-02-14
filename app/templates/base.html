@@ -13,8 +13,7 @@
   <meta name="description" content="{{config['SERVICE_NAME']}}">
   <meta name="keywords" content="GOV.UK, govuk, gov, government, uk, frontend, ui, user interface, jinja, python, flask, port, template, templating, macro, component, design system, html, forms, wtf, wtforms, widget, widgets, demo, example">
   <meta name="author" content="{{config['DEPARTMENT_NAME']}}">
-  <!--[if gt IE 8]><!--><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-4.7.0.min.css') }}" /><!--<![endif]-->
-  <!--[if IE 8]><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-ie8-4.7.0.min.css') }}" /><![endif]-->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-5.1.0.min.css') }}" />
   {% assets "css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
 {% endblock %}
 
@@ -111,7 +110,8 @@
   {{ govukHeader({
     'homepageUrl': url_for('main.index'),
     'serviceName': config['SERVICE_NAME'],
-    'serviceUrl': url_for('main.index')
+    'serviceUrl': url_for('main.index'),
+    'useTudorCrown': true
   }) }}
 {% endblock %}
 
@@ -120,7 +120,7 @@
     'tag': {
       'text': config['SERVICE_PHASE']
     },
-    'html': 'This is a new service – your <a class="govuk-link" href="mailto:' + config['CONTACT_EMAIL'] +'?subject=Feedback">feedback</a> will help us to improve it.'
+    'html': 'This is a new service – your <a class="govuk-link" href="mailto:' + config['CONTACT_EMAIL'] + '">feedback</a> will help us to improve it.'
   }) }}
 {% endblock %}
 
@@ -161,9 +161,10 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <!--[if gt IE 8]><!-->
-  <script src="{{ url_for('static', filename='govuk-frontend-4.7.0.min.js') }}"> </script>
-  <script>window.GOVUKFrontend.initAll()</script>
-  <!--<![endif]-->
+  <script type="module" src="{{ url_for('static', filename='govuk-frontend-5.1.0.min.js') }}"></script>
+  <script type="module">
+    import { initAll } from "{{ url_for('static', filename='govuk-frontend-5.1.0.min.js') }}"
+    initAll()
+  </script>
   {% assets "js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
 {% endblock %}

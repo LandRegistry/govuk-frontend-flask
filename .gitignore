@@ -6,6 +6,7 @@ app/static/fonts*
 app/static/govuk-frontend*
 app/static/images*
 app/static/VERSION.txt
+app/static/manifest.json
 govuk_components*
 
 ### certificates ###

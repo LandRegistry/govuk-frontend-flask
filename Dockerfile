@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 RUN useradd containeruser
 
@@ -17,5 +17,5 @@ ENV FLASK_APP=govuk-frontend-flask.py \
 
 USER containeruser
 
-EXPOSE 8000
+EXPOSE 9876
 ENTRYPOINT ["./docker-entrypoint.sh"]
