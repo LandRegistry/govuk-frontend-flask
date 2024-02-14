@@ -86,7 +86,7 @@ def create_app(config_class=Config):
         "sync-script": "()",
         "trust-token-redemption": "()",
         "unload": "()",
-        "window-placement": "()",
+        "window-management": "()",
         "vertical-scroll": "()",
     }
 
