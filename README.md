@@ -1,6 +1,6 @@
 # GOV.UK Frontend Flask
 
-![govuk-frontend 4.7.0](https://img.shields.io/badge/govuk--frontend%20version-4.7.0-005EA5?logo=gov.uk&style=flat)
+![govuk-frontend 5.1.0](https://img.shields.io/badge/govuk--frontend%20version-5.1.0-005EA5?logo=gov.uk&style=flat)
 
 **GOV.UK Frontend Flask is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
 
@@ -15,11 +15,7 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 ### Required
 
-- Python 3.8.x or higher
-
-### Optional
-
-- Redis 4.0.x or higher (for rate limiting, otherwise in-memory storage is used)
+- Docker
 
 ## Getting started
 
@@ -27,25 +23,9 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 [Create a new repository](https://github.com/LandRegistry/govuk-frontend-flask/generate) using this template, with the same directory structure and files. Then clone a local copy of your newly created repository.
 
-### Create venv and install requirements
-
-```shell
-python3 -m venv venv
-source venv/bin/activate
-pip3 install -r requirements.txt ; pip3 install -r requirements_dev.txt
-```
-
-### Get GOV.UK Frontend assets
-
-For convenience a shell script has been provided to download and extract the GOV.UK Frontend distribution assets
-
-```shell
-./build.sh
-```
-
 ### Set local environment variables
 
-In the `.flaskenv` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific information for the following:
+In the `compose.yml` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific service information for the following:
 
 - CONTACT_EMAIL
 - CONTACT_PHONE
@@ -55,13 +35,25 @@ In the `.flaskenv` file you will find a number of environment variables. These a
 - SERVICE_PHASE
 - SERVICE_URL
 
-### Run app
+You must also set a new unique `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python comand to generate a new key:
 
 ```shell
-flask run
+python -c 'import secrets; print(secrets.token_hex())'
 ```
 
-You should now have the app running on <http://localhost:5000/>
+### Get the latest GOV.UK Frontend assets
+
+```shell
+./build.sh
+```
+
+### Run containers
+
+```shell
+docker compose up --build
+```
+
+You should now have the app running on <https://localhost:9876/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
 
 ## Demos
 

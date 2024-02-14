@@ -41,9 +41,55 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
         "default-src": "'self'",
         "script-src": [
             "'self'",
-            "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
-            "'sha256-l1eTVSK8DTnK8+yloud7wZUqFrI0atVo6VlC6PJvYaQ='",
+            "'sha256-GUQ5ad8JK5KmEWmROf3LZd9ge94daqNvd8xy9YS1iDw='",
+            "'sha256-EOlYC7YurunqHZxQoZ/zL5TKc/rPajg45h85KVyb5So='",
         ],
+    }
+
+    # Set permissions policy
+    permissions_policy = {
+        "accelerometer": "()",
+        "ambient-light-sensor": "()",
+        "autoplay": "()",
+        "battery": "()",
+        "camera": "()",
+        "cross-origin-isolated": "()",
+        "display-capture": "()",
+        "document-domain": "()",
+        "encrypted-media": "()",
+        "execution-while-not-rendered": "()",
+        "execution-while-out-of-viewport": "()",
+        "fullscreen": "()",
+        "geolocation": "()",
+        "gyroscope": "()",
+        "keyboard-map": "()",
+        "magnetometer": "()",
+        "microphone": "()",
+        "midi": "()",
+        "navigation-override": "()",
+        "payment": "()",
+        "picture-in-picture": "()",
+        "publickey-credentials-get": "()",
+        "screen-wake-lock": "()",
+        "sync-xhr": "()",
+        "usb": "()",
+        "web-share": "()",
+        "xr-spatial-tracking": "()",
+        "clipboard-read": "()",
+        "clipboard-write": "()",
+        "gamepad": "()",
+        "speaker-selection": "()",
+        "conversion-measurement": "()",
+        "focus-without-user-activation": "()",
+        "hid": "()",
+        "idle-detection": "()",
+        "interest-cohort": "()",
+        "serial": "()",
+        "sync-script": "()",
+        "trust-token-redemption": "()",
+        "unload": "()",
+        "window-management": "()",
+        "vertical-scroll": "()",
     }
 
     # Initialise app extensions
@@ -51,7 +97,7 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     compress.init_app(app)
     csrf.init_app(app)
     limiter.init_app(app)
-    talisman.init_app(app, content_security_policy=csp)
+    talisman.init_app(app, content_security_policy=csp, permissions_policy=permissions_policy)
     WTFormsHelpers(app)
 
     # Create static asset bundles
