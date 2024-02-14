@@ -9,3 +9,4 @@ govuk-frontend-jinja
 govuk-frontend-wtf
 gunicorn
 jsmin
+pyyaml

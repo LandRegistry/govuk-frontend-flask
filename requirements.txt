@@ -80,6 +80,8 @@ packaging==23.2
     #   limits
 pygments==2.17.2
     # via rich
+pyyaml==6.0.1
+    # via -r requirements.in
 redis==5.0.1
     # via limits
 rich==13.7.0
