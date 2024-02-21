@@ -31,7 +31,7 @@ coverage[toml]==7.4.1
     # via
     #   coverage
     #   pytest-cov
-cryptography==42.0.2
+cryptography==42.0.4
     # via authlib
 dparse==0.6.4b0
     # via
