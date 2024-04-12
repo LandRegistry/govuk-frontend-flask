@@ -46,7 +46,7 @@ govuk-frontend-wtf==3.0.0
     # via -r requirements.in
 gunicorn==21.2.0
     # via -r requirements.in
-idna==3.6
+idna==3.7
     # via email-validator
 importlib-resources==6.1.1
     # via limits
