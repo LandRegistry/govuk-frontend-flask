@@ -40,7 +40,7 @@ def create_app(config_class=Config):
         "script-src": [
             "'self'",
             "'sha256-GUQ5ad8JK5KmEWmROf3LZd9ge94daqNvd8xy9YS1iDw='",
-            "'sha256-EOlYC7YurunqHZxQoZ/zL5TKc/rPajg45h85KVyb5So='",
+            "'sha256-xvC5hOpINthj2xzP7qkRGmqR3SpU8ZVw1sEMKbsOS/4='",
         ],
     }
 
