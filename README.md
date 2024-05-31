@@ -53,7 +53,7 @@ python -c 'import secrets; print(secrets.token_hex())'
 docker compose up --build
 ```
 
-You should now have the app running on <https://localhost:9876/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
+You should now have the app running on <https://localhost:1337/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
 
 ## Demos
 
