@@ -4,15 +4,17 @@
 #
 #    pip-compile requirements_dev.in
 #
+annotated-types==0.7.0
+    # via pydantic
 attrs==23.2.0
     # via flake8-bugbear
 authlib==1.3.0
     # via safety
-bandit==1.7.7
+bandit==1.7.8
     # via -r requirements_dev.in
-black==24.2.0
+black==24.4.2
     # via -r requirements_dev.in
-build==1.0.3
+build==1.2.1
     # via pip-tools
 certifi==2024.2.2
     # via requests
@@ -27,11 +29,9 @@ click==8.1.7
     #   pur
     #   safety
     #   typer
-coverage[toml]==7.4.1
-    # via
-    #   coverage
-    #   pytest-cov
-cryptography==42.0.2
+coverage[toml]==7.5.3
+    # via pytest-cov
+cryptography==42.0.7
     # via authlib
 dparse==0.6.4b0
     # via
@@ -41,21 +41,21 @@ flake8==7.0.0
     # via
     #   flake8-bugbear
     #   pep8-naming
-flake8-bugbear==24.2.6
+flake8-bugbear==24.4.26
     # via -r requirements_dev.in
-idna==3.6
+idna==3.7
     # via requests
 iniconfig==2.0.0
     # via pytest
 isort==5.13.2
     # via -r requirements_dev.in
-jinja2==3.1.3
+jinja2==3.1.4
     # via safety
 markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
     # via jinja2
-marshmallow==3.20.2
+marshmallow==3.21.2
     # via safety
 mccabe==0.7.0
     # via flake8
@@ -63,7 +63,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mypy-extensions==1.0.0
     # via black
-packaging==23.2
+packaging==24.0
     # via
     #   black
     #   build
@@ -76,67 +76,75 @@ pathspec==0.12.1
     # via black
 pbr==6.0.0
     # via stevedore
-pep8-naming==0.13.3
+pep8-naming==0.14.1
     # via -r requirements_dev.in
-pip-tools==7.3.0
+pip-tools==7.4.1
     # via -r requirements_dev.in
-platformdirs==4.2.0
+platformdirs==4.2.2
     # via black
-pluggy==1.4.0
+pluggy==1.5.0
     # via pytest
 pur==7.3.1
     # via -r requirements_dev.in
 pycodestyle==2.11.1
     # via flake8
-pycparser==2.21
+pycparser==2.22
     # via cffi
-pydantic==1.10.14
+pydantic==2.7.2
     # via
     #   safety
     #   safety-schemas
+pydantic-core==2.18.3
+    # via pydantic
 pyflakes==3.2.0
     # via flake8
-pygments==2.17.2
+pygments==2.18.0
     # via rich
-pyproject-hooks==1.0.0
-    # via build
-pytest==8.0.0
+pyproject-hooks==1.1.0
+    # via
+    #   build
+    #   pip-tools
+pytest==8.2.1
     # via pytest-cov
-pytest-cov==4.1.0
+pytest-cov==5.0.0
     # via -r requirements_dev.in
 pyyaml==6.0.1
     # via bandit
-requests==2.31.0
+requests==2.32.3
     # via safety
-rich==13.7.0
+rich==13.7.1
     # via
     #   bandit
     #   safety
+    #   typer
 ruamel-yaml==0.18.6
     # via
     #   safety
     #   safety-schemas
 ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
-safety==3.0.1
+safety==3.2.0
     # via -r requirements_dev.in
 safety-schemas==0.0.2
     # via safety
-stevedore==5.1.0
+shellingham==1.5.4
+    # via typer
+stevedore==5.2.0
     # via bandit
-typer==0.9.0
+typer==0.12.3
     # via safety
-typing-extensions==4.9.0
+typing-extensions==4.12.0
     # via
     #   pydantic
+    #   pydantic-core
     #   safety
     #   safety-schemas
     #   typer
-urllib3==2.2.0
+urllib3==2.2.1
     # via
     #   requests
     #   safety
-wheel==0.42.0
+wheel==0.43.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
