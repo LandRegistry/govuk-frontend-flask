@@ -107,10 +107,10 @@ flowchart TB
         cache1
     end
 
-    classDef PROXY fill:#D5E8D4,stroke:#82B366,stroke-width:2px
-    classDef WEB fill:#FFF2CC,stroke:#D6B656,stroke-width:2px
     classDef CACHE fill:#F8CECC,stroke:#B85450,stroke-width:2px
     classDef DB fill:#DAE8FC,stroke:#6C8EBF,stroke-width:2px
+    classDef PROXY fill:#D5E8D4,stroke:#82B366,stroke-width:2px
+    classDef WEB fill:#FFF2CC,stroke:#D6B656,stroke-width:2px
 ```
 
 ## Features
