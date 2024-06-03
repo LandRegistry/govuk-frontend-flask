@@ -59,7 +59,7 @@ openssl req -new -x509 -newkey rsa:4096 -nodes -out ./cert.pem -keyout ./key.pem
 docker compose up --build
 ```
 
-You should now have the app running on <https://localhost:1337/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
+You should now have the app running on <https://localhost/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
 
 ## Demos
 
