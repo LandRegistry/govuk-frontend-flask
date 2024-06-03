@@ -67,6 +67,46 @@ To run the tests:
 python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
+## Environment
+
+```mermaid
+flowchart LR
+    cache1(Redis):::CACHE
+    Client
+    db1[(Postgres)]:::DB
+    prox1(NGINX):::PROXY
+    web1(Flask):::WEB
+    web2[/Static/]:::WEB
+
+    Client <-- https:443 --> prox1 <-- http:5000 --> web1
+    prox1 -- Read --> web2
+    web1 -- Write --> web2
+    web1 <-- postgresql:5432 --> db1
+    web1 <-- redis:6379 --> cache1
+
+    subgraph Proxy
+        prox1
+    end
+
+    subgraph Web
+        web1
+        web2
+    end
+
+    subgraph Database
+        db1
+    end
+
+    subgraph Cache
+        cache1
+    end
+
+    classDef PROXY fill:#D5E8D4,stroke:#82B366,stroke-width:2px
+    classDef WEB fill:#FFF2CC,stroke:#D6B656,stroke-width:2px
+    classDef CACHE fill:#F8CECC,stroke:#B85450,stroke-width:2px
+    classDef DB fill:#DAE8FC,stroke:#6C8EBF,stroke-width:2px
+```
+
 ## Features
 
 Please refer to the specific packages documentation for more details.
