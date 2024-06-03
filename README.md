@@ -84,20 +84,20 @@ flowchart LR
     web1 <-- postgresql:5432 --> db1
     web1 <-- redis:6379 --> cache1
 
-    subgraph Proxy
+    subgraph Proxy container
         prox1
     end
 
-    subgraph Web
+    subgraph Web container
         web1
         web2
     end
 
-    subgraph Database
+    subgraph Database container
         db1
     end
 
-    subgraph Cache
+    subgraph Cache container
         cache1
     end
 
