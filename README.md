@@ -76,12 +76,12 @@ python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ## Environment
 
 ```mermaid
-flowchart LR
+flowchart TB
     cache1(Redis):::CACHE
     Client
     db1[(Postgres)]:::DB
     prox1(NGINX):::PROXY
-    web1(Flask):::WEB
+    web1(Flask app):::WEB
     web2[/Static/]:::WEB
 
     Client <-- https:443 --> prox1 <-- http:5000 --> web1
