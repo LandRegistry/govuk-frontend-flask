@@ -13,6 +13,8 @@ services:
       - SERVICE_NAME=[name of service]
       - SERVICE_PHASE=[phase]
       - SERVICE_URL=[url of service]
+    volumes:
+      - static_volume:/home/containeruser/app/static
     expose:
       - 5000
     depends_on:
@@ -28,7 +30,10 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./cert.pem:/root/ssl/cert.pem
       - ./key.pem:/root/ssl/key.pem
+      - static_volume:/home/containeruser/app/static
     ports:
       - 443:443
     depends_on:
       - web
+volumes:
+  static_volume:
