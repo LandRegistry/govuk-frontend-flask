@@ -95,7 +95,12 @@ def create_app(config_class=Config):
     compress.init_app(app)
     csrf.init_app(app)
     limiter.init_app(app)
-    talisman.init_app(app, content_security_policy=csp, permissions_policy=permissions_policy)
+    talisman.init_app(
+        app,
+        force_https=False,
+        content_security_policy=csp,
+        permissions_policy=permissions_policy,
+    )
     WTFormsHelpers(app)
 
     # Create static asset bundles
