@@ -7,6 +7,7 @@ from flask_talisman import Talisman
 from flask_wtf.csrf import CSRFProtect
 from govuk_frontend_wtf.main import WTFormsHelpers
 from jinja2 import ChoiceLoader, PackageLoader, PrefixLoader
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import Config
 
@@ -33,6 +34,7 @@ def create_app(config_class=Config):
             ),
         ]
     )
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
 
     # Set content security policy
     csp = {
