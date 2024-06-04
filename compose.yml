@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    command: gunicorn --bind 0.0.0.0:5000 --access-logfile - --error-logfile - govuk-frontend-flask:app
+    command: gunicorn --bind 0.0.0.0:5000 -w 4 --access-logfile - --error-logfile - govuk-frontend-flask:app
     restart: always
     environment:
       - CONTACT_EMAIL=[contact email]
