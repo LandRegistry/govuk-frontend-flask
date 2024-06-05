@@ -32,7 +32,7 @@ def create_app(config_class=Config):
             ),
         ]
     )
-    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
 
     # Initialise app extensions
     assets.init_app(app)
