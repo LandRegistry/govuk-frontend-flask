@@ -140,9 +140,7 @@ CSRF errors are handled by creating a [flash message](#flash-messages) notificat
 
 ### HTTP security headers
 
-Uses [Flask Talisman](https://github.com/GoogleCloudPlatform/flask-talisman) to set HTTP headers that can help protect against a few common web application security issues.
-
-- Forces all connections to `https`, unless running with debug enabled.
+- Forces all connections to `https`.
 - Enables [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security).
 - Sets Flask's session cookie to `secure`, so it will never be set if your application is somehow accessed via a non-secure connection.
 - Sets Flask's session cookie to `httponly`, preventing JavaScript from being able to access its content.
@@ -153,7 +151,7 @@ Uses [Flask Talisman](https://github.com/GoogleCloudPlatform/flask-talisman) to 
 
 ### Content Security Policy
 
-A strict default [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) is set using [Flask Talisman](https://github.com/GoogleCloudPlatform/flask-talisman) to mitigate [Cross Site Scripting](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#cross-site_scripting_xss) (XSS) and packet sniffing attacks. This prevents loading any resources that are not in the same domain as the application.
+A strict default [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) is set to mitigate [Cross Site Scripting](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#cross-site_scripting_xss) (XSS) and packet sniffing attacks. This prevents loading any resources that are not in the same domain as the application.
 
 ### Response compression
 

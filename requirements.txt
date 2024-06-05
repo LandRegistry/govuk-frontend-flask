@@ -34,8 +34,6 @@ flask-compress==1.15
     # via -r requirements.in
 flask-limiter[redis]==3.7.0
     # via -r requirements.in
-flask-talisman==1.1.0
-    # via -r requirements.in
 flask-wtf==1.2.1
     # via govuk-frontend-wtf
 govuk-frontend-jinja==3.1.0

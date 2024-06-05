@@ -3,7 +3,6 @@ from flask_assets import Bundle, Environment
 from flask_compress import Compress
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from flask_talisman import Talisman
 from flask_wtf.csrf import CSRFProtect
 from govuk_frontend_wtf.main import WTFormsHelpers
 from jinja2 import ChoiceLoader, PackageLoader, PrefixLoader
@@ -15,7 +14,6 @@ assets = Environment()
 compress = Compress()
 csrf = CSRFProtect()
 limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per minute"])
-talisman = Talisman()
 
 
 def create_app(config_class=Config):
@@ -36,73 +34,11 @@ def create_app(config_class=Config):
     )
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
 
-    # Set content security policy
-    csp = {
-        "default-src": "'self'",
-        "script-src": [
-            "'self'",
-            "'sha256-GUQ5ad8JK5KmEWmROf3LZd9ge94daqNvd8xy9YS1iDw='",
-            "'sha256-xvC5hOpINthj2xzP7qkRGmqR3SpU8ZVw1sEMKbsOS/4='",
-        ],
-    }
-
-    # Set permissions policy
-    permissions_policy = {
-        "accelerometer": "()",
-        "ambient-light-sensor": "()",
-        "autoplay": "()",
-        "battery": "()",
-        "camera": "()",
-        "cross-origin-isolated": "()",
-        "display-capture": "()",
-        "document-domain": "()",
-        "encrypted-media": "()",
-        "execution-while-not-rendered": "()",
-        "execution-while-out-of-viewport": "()",
-        "fullscreen": "()",
-        "geolocation": "()",
-        "gyroscope": "()",
-        "keyboard-map": "()",
-        "magnetometer": "()",
-        "microphone": "()",
-        "midi": "()",
-        "navigation-override": "()",
-        "payment": "()",
-        "picture-in-picture": "()",
-        "publickey-credentials-get": "()",
-        "screen-wake-lock": "()",
-        "sync-xhr": "()",
-        "usb": "()",
-        "web-share": "()",
-        "xr-spatial-tracking": "()",
-        "clipboard-read": "()",
-        "clipboard-write": "()",
-        "gamepad": "()",
-        "speaker-selection": "()",
-        "conversion-measurement": "()",
-        "focus-without-user-activation": "()",
-        "hid": "()",
-        "idle-detection": "()",
-        "interest-cohort": "()",
-        "serial": "()",
-        "sync-script": "()",
-        "trust-token-redemption": "()",
-        "unload": "()",
-        "window-management": "()",
-        "vertical-scroll": "()",
-    }
-
     # Initialise app extensions
     assets.init_app(app)
     compress.init_app(app)
     csrf.init_app(app)
     limiter.init_app(app)
-    talisman.init_app(
-        app,
-        force_https=False,
-        content_security_policy=csp,
-        permissions_policy=permissions_policy,
-    )
     WTFormsHelpers(app)
 
     # Create static asset bundles
