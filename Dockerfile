@@ -1,8 +1,8 @@
 FROM python:3.12-slim
 
-RUN useradd containeruser
+RUN useradd appuser
 
-WORKDIR /home/containeruser
+WORKDIR /home/appuser
 
 # Set environment variables
 ENV FLASK_APP=govuk-frontend-flask.py \
@@ -12,6 +12,6 @@ ENV FLASK_APP=govuk-frontend-flask.py \
 COPY app app
 COPY govuk-frontend-flask.py config.py requirements.txt ./
 RUN pip install -r requirements.txt \
-    && chown -R containeruser:containeruser ./
+    && chown -R appuser:appuser ./
 
-USER containeruser
+USER appuser
