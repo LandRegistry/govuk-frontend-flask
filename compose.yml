@@ -25,7 +25,7 @@ services:
     ports:
       - 6379:6379
   nginx:
-    image: nginx:stable
+    image: nginx:stable-alpine-slim
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./cert.pem:/root/ssl/cert.pem
