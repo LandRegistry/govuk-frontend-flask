@@ -52,7 +52,7 @@ python -c 'import secrets; print(secrets.token_hex())'
 ```shell
 openssl req -x509 -noenc -newkey rsa:2048 -keyout ./key.pem -out ./req.pem -days 90 -subj "/C=GB/ST=Devon/L=Plymouth/O=HM Land Registry/OU=DDaT/CN=localhost"
 
-openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
+openssl dhparam -out ./dhparam.pem 2048
 ```
 
 ### Run containers
