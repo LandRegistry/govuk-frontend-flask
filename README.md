@@ -50,7 +50,7 @@ python -c 'import secrets; print(secrets.token_hex())'
 ### Generate self-signed certificates
 
 ```shell
-openssl req -new -x509 -newkey rsa:4096 -nodes -out ./cert.pem -keyout ./key.pem -days 365 -subj "/C=GB/ST=Devon/L=Plymouth/O=HM Land Registry/OU=DDaT/CN=localhost"
+openssl req -x509 -noenc -newkey rsa:4096 -keyout ./key.pem -out ./req.pem -days 365 -subj "/C=GB/ST=Devon/L=Plymouth/O=HM Land Registry/OU=DDaT/CN=localhost"
 ```
 
 ### Run containers
