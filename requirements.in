@@ -2,7 +2,6 @@ cssmin
 email_validator
 flask
 flask-assets
-flask-compress
 flask-limiter[redis]
 govuk-frontend-jinja
 govuk-frontend-wtf

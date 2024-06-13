@@ -6,8 +6,6 @@
 #
 blinker==1.8.2
     # via flask
-brotli==1.1.0
-    # via flask-compress
 click==8.1.7
     # via flask
 cssmin==0.2.0
@@ -24,13 +22,10 @@ flask==3.0.3
     # via
     #   -r requirements.in
     #   flask-assets
-    #   flask-compress
     #   flask-limiter
     #   flask-wtf
     #   govuk-frontend-wtf
 flask-assets==2.1.0
-    # via -r requirements.in
-flask-compress==1.15
     # via -r requirements.in
 flask-limiter[redis]==3.7.0
     # via -r requirements.in
@@ -72,7 +67,7 @@ mdurl==0.1.2
     # via markdown-it-py
 ordered-set==4.1.0
     # via flask-limiter
-packaging==24.0
+packaging==24.1
     # via
     #   gunicorn
     #   limits
@@ -80,11 +75,11 @@ pygments==2.18.0
     # via rich
 pyyaml==6.0.1
     # via -r requirements.in
-redis==5.0.4
+redis==5.0.5
     # via limits
 rich==13.7.1
     # via flask-limiter
-typing-extensions==4.12.1
+typing-extensions==4.12.2
     # via
     #   flask-limiter
     #   limits
@@ -98,5 +93,3 @@ wtforms==3.1.2
     # via
     #   flask-wtf
     #   govuk-frontend-wtf
-zstandard==0.22.0
-    # via flask-compress

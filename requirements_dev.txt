@@ -10,7 +10,7 @@ attrs==23.2.0
     # via flake8-bugbear
 authlib==1.3.1
     # via safety
-bandit==1.7.8
+bandit==1.7.9
     # via -r requirements_dev.in
 black==24.4.2
     # via -r requirements_dev.in
@@ -55,7 +55,7 @@ markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
     # via jinja2
-marshmallow==3.21.2
+marshmallow==3.21.3
     # via safety
 mccabe==0.7.0
     # via flake8
@@ -63,7 +63,7 @@ mdurl==0.1.2
     # via markdown-it-py
 mypy-extensions==1.0.0
     # via black
-packaging==24.0
+packaging==24.1
     # via
     #   black
     #   build
@@ -90,7 +90,7 @@ pycodestyle==2.11.1
     # via flake8
 pycparser==2.22
     # via cffi
-pydantic==2.7.3
+pydantic==2.7.4
     # via
     #   safety
     #   safety-schemas
@@ -123,7 +123,7 @@ ruamel-yaml==0.18.6
     #   safety-schemas
 ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
-safety==3.2.1
+safety==3.2.3
     # via -r requirements_dev.in
 safety-schemas==0.0.2
     # via safety
@@ -133,7 +133,7 @@ stevedore==5.2.0
     # via bandit
 typer==0.12.3
     # via safety
-typing-extensions==4.12.1
+typing-extensions==4.12.2
     # via
     #   pydantic
     #   pydantic-core
