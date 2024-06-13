@@ -25,12 +25,8 @@ services:
     ports:
       - 6379:6379
   nginx:
-    image: nginx:stable-alpine-slim
+    build: ./nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./req.pem:/root/ssl/req.pem
-      - ./key.pem:/root/ssl/key.pem
-      - ./dhparam.pem:/root/ssl/dhparam.pem
       - static_volume:/home/appuser/app/static:ro
     ports:
       - 443:443

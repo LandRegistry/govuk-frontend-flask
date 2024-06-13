@@ -47,14 +47,6 @@ python -c 'import secrets; print(secrets.token_hex())'
 ./build.sh
 ```
 
-### Generate self-signed certificates
-
-```shell
-openssl req -x509 -noenc -newkey rsa:2048 -keyout ./key.pem -out ./req.pem -days 90 -subj "/C=GB/ST=Devon/L=Plymouth/O=HM Land Registry/OU=DDaT/CN=localhost"
-
-openssl dhparam -out ./dhparam.pem 2048
-```
-
 ### Run containers
 
 ```shell
@@ -114,7 +106,7 @@ Please refer to the specific packages documentation for more details.
 
 ### Asset management
 
-Custom CSS and JavaScript files are merged and compressed using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). This takes all `*.css` files in `app/static/src/css` and all `*.js` files in `app/static/src/js` and outputs a single compressed file to both `app/static/dist/css` and `app/static/dist/js` respectively.
+Custom CSS and JavaScript files are merged and minified using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). This takes all `*.css` files in `app/static/src/css` and all `*.js` files in `app/static/src/js` and outputs a single minified file to both `app/static/dist/css` and `app/static/dist/js` respectively.
 
 CSS is [minified](https://en.wikipedia.org/wiki/Minification_(programming)) using [CSSMin](https://github.com/zacharyvoase/cssmin) and JavaScript is minified using [JSMin](https://github.com/tikitu/jsmin/). This removes all whitespace characters, comments and line breaks to reduce the size of the source code, making its transmission over a network more efficient.
 
