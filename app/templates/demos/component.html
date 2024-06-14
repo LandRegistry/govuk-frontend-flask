@@ -65,7 +65,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <p class="govuk-body">Examples:</p>
-      <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+      <ul class="govuk-list govuk-list--bullet govuk-list--spaced govuk-list--spaced">
         {% for fixture in fixtures.examples if not fixture.hidden %}
           <li>
             <a class="govuk-link" href="#{{fixture.name | replace(' ', '-')}}">{{fixture.name | capitalize}}</a>
