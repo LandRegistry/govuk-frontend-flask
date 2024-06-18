@@ -16,7 +16,7 @@ deprecated==1.2.14
     # via limits
 dnspython==2.6.1
     # via email-validator
-email-validator==2.1.1
+email-validator==2.1.2
     # via -r requirements.in
 flask==3.0.3
     # via
@@ -75,7 +75,7 @@ pygments==2.18.0
     # via rich
 pyyaml==6.0.1
     # via -r requirements.in
-redis==5.0.5
+redis==5.0.6
     # via limits
 rich==13.7.1
     # via flask-limiter
