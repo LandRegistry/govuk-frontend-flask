@@ -29,7 +29,7 @@ click==8.1.7
     #   pur
     #   safety
     #   typer
-coverage[toml]==7.5.3
+coverage[toml]==7.5.4
     # via pytest-cov
 cryptography==42.0.8
     # via authlib

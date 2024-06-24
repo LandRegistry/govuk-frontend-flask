@@ -16,7 +16,7 @@ deprecated==1.2.14
     # via limits
 dnspython==2.6.1
     # via email-validator
-email-validator==2.1.2
+email-validator==2.2.0
     # via -r requirements.in
 flask==3.0.3
     # via
@@ -54,7 +54,7 @@ jinja2==3.1.4
     #   govuk-frontend-wtf
 jsmin==3.0.1
     # via -r requirements.in
-limits[redis]==3.12.0
+limits[redis]==3.13.0
     # via flask-limiter
 markdown-it-py==3.0.0
     # via rich
