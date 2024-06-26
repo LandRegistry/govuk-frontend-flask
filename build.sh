@@ -18,16 +18,16 @@ rm -rf govuk_frontend.zip
 #####################################################################
 
 # Remove existing GOV.UK Frontend test fixtures
-rm -rf govuk_components
+rm -rf app/demos/govuk_components
 
 # Get new release source code and move to a directory
 curl -L https://github.com/alphagov/govuk-frontend/archive/refs/tags/v5.4.0.zip > govuk_frontend_source.zip
 unzip -o govuk_frontend_source.zip -d govuk_frontend_source
-mkdir govuk_components
-mv govuk_frontend_source/govuk-frontend-5.4.0/packages/govuk-frontend/src/govuk/components/** govuk_components
+mkdir app/demos/govuk_components
+mv govuk_frontend_source/govuk-frontend-5.4.0/packages/govuk-frontend/src/govuk/components/** app/demos/govuk_components
 
 # Remove all files apart from test fixtures
-find govuk_components -type f ! -name '*.yaml' -delete
+find app/demos/govuk_components -type f ! -name '*.yaml' -delete
 
 # Tidy up
 rm -rf govuk_frontend_source

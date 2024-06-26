@@ -13,4 +13,5 @@ class Config(object):
     SERVICE_PHASE = os.environ.get("SERVICE_PHASE")
     SERVICE_URL = os.environ.get("SERVICE_URL")
     SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Lax"
     SESSION_COOKIE_SECURE = True

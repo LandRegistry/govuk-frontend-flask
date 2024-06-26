@@ -268,10 +268,6 @@ class KitchenSinkForm(FlaskForm):
         widget=GovPasswordInput(),
         validators=[
             InputRequired("Password is required"),
-            EqualTo(
-                "password_retype_field",
-                message="Please ensure both password fields match",
-            ),
         ],
         description="PasswordField rendered using a GovPasswordInput widget.",
     )
