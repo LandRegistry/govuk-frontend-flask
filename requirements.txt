@@ -27,7 +27,7 @@ flask==3.0.3
     #   govuk-frontend-wtf
 flask-assets==2.1.0
     # via -r requirements.in
-flask-limiter[redis]==3.7.0
+flask-limiter[redis]==3.8.0
     # via -r requirements.in
 flask-wtf==1.2.1
     # via govuk-frontend-wtf
@@ -75,7 +75,7 @@ pygments==2.18.0
     # via rich
 pyyaml==6.0.1
     # via -r requirements.in
-redis==5.0.6
+redis==5.0.8
     # via limits
 rich==13.7.1
     # via flask-limiter
