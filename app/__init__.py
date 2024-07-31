@@ -11,7 +11,10 @@ from config import Config
 
 assets = Environment()
 csrf = CSRFProtect()
-limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per minute"])
+limiter = Limiter(
+    get_remote_address,
+    default_limits=["2 per second", "60 per minute"],
+)
 
 
 def create_app(config_class=Config):
@@ -39,8 +42,16 @@ def create_app(config_class=Config):
     WTFormsHelpers(app)
 
     # Create static asset bundles
-    css = Bundle("src/css/*.css", filters="cssmin", output="dist/css/custom-%(version)s.min.css")
-    js = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.min.js")
+    css = Bundle(
+        "src/css/*.css",
+        filters="cssmin",
+        output="dist/css/custom-%(version)s.min.css",
+    )
+    js = Bundle(
+        "src/js/*.js",
+        filters="jsmin",
+        output="dist/js/custom-%(version)s.min.js",
+    )
     if "css" not in assets:
         assets.register("css", css)
     if "js" not in assets:

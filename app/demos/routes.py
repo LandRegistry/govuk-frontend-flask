@@ -24,7 +24,11 @@ def component(component):
     except FileNotFoundError:
         raise NotFound
 
-    return render_template("component.html", component=component, fixtures=fixtures)
+    return render_template(
+        "component.html",
+        component=component,
+        fixtures=fixtures,
+    )
 
 
 @bp.route("/forms", methods=["GET"])

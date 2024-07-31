@@ -2,7 +2,13 @@ from wtforms.validators import InputRequired
 
 
 class RequiredIf(InputRequired):
-    def __init__(self, other_field_name, other_field_value, *args, **kwargs):
+    def __init__(
+        self,
+        other_field_name,
+        other_field_value,
+        *args,
+        **kwargs,
+    ):
         self.other_field_name = other_field_name
         self.other_field_value = other_field_value
 
