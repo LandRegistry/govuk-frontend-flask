@@ -4,11 +4,11 @@
 #
 #    pip-compile requirements_dev.in
 #
-attrs==23.2.0
+attrs==24.2.0
     # via flake8-bugbear
 bandit==1.7.9
     # via -r requirements_dev.in
-black==24.4.2
+black==24.8.0
     # via -r requirements_dev.in
 boolean-py==4.0
     # via license-expression
@@ -27,29 +27,29 @@ click==8.1.7
     #   black
     #   pip-tools
     #   pur
-coverage[toml]==7.6.0
+coverage[toml]==7.6.1
     # via pytest-cov
-cyclonedx-python-lib==7.5.1
+cyclonedx-python-lib==7.6.0
     # via pip-audit
 defusedxml==0.7.1
     # via py-serializable
 filelock==3.15.4
     # via cachecontrol
-flake8==7.1.0
+flake8==7.1.1
     # via
     #   flake8-bugbear
     #   pep8-naming
-flake8-bugbear==24.4.26
+flake8-bugbear==24.8.19
     # via -r requirements_dev.in
 html5lib==1.1
     # via pip-audit
-idna==3.7
+idna==3.8
     # via requests
 iniconfig==2.0.0
     # via pytest
 isort==5.13.2
     # via -r requirements_dev.in
-license-expression==30.3.0
+license-expression==30.3.1
     # via cyclonedx-python-lib
 markdown-it-py==3.0.0
     # via rich
@@ -59,7 +59,7 @@ mdurl==0.1.2
     # via markdown-it-py
 msgpack==1.0.8
     # via cachecontrol
-mypy==1.11.1
+mypy==1.11.2
     # via -r requirements_dev.in
 mypy-extensions==1.0.0
     # via
@@ -76,7 +76,7 @@ packaging==24.1
     #   pytest
 pathspec==0.12.1
     # via black
-pbr==6.0.0
+pbr==6.1.0
     # via stevedore
 pep8-naming==0.14.1
     # via -r requirements_dev.in
@@ -96,13 +96,13 @@ pur==7.3.2
     # via -r requirements_dev.in
 py-serializable==1.1.0
     # via cyclonedx-python-lib
-pycodestyle==2.12.0
+pycodestyle==2.12.1
     # via flake8
 pyflakes==3.2.0
     # via flake8
 pygments==2.18.0
     # via rich
-pyparsing==3.1.2
+pyparsing==3.1.4
     # via pip-requirements-parser
 pyproject-hooks==1.1.0
     # via
@@ -112,13 +112,13 @@ pytest==8.3.2
     # via pytest-cov
 pytest-cov==5.0.0
     # via -r requirements_dev.in
-pyyaml==6.0.1
+pyyaml==6.0.2
     # via bandit
 requests==2.32.3
     # via
     #   cachecontrol
     #   pip-audit
-rich==13.7.1
+rich==13.8.0
     # via
     #   bandit
     #   pip-audit
@@ -126,7 +126,7 @@ six==1.16.0
     # via html5lib
 sortedcontainers==2.4.0
     # via cyclonedx-python-lib
-stevedore==5.2.0
+stevedore==5.3.0
     # via bandit
 toml==0.10.2
     # via pip-audit
@@ -136,7 +136,7 @@ urllib3==2.2.2
     # via requests
 webencodings==0.5.1
     # via html5lib
-wheel==0.43.0
+wheel==0.44.0
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:

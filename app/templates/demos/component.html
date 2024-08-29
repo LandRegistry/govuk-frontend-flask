@@ -27,6 +27,7 @@
 {%- from 'govuk_frontend_jinja/components/phase-banner/macro.html' import govukPhaseBanner -%}
 {%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
 {%- from 'govuk_frontend_jinja/components/select/macro.html' import govukSelect -%}
+{%- from 'govuk_frontend_jinja/components/service-navigation/macro.html' import govukServiceNavigation -%}
 {%- from 'govuk_frontend_jinja/components/skip-link/macro.html' import govukSkipLink -%}
 {%- from 'govuk_frontend_jinja/components/summary-list/macro.html' import govukSummaryList -%}
 {%- from 'govuk_frontend_jinja/components/table/macro.html' import govukTable -%}
@@ -133,6 +134,8 @@
               {{ govukRadios(fixture.options)}}
             {% elif component == 'select' %}
               {{ govukSelect(fixture.options)}}
+            {% elif component == 'service-navigation' %}
+              {{ govukServiceNavigation(fixture.options)}}  
             {% elif component == 'skip-link' %}
               {{ govukSkipLink(fixture.options)}}
             {% elif component == 'summary-list' %}
