@@ -10,7 +10,7 @@ click==8.1.7
     # via flask
 cssmin==0.2.0
     # via -r requirements.in
-deepmerge==1.1.1
+deepmerge==2.0
     # via govuk-frontend-wtf
 deprecated==1.2.14
     # via limits
