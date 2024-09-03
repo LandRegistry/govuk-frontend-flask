@@ -27,6 +27,7 @@
 {%- from 'govuk_frontend_jinja/components/phase-banner/macro.html' import govukPhaseBanner -%}
 {%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
 {%- from 'govuk_frontend_jinja/components/select/macro.html' import govukSelect -%}
+{%- from 'govuk_frontend_jinja/components/service-navigation/macro.html' import govukServiceNavigation -%}
 {%- from 'govuk_frontend_jinja/components/skip-link/macro.html' import govukSkipLink -%}
 {%- from 'govuk_frontend_jinja/components/summary-list/macro.html' import govukSummaryList -%}
 {%- from 'govuk_frontend_jinja/components/table/macro.html' import govukTable -%}
@@ -65,7 +66,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <p class="govuk-body">Examples:</p>
-      <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+      <ul class="govuk-list govuk-list--bullet govuk-list--spaced govuk-list--spaced">
         {% for fixture in fixtures.examples if not fixture.hidden %}
           <li>
             <a class="govuk-link" href="#{{fixture.name | replace(' ', '-')}}">{{fixture.name | capitalize}}</a>
@@ -133,6 +134,8 @@
               {{ govukRadios(fixture.options)}}
             {% elif component == 'select' %}
               {{ govukSelect(fixture.options)}}
+            {% elif component == 'service-navigation' %}
+              {{ govukServiceNavigation(fixture.options)}}  
             {% elif component == 'skip-link' %}
               {{ govukSkipLink(fixture.options)}}
             {% elif component == 'summary-list' %}
