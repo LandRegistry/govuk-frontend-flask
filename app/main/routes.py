@@ -38,6 +38,7 @@ def cookies():
             "cookies_policy",
             json.dumps(cookies_policy),
             max_age=31557600,
+            secure=True,
         )
         return response
     elif request.method == "GET":
