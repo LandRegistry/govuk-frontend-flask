@@ -1,24 +1,5 @@
 {% extends "base.html" %}
 
-{%- from 'govuk_frontend_jinja/components/breadcrumbs/macro.html' import govukBreadcrumbs -%}
-
-{% block beforeContent %}
-    {{ super() }}
-
-    {{ govukBreadcrumbs({
-        'collapseOnMobile': True,
-        'items': [
-            {
-                'text': "Home",
-                'href': url_for('main.index')
-            },
-            {
-                'text': "Forms"
-            }
-        ]
-    }) }}
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">

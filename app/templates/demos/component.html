@@ -39,26 +39,6 @@
 
 {% block pageTitle %}{{component | replace("-", " ") | capitalize}} – GOV.UK{% endblock %}
 
-{% block beforeContent %}
-  {{ super() }}
-  {{ govukBreadcrumbs({
-    'collapseOnMobile': True,
-    'items': [
-        {
-            'text': "Home",
-            'href': url_for('main.index')
-        },
-        {
-            'text': "Components",
-            'href': url_for('demos.components')
-        },
-        {
-            'text': component | replace("-", " ") | capitalize
-        }
-    ]
-  }) }}
-{% endblock %}
-
 {% block content %}
   <span class="govuk-caption-xl">Components</span>
   <h1 class="govuk-heading-xl">{{component | replace("-", " ") | capitalize}}</h1>
