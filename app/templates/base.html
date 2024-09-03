@@ -4,6 +4,7 @@
 {%- from 'govuk_frontend_jinja/components/error-summary/macro.html' import govukErrorSummary-%}
 {%- from 'govuk_frontend_jinja/components/notification-banner/macro.html' import govukNotificationBanner -%}
 {%- from 'govuk_frontend_jinja/components/phase-banner/macro.html' import govukPhaseBanner -%}
+{%- from 'govuk_frontend_jinja/components/service-navigation/macro.html' import govukServiceNavigation -%}
 
 {% set assetPath = url_for('static', filename='').rstrip('/') %}
 
@@ -108,10 +109,17 @@
 
 {% block header %}
   {{ govukHeader({
-    'homepageUrl': url_for('main.index'),
+    'classes': 'govuk-header--full-width-border',
+    'homepageUrl': 'https://www.gov.uk/'
+  }) }}
+
+  {{ govukServiceNavigation({
     'serviceName': config['SERVICE_NAME'],
     'serviceUrl': url_for('main.index'),
-    'useTudorCrown': true
+    'navigation': [
+      {'href': url_for('demos.components'), 'text': 'Components'},
+      {'href': url_for('demos.forms'), 'text': 'Forms'}
+    ]
   }) }}
 {% endblock %}
 

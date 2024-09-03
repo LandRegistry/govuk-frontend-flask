@@ -1,28 +1,6 @@
 {% extends "base.html" %}
 
-{%- from 'govuk_frontend_jinja/components/breadcrumbs/macro.html' import govukBreadcrumbs -%}
-
 {% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Create an account – GOV.UK{% endblock %}
-
-{% block beforeContent %}
-  {{ super() }}
-  {{ govukBreadcrumbs({
-    'collapseOnMobile': True,
-    'items': [
-        {
-            'text': "Home",
-            'href': url_for('main.index')
-        },
-        {
-            'text': "Forms",
-            'href': url_for('demos.forms')
-        },
-        {
-            'text': "Create account"
-        }
-    ]
-  }) }}
-{% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
