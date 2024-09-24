@@ -6,7 +6,7 @@
 #
 attrs==24.2.0
     # via flake8-bugbear
-bandit==1.7.9
+bandit==1.7.10
     # via -r requirements_dev.in
 black==24.8.0
     # via -r requirements_dev.in
