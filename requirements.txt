@@ -14,7 +14,7 @@ deepmerge==2.0
     # via govuk-frontend-wtf
 deprecated==1.2.14
     # via limits
-dnspython==2.6.1
+dnspython==2.7.0
     # via email-validator
 email-validator==2.2.0
     # via -r requirements.in
@@ -31,17 +31,17 @@ flask-limiter[redis]==3.8.0
     # via -r requirements.in
 flask-wtf==1.2.1
     # via govuk-frontend-wtf
-govuk-frontend-jinja==3.3.0
+govuk-frontend-jinja==3.4.0
     # via
     #   -r requirements.in
     #   govuk-frontend-wtf
-govuk-frontend-wtf==3.1.0
+govuk-frontend-wtf==3.2.0
     # via -r requirements.in
 gunicorn==23.0.0
     # via -r requirements.in
-idna==3.8
+idna==3.10
     # via email-validator
-importlib-resources==6.4.4
+importlib-resources==6.4.5
     # via limits
 itsdangerous==2.2.0
     # via
@@ -58,7 +58,7 @@ limits[redis]==3.13.0
     # via flask-limiter
 markdown-it-py==3.0.0
     # via rich
-markupsafe==2.1.5
+markupsafe==3.0.1
     # via
     #   jinja2
     #   werkzeug
@@ -75,9 +75,9 @@ pygments==2.18.0
     # via rich
 pyyaml==6.0.2
     # via -r requirements.in
-redis==5.0.8
+redis==5.1.1
     # via limits
-rich==13.8.0
+rich==13.9.2
     # via flask-limiter
 typing-extensions==4.12.2
     # via
