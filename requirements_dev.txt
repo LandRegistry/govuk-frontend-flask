@@ -6,13 +6,13 @@
 #
 attrs==24.2.0
     # via flake8-bugbear
-bandit==1.7.9
+bandit==1.7.10
     # via -r requirements_dev.in
-black==24.8.0
+black==24.10.0
     # via -r requirements_dev.in
 boolean-py==4.0
     # via license-expression
-build==1.2.1
+build==1.2.2.post1
     # via pip-tools
 cachecontrol[filecache]==0.14.0
     # via
@@ -20,20 +20,20 @@ cachecontrol[filecache]==0.14.0
     #   pip-audit
 certifi==2024.8.30
     # via requests
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via
     #   black
     #   pip-tools
     #   pur
-coverage[toml]==7.6.1
+coverage[toml]==7.6.3
     # via pytest-cov
-cyclonedx-python-lib==7.6.0
+cyclonedx-python-lib==7.6.2
     # via pip-audit
 defusedxml==0.7.1
     # via py-serializable
-filelock==3.15.4
+filelock==3.16.1
     # via cachecontrol
 flake8==7.1.1
     # via
@@ -43,7 +43,7 @@ flake8-bugbear==24.8.19
     # via -r requirements_dev.in
 html5lib==1.1
     # via pip-audit
-idna==3.8
+idna==3.10
     # via requests
 iniconfig==2.0.0
     # via pytest
@@ -57,9 +57,9 @@ mccabe==0.7.0
     # via flake8
 mdurl==0.1.2
     # via markdown-it-py
-msgpack==1.0.8
+msgpack==1.1.0
     # via cachecontrol
-mypy==1.11.2
+mypy==1.12.0
     # via -r requirements_dev.in
 mypy-extensions==1.0.0
     # via
@@ -88,13 +88,13 @@ pip-requirements-parser==32.0.1
     # via pip-audit
 pip-tools==7.4.1
     # via -r requirements_dev.in
-platformdirs==4.2.2
+platformdirs==4.3.6
     # via black
 pluggy==1.5.0
     # via pytest
 pur==7.3.2
     # via -r requirements_dev.in
-py-serializable==1.1.0
+py-serializable==1.1.2
     # via cyclonedx-python-lib
 pycodestyle==2.12.1
     # via flake8
@@ -102,13 +102,13 @@ pyflakes==3.2.0
     # via flake8
 pygments==2.18.0
     # via rich
-pyparsing==3.1.4
+pyparsing==3.2.0
     # via pip-requirements-parser
-pyproject-hooks==1.1.0
+pyproject-hooks==1.2.0
     # via
     #   build
     #   pip-tools
-pytest==8.3.2
+pytest==8.3.3
     # via pytest-cov
 pytest-cov==5.0.0
     # via -r requirements_dev.in
@@ -118,7 +118,7 @@ requests==2.32.3
     # via
     #   cachecontrol
     #   pip-audit
-rich==13.8.0
+rich==13.9.2
     # via
     #   bandit
     #   pip-audit
@@ -132,7 +132,7 @@ toml==0.10.2
     # via pip-audit
 typing-extensions==4.12.2
     # via mypy
-urllib3==2.2.2
+urllib3==2.2.3
     # via requests
 webencodings==0.5.1
     # via html5lib
