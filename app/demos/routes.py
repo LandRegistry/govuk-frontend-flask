@@ -11,8 +11,8 @@ from app.demos.forms import AutocompleteForm, BankDetailsForm, ConditionalReveal
 
 
 @bp.route("/components", methods=["GET"])
-def components() -> str:
-    components = os.listdir("govuk_components")
+def components():
+    components = os.listdir("app/demos/govuk_components")
     components.sort()
 
     return render_template("components.html", components=components)
@@ -21,12 +21,16 @@ def components() -> str:
 @bp.route("/components/<string:component>", methods=["GET"])
 def component(component: str) -> str:
     try:
-        with open(f"govuk_components/{component}/{component}.yaml") as yaml_file:
+        with open(f"app/demos/govuk_components/{component}/{component}.yaml") as yaml_file:
             fixtures = yaml.safe_load(yaml_file)
     except FileNotFoundError:
         raise NotFound
 
-    return render_template("component.html", component=component, fixtures=fixtures)
+    return render_template(
+        "component.html",
+        component=component,
+        fixtures=fixtures,
+    )
 
 
 @bp.route("/forms", methods=["GET"])

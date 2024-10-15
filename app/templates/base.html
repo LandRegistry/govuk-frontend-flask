@@ -4,6 +4,7 @@
 {%- from 'govuk_frontend_jinja/components/error-summary/macro.html' import govukErrorSummary-%}
 {%- from 'govuk_frontend_jinja/components/notification-banner/macro.html' import govukNotificationBanner -%}
 {%- from 'govuk_frontend_jinja/components/phase-banner/macro.html' import govukPhaseBanner -%}
+{%- from 'govuk_frontend_jinja/components/service-navigation/macro.html' import govukServiceNavigation -%}
 
 {% set assetPath = url_for('static', filename='').rstrip('/') %}
 
@@ -13,7 +14,7 @@
   <meta name="description" content="{{config['SERVICE_NAME']}}">
   <meta name="keywords" content="GOV.UK, govuk, gov, government, uk, frontend, ui, user interface, jinja, python, flask, port, template, templating, macro, component, design system, html, forms, wtf, wtforms, widget, widgets, demo, example">
   <meta name="author" content="{{config['DEPARTMENT_NAME']}}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-5.4.0.min.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-5.7.1.min.css') }}" />
   {% assets "css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
 {% endblock %}
 
@@ -33,7 +34,7 @@
     {% endset %}
 
     {{ govukCookieBanner({
-      'ariaLabel': "Cookies on " + config['SERVICE_NAME'],
+      'ariaLabel': "Cookies on " ~ config['SERVICE_NAME'],
       'attributes': {
         'id': "cookie-banner"
       },
@@ -42,7 +43,7 @@
           'attributes': {
             'id': "default-message"
           },
-          'headingText': "Cookies on " + config['SERVICE_NAME'],
+          'headingText': "Cookies on " ~ config['SERVICE_NAME'],
           'html': html,
           'actions': [
             {
@@ -108,10 +109,17 @@
 
 {% block header %}
   {{ govukHeader({
-    'homepageUrl': url_for('main.index'),
+    'classes': 'govuk-header--full-width-border',
+    'homepageUrl': 'https://www.gov.uk/'
+  }) }}
+
+  {{ govukServiceNavigation({
     'serviceName': config['SERVICE_NAME'],
     'serviceUrl': url_for('main.index'),
-    'useTudorCrown': true
+    'navigation': [
+      {'href': url_for('demos.components'), 'text': 'Components'},
+      {'href': url_for('demos.forms'), 'text': 'Forms'}
+    ]
   }) }}
 {% endblock %}
 
@@ -161,9 +169,9 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="module" src="{{ url_for('static', filename='govuk-frontend-5.4.0.min.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='govuk-frontend-5.7.1.min.js') }}"></script>
   <script type="module">
-    import { initAll } from "{{ url_for('static', filename='govuk-frontend-5.4.0.min.js') }}"
+    import { initAll } from "{{ url_for('static', filename='govuk-frontend-5.7.1.min.js') }}"
     initAll()
   </script>
   {% assets "js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}

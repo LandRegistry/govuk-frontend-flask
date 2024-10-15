@@ -27,6 +27,7 @@
 {%- from 'govuk_frontend_jinja/components/phase-banner/macro.html' import govukPhaseBanner -%}
 {%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
 {%- from 'govuk_frontend_jinja/components/select/macro.html' import govukSelect -%}
+{%- from 'govuk_frontend_jinja/components/service-navigation/macro.html' import govukServiceNavigation -%}
 {%- from 'govuk_frontend_jinja/components/skip-link/macro.html' import govukSkipLink -%}
 {%- from 'govuk_frontend_jinja/components/summary-list/macro.html' import govukSummaryList -%}
 {%- from 'govuk_frontend_jinja/components/table/macro.html' import govukTable -%}
@@ -38,26 +39,6 @@
 
 {% block pageTitle %}{{component | replace("-", " ") | capitalize}} – GOV.UK{% endblock %}
 
-{% block beforeContent %}
-  {{ super() }}
-  {{ govukBreadcrumbs({
-    'collapseOnMobile': True,
-    'items': [
-        {
-            'text': "Home",
-            'href': url_for('main.index')
-        },
-        {
-            'text': "Components",
-            'href': url_for('demos.components')
-        },
-        {
-            'text': component | replace("-", " ") | capitalize
-        }
-    ]
-  }) }}
-{% endblock %}
-
 {% block content %}
   <span class="govuk-caption-xl">Components</span>
   <h1 class="govuk-heading-xl">{{component | replace("-", " ") | capitalize}}</h1>
@@ -65,7 +46,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <p class="govuk-body">Examples:</p>
-      <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+      <ul class="govuk-list govuk-list--bullet govuk-list--spaced govuk-list--spaced">
         {% for fixture in fixtures.examples if not fixture.hidden %}
           <li>
             <a class="govuk-link" href="#{{fixture.name | replace(' ', '-')}}">{{fixture.name | capitalize}}</a>
@@ -133,6 +114,8 @@
               {{ govukRadios(fixture.options)}}
             {% elif component == 'select' %}
               {{ govukSelect(fixture.options)}}
+            {% elif component == 'service-navigation' %}
+              {{ govukServiceNavigation(fixture.options)}}  
             {% elif component == 'skip-link' %}
               {{ govukSkipLink(fixture.options)}}
             {% elif component == 'summary-list' %}

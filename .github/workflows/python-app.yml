@@ -5,9 +5,9 @@ name: Python application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -27,7 +27,7 @@ jobs:
           pip install -r requirements_dev.txt
           pip install -r requirements.txt
       - name: Check dependencies for known security vulnerabilities
-        run: safety check -r requirements.txt
+        run: pip-audit -r requirements.txt
       - name: Check code for potential security vulnerabilities
         run: bandit -r . -x /tests
       - name: Check code formatting

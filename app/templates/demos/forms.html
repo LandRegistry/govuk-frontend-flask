@@ -1,31 +1,12 @@
 {% extends "base.html" %}
 
-{%- from 'govuk_frontend_jinja/components/breadcrumbs/macro.html' import govukBreadcrumbs -%}
-
-{% block beforeContent %}
-    {{ super() }}
-
-    {{ govukBreadcrumbs({
-        'collapseOnMobile': True,
-        'items': [
-            {
-                'text': "Home",
-                'href': url_for('main.index')
-            },
-            {
-                'text': "Forms"
-            }
-        ]
-    }) }}
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {{ super() }}
     <span class="govuk-caption-xl">Demo</span>
     <h1 class="govuk-heading-l">Forms</h1>
-    <ul class="govuk-list govuk-list--bullet">
+    <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
       <li><a class="govuk-link" href="{{ url_for('demos.autocomplete') }}">Autocomplete</a></li>
       <li><a class="govuk-link" href="{{ url_for('demos.bank_details') }}">Bank details</a></li>
       <li><a class="govuk-link" href="{{ url_for('demos.conditional_reveal') }}">Conditional reveal</a></li>

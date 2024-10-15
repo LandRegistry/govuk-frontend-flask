@@ -1,21 +1,17 @@
 FROM python:3.12-slim
 
-RUN useradd containeruser
+RUN useradd appuser
 
-WORKDIR /home/containeruser
-
-COPY app app
-COPY govuk-frontend-flask.py config.py docker-entrypoint.sh requirements.txt ./
-RUN pip install -r requirements.txt \
-    && chmod +x docker-entrypoint.sh \
-    && chown -R containeruser:containeruser ./
+WORKDIR /home/appuser
 
 # Set environment variables
 ENV FLASK_APP=govuk-frontend-flask.py \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-USER containeruser
+COPY app app
+COPY govuk-frontend-flask.py config.py requirements.txt ./
+RUN pip install -r requirements.txt \
+    && chown -R appuser:appuser ./
 
-EXPOSE 9876
-ENTRYPOINT ["./docker-entrypoint.sh"]
+USER appuser

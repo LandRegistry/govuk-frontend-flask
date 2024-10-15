@@ -1,6 +1,6 @@
 # GOV.UK Frontend Flask
 
-![govuk-frontend 5.4.0](https://img.shields.io/badge/govuk--frontend%20version-5.4.0-005EA5?logo=gov.uk&style=flat)
+![govuk-frontend 5.7.1](https://img.shields.io/badge/govuk--frontend%20version-5.7.1-005EA5?logo=gov.uk&style=flat)
 
 **GOV.UK Frontend Flask is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
 
@@ -35,7 +35,7 @@ In the `compose.yml` file you will find a number of environment variables. These
 - SERVICE_PHASE
 - SERVICE_URL
 
-You must also set a new unique `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python comand to generate a new key:
+You must also set a new unique `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python command to generate a new key:
 
 ```shell
 python -c 'import secrets; print(secrets.token_hex())'
@@ -53,7 +53,7 @@ python -c 'import secrets; print(secrets.token_hex())'
 docker compose up --build
 ```
 
-You should now have the app running on <https://localhost:9876/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
+You should now have the app running on <https://localhost/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
 
 ## Demos
 
@@ -67,19 +67,52 @@ To run the tests:
 python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
+## Environment
+
+```mermaid
+flowchart TB
+    cache1(Redis):::CACHE
+    Client
+    prox1(NGINX):::PROXY
+    web1(Flask app):::WEB
+    web2[/Static files/]:::WEB
+
+    Client <-- https:443 --> prox1 <-- http:5000 --> web1
+    prox1 -- Read only --> web2
+    web1 -- Write --> web2
+    web1 <-- redis:6379 --> cache1
+
+    subgraph Proxy container
+        prox1
+    end
+
+    subgraph Web container
+        web1
+        web2
+    end
+
+    subgraph Cache container
+        cache1
+    end
+
+    classDef CACHE fill:#F8CECC,stroke:#B85450,stroke-width:2px
+    classDef PROXY fill:#D5E8D4,stroke:#82B366,stroke-width:2px
+    classDef WEB fill:#FFF2CC,stroke:#D6B656,stroke-width:2px
+```
+
 ## Features
 
 Please refer to the specific packages documentation for more details.
 
 ### Asset management
 
-Custom CSS and JavaScript files are merged and compressed using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). This takes all `*.css` files in `app/static/src/css` and all `*.js` files in `app/static/src/js` and outputs a single compressed file to both `app/static/dist/css` and `app/static/dist/js` respectively.
+Custom CSS and JavaScript files are merged and minified using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). This takes all `*.css` files in `app/static/src/css` and all `*.js` files in `app/static/src/js` and outputs a single minified file to both `app/static/dist/css` and `app/static/dist/js` respectively.
 
-CSS is [minified](https://en.wikipedia.org/wiki/Minification_(programming)) using [CSSMin](https://github.com/zacharyvoase/cssmin) and JavaScript is minified using [JSMin](https://github.com/tikitu/jsmin/). This removes all whitespace characters, comments and line breaks to reduce the size of the source code, making its transmission over a network more efficient.
+CSS is [minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) using [CSSMin](https://github.com/zacharyvoase/cssmin) and JavaScript is minified using [JSMin](https://github.com/tikitu/jsmin/). This removes all whitespace characters, comments and line breaks to reduce the size of the source code, making its transmission over a network more efficient.
 
 ### Cache busting
 
-Merged and compressed assets are browser cache busted on update by modifying their URL with their MD5 hash using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). The MD5 hash is appended to the file name, for example `custom-d41d8cd9.css` instead of a query string, to support certain older browsers and proxies that ignore the querystring in their caching behaviour.
+Merged and minified assets are browser cache busted on update by modifying the filename with their MD5 hash using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). The MD5 hash is appended to the file name, for example `custom-d41d8cd9.css` instead of a query string, to support certain older browsers and proxies that ignore the querystring in their caching behaviour.
 
 ### Forms generation and validation
 
@@ -101,20 +134,21 @@ CSRF errors are handled by creating a [flash message](#flash-messages) notificat
 
 ### HTTP security headers
 
-Uses [Flask Talisman](https://github.com/GoogleCloudPlatform/flask-talisman) to set HTTP headers that can help protect against a few common web application security issues.
-
-- Forces all connections to `https`, unless running with debug enabled.
+- Forces all connections to `https`.
 - Enables [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security).
 - Sets Flask's session cookie to `secure`, so it will never be set if your application is somehow accessed via a non-secure connection.
 - Sets Flask's session cookie to `httponly`, preventing JavaScript from being able to access its content.
 - Sets [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) to `SAMEORIGIN` to avoid [clickjacking](https://en.wikipedia.org/wiki/Clickjacking).
-- Sets [X-XSS-Protection](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) to enable a cross site scripting filter for IE and Safari (note Chrome has removed this and Firefox never supported it).
 - Sets [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options) to prevent content type sniffing.
 - Sets a strict [Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) of `strict-origin-when-cross-origin` that governs which referrer information should be included with requests made.
 
 ### Content Security Policy
 
-A strict default [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) is set using [Flask Talisman](https://github.com/GoogleCloudPlatform/flask-talisman) to mitigate [Cross Site Scripting](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#cross-site_scripting_xss) (XSS) and packet sniffing attacks. This prevents loading any resources that are not in the same domain as the application.
+A strict [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) is set to mitigate [Cross Site Scripting](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#cross-site_scripting_xss) (XSS) and packet sniffing attacks. This prevents loading any resources that are not in the same domain as the application by default.
+
+### Permissions Policy
+
+A strict [Permissions Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy) is set to deny the use of browser features by default.
 
 ### Response compression
 
