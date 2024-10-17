@@ -1,4 +1,4 @@
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired  # type: ignore
 
 
 class RequiredIf(InputRequired):

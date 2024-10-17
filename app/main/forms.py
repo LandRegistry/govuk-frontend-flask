@@ -1,7 +1,7 @@
-from flask_wtf import FlaskForm
-from govuk_frontend_wtf.wtforms_widgets import GovRadioInput, GovSubmitInput
-from wtforms.fields import RadioField, SubmitField
-from wtforms.validators import InputRequired
+from flask_wtf import FlaskForm  # type: ignore
+from govuk_frontend_wtf.wtforms_widgets import GovRadioInput, GovSubmitInput  # type: ignore
+from wtforms.fields import RadioField, SubmitField  # type: ignore
+from wtforms.validators import InputRequired  # type: ignore
 
 
 class CookiesForm(FlaskForm):

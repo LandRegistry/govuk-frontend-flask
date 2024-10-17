@@ -1,7 +1,7 @@
 from typing import Optional, Tuple, Union
 
 from flask import flash, json, make_response, redirect, render_template, request
-from flask_wtf.csrf import CSRFError
+from flask_wtf.csrf import CSRFError  # type: ignore
 from werkzeug import Response
 from werkzeug.exceptions import HTTPException
 
@@ -47,7 +47,7 @@ def cookies() -> Union[str, Response]:
     elif request.method == "GET":
         if request.cookies.get("cookies_policy"):
             # Set cookie consent radios to current consent
-            cookies_policy = json.loads(request.cookies.get("cookies_policy"))
+            cookies_policy = json.loads(str(request.cookies.get("cookies_policy")))
             form.functional.data = cookies_policy["functional"]
             form.analytics.data = cookies_policy["analytics"]
         else:

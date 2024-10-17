@@ -1,5 +1,5 @@
-from flask_wtf import FlaskForm
-from govuk_frontend_wtf.wtforms_widgets import (
+from flask_wtf import FlaskForm  # type: ignore
+from govuk_frontend_wtf.wtforms_widgets import (  # type: ignore
     GovCharacterCount,
     GovCheckboxesInput,
     GovCheckboxInput,
@@ -12,7 +12,7 @@ from govuk_frontend_wtf.wtforms_widgets import (
     GovTextArea,
     GovTextInput,
 )
-from wtforms.fields import (
+from wtforms.fields import (  # type: ignore
     BooleanField,
     DateField,
     DateTimeField,
@@ -29,7 +29,7 @@ from wtforms.fields import (
     SubmitField,
     TextAreaField,
 )
-from wtforms.validators import Email, EqualTo, InputRequired, Length, Optional, Regexp, ValidationError
+from wtforms.validators import Email, EqualTo, InputRequired, Length, Optional, Regexp, ValidationError  # type: ignore
 
 from app.demos.custom_validators import RequiredIf
 
