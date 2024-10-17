@@ -31,9 +31,7 @@ jobs:
       - name: Check code for potential security vulnerabilities
         run: bandit -r . -x /tests
       - name: Static type checking
-        run:  |
-          mypy --install-types
-          mypy .
+        run: mypy . --install-types
       - name: Check code formatting
         run: |
           black . -t py312 -l 120 --check
