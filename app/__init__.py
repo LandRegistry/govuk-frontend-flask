@@ -1,9 +1,11 @@
+from typing import Type
+
 from flask import Flask
-from flask_assets import Bundle, Environment
+from flask_assets import Bundle, Environment  # type: ignore
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from flask_wtf.csrf import CSRFProtect
-from govuk_frontend_wtf.main import WTFormsHelpers
+from flask_wtf.csrf import CSRFProtect  # type: ignore
+from govuk_frontend_wtf.main import WTFormsHelpers  # type: ignore
 from jinja2 import ChoiceLoader, PackageLoader, PrefixLoader
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -17,7 +19,7 @@ limiter = Limiter(
 )
 
 
-def create_app(config_class=Config):
+def create_app(config_class: Type[Config] = Config) -> Flask:
     app = Flask(__name__, static_url_path="/assets")
     app.config.from_object(config_class)
     app.jinja_env.lstrip_blocks = True

@@ -1,5 +1,8 @@
+from typing import Optional, Tuple, Union
+
 from flask import flash, json, make_response, redirect, render_template, request
-from flask_wtf.csrf import CSRFError
+from flask_wtf.csrf import CSRFError  # type: ignore
+from werkzeug import Response
 from werkzeug.exceptions import HTTPException
 
 from app.main import bp
@@ -7,25 +10,25 @@ from app.main.forms import CookiesForm
 
 
 @bp.route("/", methods=["GET"])
-def index():
+def index() -> str:
     return render_template("index.html")
 
 
 @bp.route("/accessibility", methods=["GET"])
-def accessibility():
+def accessibility() -> str:
     return render_template("accessibility.html")
 
 
 @bp.route("/cookies", methods=["GET", "POST"])
-def cookies():
+def cookies() -> Union[str, Response]:
     form = CookiesForm()
     # Default cookies policy to reject all categories of cookie
     cookies_policy = {"functional": "no", "analytics": "no"}
 
     if form.validate_on_submit():
         # Update cookies policy consent from form data
-        cookies_policy["functional"] = form.functional.data
-        cookies_policy["analytics"] = form.analytics.data
+        cookies_policy["functional"] = str(form.functional.data)
+        cookies_policy["analytics"] = str(form.analytics.data)
 
         # Create flash message confirmation before rendering template
         flash("You’ve set your cookie preferences.", "success")
@@ -44,7 +47,7 @@ def cookies():
     elif request.method == "GET":
         if request.cookies.get("cookies_policy"):
             # Set cookie consent radios to current consent
-            cookies_policy = json.loads(request.cookies.get("cookies_policy"))
+            cookies_policy = json.loads(str(request.cookies.get("cookies_policy")))
             form.functional.data = cookies_policy["functional"]
             form.analytics.data = cookies_policy["analytics"]
         else:
@@ -55,16 +58,16 @@ def cookies():
 
 
 @bp.route("/privacy", methods=["GET"])
-def privacy():
+def privacy() -> str:
     return render_template("privacy.html")
 
 
 @bp.app_errorhandler(HTTPException)
-def http_exception(error):
+def http_exception(error: HTTPException) -> Tuple[str, Optional[int]]:
     return render_template(f"{error.code}.html"), error.code
 
 
 @bp.app_errorhandler(CSRFError)
-def csrf_error(error):
+def csrf_error(error: CSRFError) -> Response:
     flash("The form you were submitting has expired. Please try again.")
     return redirect(request.full_path)
