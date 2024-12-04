@@ -1,4 +1,4 @@
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired  # type: ignore
 
 
 class RequiredIf(InputRequired):
@@ -14,7 +14,7 @@ class RequiredIf(InputRequired):
 
         super(RequiredIf, self).__init__(*args, **kwargs)
 
-    def __call__(self, form, field):
+    def __call__(self, form, field) -> None:
         other_field = form._fields.get(self.other_field_name)
 
         if other_field is None:
