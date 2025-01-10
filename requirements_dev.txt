@@ -39,7 +39,7 @@ flake8==7.1.1
     # via
     #   flake8-bugbear
     #   pep8-naming
-flake8-bugbear==24.10.31
+flake8-bugbear==24.12.12
     # via -r requirements_dev.in
 html5lib==1.1
     # via pip-audit
