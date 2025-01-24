@@ -11,22 +11,30 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import Config
 
+# Initialize Flask extensions. These are initialized here for easier access.
 assets = Environment()
 csrf = CSRFProtect()
-limiter = Limiter(
-    get_remote_address,
-    default_limits=["2 per second", "60 per minute"],
-)
+limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per minute"])
 
 
 def create_app(config_class: Type[Config] = Config) -> Flask:
+    """Create and configure the Flask application.
+
+    Args:
+        config_class: The configuration class to use (defaults to `Config`).
+
+    Returns:
+        A configured Flask application instance.
+    """
     app: Flask = Flask(__name__, static_url_path="/assets")  # type: ignore[assignment]
     app.config.from_object(config_class)
     app.jinja_env.lstrip_blocks = True
     app.jinja_env.trim_blocks = True
+
+    # Configure Jinja2 template loader to search in multiple locations.
     app.jinja_loader = ChoiceLoader(
         [
-            PackageLoader("app"),
+            PackageLoader("app"),  # Load templates from the 'app' package.
             PrefixLoader(
                 {
                     "govuk_frontend_jinja": PackageLoader("govuk_frontend_jinja"),
@@ -35,29 +43,23 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
             ),
         ]
     )
+
+    # Use ProxyFix middleware to handle proxies correctly.
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)  # type: ignore[call-arg]
 
-    # Initialise app extensions
+    # Initialize Flask extensions
     assets.init_app(app)
     csrf.init_app(app)
     limiter.init_app(app)
     WTFormsHelpers(app)
 
-    # Create static asset bundles
-    css: Bundle = Bundle(
-        "src/css/*.css",
-        filters="cssmin",
-        output="dist/css/custom-%(version)s.min.css",
-    )
-    js: Bundle = Bundle(
-        "src/js/*.js",
-        filters="jsmin",
-        output="dist/js/custom-%(version)s.min.js",
-    )
+    # Register asset bundles for CSS and JavaScript.
+    css: Bundle = Bundle("src/css/*.css", filters="cssmin", output="dist/css/custom-%(version)s.min.css")
+    js: Bundle = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.min.js")
     assets.register("css", css)
     assets.register("js", js)
 
-    # Register blueprints
+    # Register blueprints. These define different sections of the application.
     from app.demos import bp as demo_bp
     from app.main import bp as main_bp
 

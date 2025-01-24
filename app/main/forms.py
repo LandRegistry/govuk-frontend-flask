@@ -5,6 +5,8 @@ from wtforms.validators import InputRequired  # type: ignore
 
 
 class CookiesForm(FlaskForm):
+    """Form for managing cookie preferences."""
+
     functional: RadioField = RadioField(
         "Do you want to accept functional cookies?",
         widget=GovRadioInput(),
