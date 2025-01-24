@@ -14,7 +14,7 @@
   <meta name="description" content="{{config['SERVICE_NAME']}}">
   <meta name="keywords" content="GOV.UK, govuk, gov, government, uk, frontend, ui, user interface, jinja, python, flask, port, template, templating, macro, component, design system, html, forms, wtf, wtforms, widget, widgets, demo, example">
   <meta name="author" content="{{config['DEPARTMENT_NAME']}}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-5.7.1.min.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='govuk-frontend-5.8.0.min.css') }}" />
   {% assets "css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets %}
 {% endblock %}
 
@@ -169,9 +169,9 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script type="module" src="{{ url_for('static', filename='govuk-frontend-5.7.1.min.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='govuk-frontend-5.8.0.min.js') }}"></script>
   <script type="module">
-    import { initAll } from "{{ url_for('static', filename='govuk-frontend-5.7.1.min.js') }}"
+    import { initAll } from "{{ url_for('static', filename='govuk-frontend-5.8.0.min.js') }}"
     initAll()
   </script>
   {% assets "js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
