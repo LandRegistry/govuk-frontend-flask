@@ -1,8 +1,8 @@
-from typing import Optional, Tuple, Union
+import json
+from typing import Tuple, Union
 
-from flask import flash, json, make_response, redirect, render_template, request
+from flask import Response, flash, make_response, redirect, render_template, request
 from flask_wtf.csrf import CSRFError  # type: ignore
-from werkzeug import Response
 from werkzeug.exceptions import HTTPException
 
 from app.main import bp
@@ -21,9 +21,9 @@ def accessibility() -> str:
 
 @bp.route("/cookies", methods=["GET", "POST"])
 def cookies() -> Union[str, Response]:
-    form = CookiesForm()
+    form: CookiesForm = CookiesForm()
     # Default cookies policy to reject all categories of cookie
-    cookies_policy = {"functional": "no", "analytics": "no"}
+    cookies_policy: dict[str, str] = {"functional": "no", "analytics": "no"}
 
     if form.validate_on_submit():
         # Update cookies policy consent from form data
@@ -63,11 +63,11 @@ def privacy() -> str:
 
 
 @bp.app_errorhandler(HTTPException)
-def http_exception(error: HTTPException) -> Tuple[str, Optional[int]]:
+def handle_http_exception(error: HTTPException) -> Tuple[str, int]:
     return render_template(f"{error.code}.html"), error.code
 
 
 @bp.app_errorhandler(CSRFError)
-def csrf_error(error: CSRFError) -> Response:
+def handle_csrf_error(error: CSRFError) -> Response:
     flash("The form you were submitting has expired. Please try again.")
-    return redirect(request.full_path)
+    return redirect(request.url)
