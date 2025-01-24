@@ -44,20 +44,18 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     WTFormsHelpers(app)
 
     # Create static asset bundles
-    css = Bundle(
+    css: Bundle = Bundle(
         "src/css/*.css",
         filters="cssmin",
         output="dist/css/custom-%(version)s.min.css",
     )
-    js = Bundle(
+    js: Bundle = Bundle(
         "src/js/*.js",
         filters="jsmin",
         output="dist/js/custom-%(version)s.min.js",
     )
-    if "css" not in assets:
-        assets.register("css", css)
-    if "js" not in assets:
-        assets.register("js", js)
+    assets.register("css", css)
+    assets.register("js", js)
 
     # Register blueprints
     from app.demos import bp as demo_bp

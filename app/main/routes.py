@@ -1,5 +1,5 @@
 import json
-from typing import Tuple, Union
+from typing import Optional, Tuple, Union
 
 from flask import Response, flash, make_response, redirect, render_template, request
 from flask_wtf.csrf import CSRFError  # type: ignore
@@ -27,33 +27,34 @@ def cookies() -> Union[str, Response]:
 
     if form.validate_on_submit():
         # Update cookies policy consent from form data
-        cookies_policy["functional"] = str(form.functional.data)
-        cookies_policy["analytics"] = str(form.analytics.data)
-
+        cookies_policy["functional"] = form.functional.data
+        cookies_policy["analytics"] = form.analytics.data
         # Create flash message confirmation before rendering template
         flash("You’ve set your cookie preferences.", "success")
-
         # Create the response so we can set the cookie before returning
-        response = make_response(render_template("cookies.html", form=form))
-
+        response: Response = make_response(render_template("cookies.html", form=form))
         # Set cookies policy for one year
         response.set_cookie(
             "cookies_policy",
             json.dumps(cookies_policy),
             max_age=31557600,
             secure=True,
+            samesite="Lax",
         )
         return response
     elif request.method == "GET":
-        if request.cookies.get("cookies_policy"):
-            # Set cookie consent radios to current consent
-            cookies_policy = json.loads(str(request.cookies.get("cookies_policy")))
-            form.functional.data = cookies_policy["functional"]
-            form.analytics.data = cookies_policy["analytics"]
-        else:
-            # If conset not previously set, use default "no" policy
-            form.functional.data = cookies_policy["functional"]
-            form.analytics.data = cookies_policy["analytics"]
+        cookies_string: Optional[str] = request.cookies.get("cookies_policy")
+        if cookies_string:
+            try:
+                # Set cookie consent radios to current consent
+                cookies_policy = json.loads(cookies_string)
+                form.functional.data = cookies_policy["functional"]
+                form.analytics.data = cookies_policy["analytics"]
+            except json.JSONDecodeError:
+                # If conset not previously set, use default "no" policy
+                form.functional.data = cookies_policy["functional"]
+                form.analytics.data = cookies_policy["analytics"]
+
     return render_template("cookies.html", form=form)
 
 
