@@ -6,7 +6,7 @@
 #
 blinker==1.9.0
     # via flask
-click==8.1.7
+click==8.1.8
     # via flask
 cssmin==0.2.0
     # via -r requirements.in
@@ -27,11 +27,11 @@ flask==3.1.0
     #   govuk-frontend-wtf
 flask-assets==2.1.0
     # via -r requirements.in
-flask-limiter[redis]==3.9.2
+flask-limiter[redis]==3.10.1
     # via -r requirements.in
 flask-wtf==1.2.2
     # via govuk-frontend-wtf
-govuk-frontend-jinja==3.4.0
+govuk-frontend-jinja==3.4.1
     # via
     #   -r requirements.in
     #   govuk-frontend-wtf
@@ -45,14 +45,14 @@ itsdangerous==2.2.0
     # via
     #   flask
     #   flask-wtf
-jinja2==3.1.4
+jinja2==3.1.5
     # via
     #   flask
     #   govuk-frontend-jinja
     #   govuk-frontend-wtf
 jsmin==3.0.1
     # via -r requirements.in
-limits[redis]==3.14.1
+limits[redis]==4.0.1
     # via flask-limiter
 markdown-it-py==3.0.0
     # via rich
@@ -69,11 +69,11 @@ packaging==24.2
     # via
     #   gunicorn
     #   limits
-pygments==2.18.0
+pygments==2.19.1
     # via rich
 pyyaml==6.0.2
     # via -r requirements.in
-redis==5.2.0
+redis==5.2.1
     # via limits
 rich==13.9.4
     # via flask-limiter
@@ -85,7 +85,7 @@ webassets==2.0
     # via flask-assets
 werkzeug==3.1.3
     # via flask
-wrapt==1.17.0
+wrapt==1.17.2
     # via deprecated
 wtforms==3.2.1
     # via

@@ -4,9 +4,9 @@
 #
 #    pip-compile requirements_dev.in
 #
-attrs==24.2.0
+attrs==24.3.0
     # via flake8-bugbear
-bandit==1.8.0
+bandit==1.8.2
     # via -r requirements_dev.in
 black==24.10.0
     # via -r requirements_dev.in
@@ -14,32 +14,32 @@ boolean-py==4.0
     # via license-expression
 build==1.2.2.post1
     # via pip-tools
-cachecontrol[filecache]==0.14.1
+cachecontrol[filecache]==0.14.2
     # via
     #   cachecontrol
     #   pip-audit
-certifi==2024.8.30
+certifi==2024.12.14
     # via requests
-charset-normalizer==3.4.0
+charset-normalizer==3.4.1
     # via requests
-click==8.1.7
+click==8.1.8
     # via
     #   black
     #   pip-tools
     #   pur
-coverage[toml]==7.6.8
+coverage[toml]==7.6.10
     # via pytest-cov
 cyclonedx-python-lib==7.6.2
     # via pip-audit
 defusedxml==0.7.1
     # via py-serializable
-filelock==3.16.1
+filelock==3.17.0
     # via cachecontrol
 flake8==7.1.1
     # via
     #   flake8-bugbear
     #   pep8-naming
-flake8-bugbear==24.10.31
+flake8-bugbear==24.12.12
     # via -r requirements_dev.in
 html5lib==1.1
     # via pip-audit
@@ -49,7 +49,7 @@ iniconfig==2.0.0
     # via pytest
 isort==5.13.2
     # via -r requirements_dev.in
-license-expression==30.4.0
+license-expression==30.4.1
     # via cyclonedx-python-lib
 markdown-it-py==3.0.0
     # via rich
@@ -59,7 +59,7 @@ mdurl==0.1.2
     # via markdown-it-py
 msgpack==1.1.0
     # via cachecontrol
-mypy==1.13.0
+mypy==1.14.1
     # via -r requirements_dev.in
 mypy-extensions==1.0.0
     # via
@@ -92,7 +92,7 @@ platformdirs==4.3.6
     # via black
 pluggy==1.5.0
     # via pytest
-pur==7.3.2
+pur==7.3.3
     # via -r requirements_dev.in
 py-serializable==1.1.2
     # via cyclonedx-python-lib
@@ -100,9 +100,9 @@ pycodestyle==2.12.1
     # via flake8
 pyflakes==3.2.0
     # via flake8
-pygments==2.18.0
+pygments==2.19.1
     # via rich
-pyparsing==3.2.0
+pyparsing==3.2.1
     # via pip-requirements-parser
 pyproject-hooks==1.2.0
     # via
@@ -122,7 +122,7 @@ rich==13.9.4
     # via
     #   bandit
     #   pip-audit
-six==1.16.0
+six==1.17.0
     # via html5lib
 sortedcontainers==2.4.0
     # via cyclonedx-python-lib
@@ -132,7 +132,7 @@ toml==0.10.2
     # via pip-audit
 typing-extensions==4.12.2
     # via mypy
-urllib3==2.2.3
+urllib3==2.3.0
     # via requests
 webencodings==0.5.1
     # via html5lib
