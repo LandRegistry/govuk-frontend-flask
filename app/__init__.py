@@ -1,11 +1,11 @@
 from typing import Type
 
 from flask import Flask
-from flask_assets import Bundle, Environment  # type: ignore
+from flask_assets import Bundle, Environment  # type: ignore[import]
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from flask_wtf.csrf import CSRFProtect  # type: ignore
-from govuk_frontend_wtf.main import WTFormsHelpers  # type: ignore
+from flask_wtf.csrf import CSRFProtect  # type: ignore[import]
+from govuk_frontend_wtf.main import WTFormsHelpers  # type: ignore[import]
 from jinja2 import ChoiceLoader, PackageLoader, PrefixLoader
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -20,7 +20,7 @@ limiter = Limiter(
 
 
 def create_app(config_class: Type[Config] = Config) -> Flask:
-    app = Flask(__name__, static_url_path="/assets")
+    app: Flask = Flask(__name__, static_url_path="/assets")  # type: ignore[assignment]
     app.config.from_object(config_class)
     app.jinja_env.lstrip_blocks = True
     app.jinja_env.trim_blocks = True
@@ -35,7 +35,7 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
             ),
         ]
     )
-    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)  # type: ignore[call-arg]
 
     # Initialise app extensions
     assets.init_app(app)
