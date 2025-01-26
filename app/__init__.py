@@ -56,8 +56,10 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     # Register asset bundles for CSS and JavaScript.
     css: Bundle = Bundle("src/css/*.css", filters="cssmin", output="dist/css/custom-%(version)s.min.css")
     js: Bundle = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.min.js")
-    assets.register("css", css)
-    assets.register("js", js)
+    if "css" not in assets:
+        assets.register("css", css)
+    if "js" not in assets:
+        assets.register("js", js)
 
     # Register blueprints. These define different sections of the application.
     from app.demos import bp as demo_bp
