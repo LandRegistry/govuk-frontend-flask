@@ -5,47 +5,54 @@ from app import create_app
 from config import Config
 
 
-def test_create_app():
-    app = create_app()
+def test_create_app() -> None:
+    """Verify that create_app returns a configured Flask app instance."""
+    app: Flask = create_app()
     assert isinstance(app, Flask)
 
 
-def test_config_loaded_with_context():
-    app = create_app()
+def test_config_loaded_with_context() -> None:
+    """Verify config is loaded correctly within an app context."""
+    app: Flask = create_app()
     with app.app_context():
         assert app.config["DEBUG"] == Config.DEBUG
 
 
-def test_config_loaded():
-    app = create_app()
+def test_config_loaded() -> None:
+    """Verify config is loaded correctly (outside app context)."""
+    app: Flask = create_app()
     assert app.config["DEBUG"] == Config.DEBUG
 
 
-def test_jinja_env_config():
-    app = create_app()
+def test_jinja_env_config() -> None:
+    """Verify Jinja environment configuration."""
+    app: Flask = create_app()
     assert app.jinja_env.lstrip_blocks is True
     assert app.jinja_env.trim_blocks is True
 
 
-def test_middleware_applied():
-    app = create_app()
+def test_middleware_applied() -> None:
+    """Verify that the ProxyFix middleware is applied to the app."""
+    app: Flask = create_app()
     assert isinstance(app.wsgi_app, ProxyFix)
 
 
-def test_extensions_initialized():
-    app = create_app()
-    # assert "assets" in app.extensions
+def test_extensions_initialized() -> None:
+    """Verify that core Flask extensions are initialized."""
+    app: Flask = create_app()
     assert "csrf" in app.extensions
     assert "limiter" in app.extensions
 
 
-def test_asset_bundles_registered():
-    app = create_app()
+def test_asset_bundles_registered() -> None:
+    """Verify that asset bundles are registered with the Jinja environment."""
+    app: Flask = create_app()
     assert "css" in app.jinja_env.assets_environment._named_bundles
     assert "js" in app.jinja_env.assets_environment._named_bundles
 
 
-def test_blueprints_registered():
-    app = create_app()
+def test_blueprints_registered() -> None:
+    """Verify that blueprints are registered with the app."""
+    app: Flask = create_app()
     assert "demos" in app.blueprints
     assert "main" in app.blueprints
