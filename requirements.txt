@@ -12,7 +12,7 @@ cssmin==0.2.0
     # via -r requirements.in
 deepmerge==2.0
     # via govuk-frontend-wtf
-deprecated==1.2.15
+deprecated==1.2.17
     # via limits
 dnspython==2.7.0
     # via email-validator
