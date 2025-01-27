@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements_dev.in
 #
-attrs==24.3.0
+attrs==25.1.0
     # via flake8-bugbear
 bandit==1.8.2
     # via -r requirements_dev.in
