@@ -33,7 +33,7 @@ def cookies() -> Union[str, Response]:
         cookies_policy["functional"] = form.functional.data
         cookies_policy["analytics"] = form.analytics.data
         # Create flash message confirmation before rendering template
-        flash("You’ve set your cookie preferences.", "success")
+        flash("You've set your cookie preferences.", "success")
         # Create the response so we can set the cookie before returning
         response: Response = make_response(render_template("cookies.html", form=form))
         # Set the cookies_policy cookie in the response
