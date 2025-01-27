@@ -2,26 +2,26 @@ from flask import Flask
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from app import create_app
-from config import Config
+from config import TestConfig
 
 
 def test_create_app() -> None:
     """Verify that create_app returns a configured Flask app instance."""
-    app: Flask = create_app()
+    app: Flask = create_app(TestConfig)
     assert isinstance(app, Flask)
 
 
 def test_config_loaded_with_context() -> None:
     """Verify config is loaded correctly within an app context."""
-    app: Flask = create_app()
+    app: Flask = create_app(TestConfig)
     with app.app_context():
-        assert app.config["DEBUG"] == Config.DEBUG
+        assert app.config["DEBUG"] == TestConfig.DEBUG
 
 
 def test_config_loaded() -> None:
     """Verify config is loaded correctly (outside app context)."""
-    app: Flask = create_app()
-    assert app.config["DEBUG"] == Config.DEBUG
+    app: Flask = create_app(TestConfig)
+    assert app.config["DEBUG"] == TestConfig.DEBUG
 
 
 def test_jinja_env_config() -> None:
