@@ -1,5 +1,4 @@
-import json
-from typing import Optional, Tuple, Union
+from typing import Tuple, Union
 
 from flask import Response, flash, make_response, redirect, render_template, request
 from flask_wtf.csrf import CSRFError  # type: ignore
@@ -25,39 +24,37 @@ def accessibility() -> str:
 def cookies() -> Union[str, Response]:
     """Handle GET and POST requests for managing cookie preferences."""
     form: CookiesForm = CookiesForm()
-    # Initialize cookie policy. Defaults to rejecting all cookies.
-    cookies_policy: dict[str, str] = {"functional": "no", "analytics": "no"}
+    # Initialize cookie settings. Defaults to rejecting all cookies.
+    functional: str = "no"
+    analytics: str = "no"
 
     if form.validate_on_submit():
-        # Update cookie policy based on form submission.
-        cookies_policy["functional"] = form.functional.data
-        cookies_policy["analytics"] = form.analytics.data
+        # Update cookie settings based on form submission
+        functional = form.functional.data
+        analytics = form.analytics.data
         # Create flash message confirmation before rendering template
         flash("You've set your cookie preferences.", "success")
-        # Create the response so we can set the cookie before returning
+        # Create the response so we can set cookies before returning
         response: Response = make_response(render_template("cookies.html", form=form))
-        # Set the cookies_policy cookie in the response
-        response.set_cookie(
-            "cookies_policy",
-            json.dumps(cookies_policy),
-            max_age=31557600,  # One year
-            secure=True,
-            samesite="Lax",
-        )
+
+        # Set individual cookies in the response
+        cookie_params = {
+            "max_age": 31557600,
+            "secure": True,
+            "samesite": "Lax",
+        }  # One year
+        response.set_cookie("functional", functional, **cookie_params)
+        response.set_cookie("analytics", analytics, **cookie_params)
+
         return response
     elif request.method == "GET":
-        # Retrieve existing cookie policy if present.
-        cookies_string: Optional[str] = request.cookies.get("cookies_policy")
-        if cookies_string:
-            try:
-                # Set cookie consent radios to current consent
-                cookies_policy = json.loads(cookies_string)
-                form.functional.data = cookies_policy["functional"]
-                form.analytics.data = cookies_policy["analytics"]
-            except json.JSONDecodeError:
-                # If conset not previously set, use default "no" policy
-                form.functional.data = cookies_policy["functional"]
-                form.analytics.data = cookies_policy["analytics"]
+        # Retrieve existing cookie settings if present
+        functional = request.cookies.get("functional", "no")
+        analytics = request.cookies.get("analytics", "no")
+
+        # Pre-populate form with existing settings
+        form.functional.data = functional
+        form.analytics.data = analytics
 
     return render_template("cookies.html", form=form)
 
