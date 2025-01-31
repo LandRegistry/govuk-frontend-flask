@@ -90,3 +90,16 @@ def test_cookies_post(app: FlaskClient) -> None:
         assert "Max-Age=31557600" in cookie
         assert "Secure" in cookie
         assert "SameSite=Lax" in cookie
+
+
+def test_http_errors(app: FlaskClient) -> None:
+    """Test handling of HTTP errors."""
+    response = app.get("/not-found")
+    assert response.status_code == 404
+    assert b"Page not found" in response.data
+
+    response = app.get("/")
+    response = app.get("/")
+    response = app.get("/")
+    assert response.status_code == 429
+    assert b"There have been too many attempts to access this page." in response.data
