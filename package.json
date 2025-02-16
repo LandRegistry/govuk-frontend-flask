@@ -1,0 +1,31 @@
+{
+  "name": "govuk-frontend-flask",
+  "version": "1.0.0",
+  "description": "GOV.UK Frontend Flask",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "format": "prettier . --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LandRegistry/govuk-frontend-flask.git"
+  },
+  "keywords": [],
+  "author": "Matt Shaw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LandRegistry/govuk-frontend-flask/issues"
+  },
+  "homepage": "https://github.com/LandRegistry/govuk-frontend-flask#readme",
+  "dependencies": {
+    "govuk-frontend": "^5.8.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.1",
+    "sass": "^1.85.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  }
+}

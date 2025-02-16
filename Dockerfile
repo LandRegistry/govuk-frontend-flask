@@ -1,3 +1,9 @@
+FROM node:jod-alpine as build
+
+COPY package*.json ./
+
+RUN npm install
+
 FROM python:3.13-slim
 
 RUN useradd appuser
