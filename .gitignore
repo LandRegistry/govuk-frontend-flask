@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,git,python,flask,visualstudiocode,jetbrains+all,venv,certificates,node
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,git,python,flask,visualstudiocode,jetbrains+all,venv,certificates,node
+# Created by https://www.toptal.com/developers/gitignore/api/git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode
 
 ### GOV.UK Frontend ###
 app/static/fonts*
@@ -620,4 +620,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,git,python,flask,visualstudiocode,jetbrains+all,venv,certificates,node
+# End of https://www.toptal.com/developers/gitignore/api/git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode
