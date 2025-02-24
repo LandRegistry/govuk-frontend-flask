@@ -44,13 +44,6 @@ def test_extensions_initialized() -> None:
     assert "limiter" in app.extensions
 
 
-def test_asset_bundles_registered() -> None:
-    """Verify that asset bundles are registered with the Jinja environment."""
-    app: Flask = create_app()
-    assert "css" in app.jinja_env.assets_environment._named_bundles
-    assert "js" in app.jinja_env.assets_environment._named_bundles
-
-
 def test_blueprints_registered() -> None:
     """Verify that blueprints are registered with the app."""
     app: Flask = create_app()

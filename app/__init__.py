@@ -1,7 +1,6 @@
 from typing import Type
 
 from flask import Flask
-from flask_assets import Bundle, Environment  # type: ignore[import]
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_wtf.csrf import CSRFProtect  # type: ignore[import]
@@ -12,7 +11,6 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from config import Config
 
 # Initialize Flask extensions. These are initialized here for easier access.
-assets = Environment()
 csrf = CSRFProtect()
 limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per minute"])
 
@@ -48,7 +46,6 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)  # type: ignore[call-arg]
 
     # Initialize Flask extensions
-    assets.init_app(app)
     csrf.init_app(app)
     limiter.init_app(app)
     WTFormsHelpers(app)
