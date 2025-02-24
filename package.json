@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "format": "prettier . --write",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -19,12 +19,13 @@
     "url": "https://github.com/LandRegistry/govuk-frontend-flask/issues"
   },
   "homepage": "https://github.com/LandRegistry/govuk-frontend-flask#readme",
-  "dependencies": {
-    "govuk-frontend": "^5.8.0"
-  },
   "devDependencies": {
-    "prettier": "^3.5.1",
+    "css-loader": "^7.1.2",
+    "govuk-frontend": "^5.8.0",
+    "mini-css-extract-plugin": "^2.9.2",
+    "prettier": "^3.5.2",
     "sass": "^1.85.0",
+    "sass-loader": "^16.0.5",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1"
   }
