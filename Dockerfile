@@ -1,9 +1,3 @@
-FROM node:jod-alpine as build
-
-COPY package*.json ./
-
-RUN npm install
-
 FROM python:3.13-slim
 
 RUN useradd appuser
@@ -17,6 +11,7 @@ ENV FLASK_APP=govuk-frontend-flask.py \
 
 COPY app app
 COPY govuk-frontend-flask.py config.py requirements.txt ./
+
 RUN pip install -r requirements.txt \
     && chown -R appuser:appuser ./
 

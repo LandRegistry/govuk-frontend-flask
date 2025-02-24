@@ -82,11 +82,11 @@ flowchart TB
     web1 -- Write --> web2
     web1 <-- redis:6379 --> cache1
 
-    subgraph Proxy container
+    subgraph Web container
         prox1
     end
 
-    subgraph Web container
+    subgraph App container
         web1
         web2
     end

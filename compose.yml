@@ -1,5 +1,5 @@
 services:
-  web:
+  app:
     build: .
     command: gunicorn --bind 0.0.0.0:5000 -w 4 --access-logfile - --error-logfile - govuk-frontend-flask:app
     restart: always
@@ -8,29 +8,23 @@ services:
       - CONTACT_PHONE=[contact phone]
       - DEPARTMENT_NAME=[name of department]
       - DEPARTMENT_URL=[url of department]
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=redis://cache:6379
       - SECRET_KEY=4f378500459bb58fecf903ea3c113069f11f150b33388f56fc89f7edce0e6a84
       - SERVICE_NAME=[name of service]
       - SERVICE_PHASE=[phase]
       - SERVICE_URL=[url of service]
-    volumes:
-      - static_volume:/home/appuser/app/static:rw
     expose:
       - 5000
     depends_on:
-      - redis
-  redis:
+      - cache
+  cache:
     image: redis:7-alpine
     restart: always
     expose:
       - 6379
-  nginx:
-    build: ./nginx
-    volumes:
-      - static_volume:/home/appuser/app/static:ro
+  web:
+    build: ./web
     ports:
       - 443:443
     depends_on:
-      - web
-volumes:
-  static_volume:
+      - app

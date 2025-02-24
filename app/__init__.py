@@ -26,7 +26,7 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     Returns:
         A configured Flask application instance.
     """
-    app: Flask = Flask(__name__, static_url_path="/assets")  # type: ignore[assignment]
+    app: Flask = Flask(__name__)  # type: ignore[assignment]
     app.config.from_object(config_class)
     app.jinja_env.lstrip_blocks = True
     app.jinja_env.trim_blocks = True
@@ -52,14 +52,6 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     csrf.init_app(app)
     limiter.init_app(app)
     WTFormsHelpers(app)
-
-    # Register asset bundles for CSS and JavaScript.
-    css: Bundle = Bundle("src/css/*.css", filters="cssmin", output="dist/css/custom-%(version)s.min.css")
-    js: Bundle = Bundle("src/js/*.js", filters="jsmin", output="dist/js/custom-%(version)s.min.js")
-    if "css" not in assets:
-        assets.register("css", css)
-    if "js" not in assets:
-        assets.register("js", js)
 
     # Register blueprints. These define different sections of the application.
     from app.demos import bp as demo_bp
