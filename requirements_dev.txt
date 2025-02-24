@@ -124,7 +124,7 @@ rich==13.9.4
     #   pip-audit
 sortedcontainers==2.4.0
     # via cyclonedx-python-lib
-stevedore==5.4.0
+stevedore==5.4.1
     # via bandit
 toml==0.10.2
     # via pip-audit
