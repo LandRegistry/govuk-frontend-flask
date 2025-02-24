@@ -15,8 +15,3 @@ RUN apk update && apk add --no-cache openssl && \
 COPY nginx.conf /etc/nginx/conf.d
 COPY --from=builder /app/node_modules/govuk-frontend/dist/govuk/assets /app/static/assets/
 COPY --from=builder /app/node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.* /app/static
-
-RUN ls -la /app/static && sleep 10
-RUN ls -la /app/static/assets && sleep 10
-RUN ls -la /app/static/assets/fonts && sleep 10
-RUN ls -la /app/static/assets/images && sleep 10
