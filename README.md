@@ -41,12 +41,6 @@ You must also set a new unique `SECRET_KEY`, which is used to securely sign the 
 python -c 'import secrets; print(secrets.token_hex())'
 ```
 
-### Get the latest GOV.UK Frontend assets
-
-```shell
-./build.sh
-```
-
 ### Run containers
 
 ```shell
@@ -56,6 +50,8 @@ docker compose up --build
 You should now have the app running on <https://localhost/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
 
 ## Demos
+
+To install the demo content run: `./build.sh`
 
 There are some helpful demos included by default that show all of the components available from GOV.UK Frontend Jinja and a selection of forms and validation patterns from GOV.UK Frontend WTForms. These are located in the `app/demos` and `app/templates/demos` directories, along with the `demos` blueprint. Use them for reference whilst building your service, but make sure to delete them, along with the relevant section in `build.sh`, before deploying the app.
 
