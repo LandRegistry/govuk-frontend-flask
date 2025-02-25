@@ -1,4 +1,93 @@
 $govuk-assets-path: "../../node_modules/govuk-frontend/dist/govuk/assets/";
 
-// Import GOV.UK Frontend
-@import "govuk-frontend/dist/govuk";
+// 'Base' includes everything from settings, tools and helpers. Nothing
+// in the base outputs any CSS.
+
+@import "govuk-frontend/dist/govuk/base";
+
+// Basic content styles for typography, links etc. Approximately 10% of
+// the CSS output if you include everything.
+
+@import "govuk-frontend/dist/govuk/core";
+
+// Objects include things like the page template, grid and form groups.
+// Approximately 5% of the CSS output if you include everything.
+
+@import "govuk-frontend/dist/govuk/objects";
+
+// The components themselves - try to only include the components you
+// are using in your project. Approximately 70% of the CSS output if
+// you include everything.
+
+@import "govuk-frontend/dist/govuk/components/accordion";
+@import "govuk-frontend/dist/govuk/components/back-link";
+@import "govuk-frontend/dist/govuk/components/breadcrumbs";
+@import "govuk-frontend/dist/govuk/components/button";
+@import "govuk-frontend/dist/govuk/components/character-count";
+@import "govuk-frontend/dist/govuk/components/checkboxes";
+@import "govuk-frontend/dist/govuk/components/cookie-banner";
+@import "govuk-frontend/dist/govuk/components/date-input";
+@import "govuk-frontend/dist/govuk/components/details";
+@import "govuk-frontend/dist/govuk/components/error-message";
+@import "govuk-frontend/dist/govuk/components/error-summary";
+@import "govuk-frontend/dist/govuk/components/exit-this-page";
+@import "govuk-frontend/dist/govuk/components/fieldset";
+@import "govuk-frontend/dist/govuk/components/file-upload";
+@import "govuk-frontend/dist/govuk/components/footer";
+@import "govuk-frontend/dist/govuk/components/header";
+@import "govuk-frontend/dist/govuk/components/hint";
+@import "govuk-frontend/dist/govuk/components/input";
+@import "govuk-frontend/dist/govuk/components/inset-text";
+@import "govuk-frontend/dist/govuk/components/label";
+@import "govuk-frontend/dist/govuk/components/notification-banner";
+@import "govuk-frontend/dist/govuk/components/pagination";
+@import "govuk-frontend/dist/govuk/components/panel";
+@import "govuk-frontend/dist/govuk/components/password-input";
+@import "govuk-frontend/dist/govuk/components/phase-banner";
+@import "govuk-frontend/dist/govuk/components/radios";
+@import "govuk-frontend/dist/govuk/components/select";
+@import "govuk-frontend/dist/govuk/components/service-navigation";
+@import "govuk-frontend/dist/govuk/components/skip-link";
+@import "govuk-frontend/dist/govuk/components/summary-list";
+@import "govuk-frontend/dist/govuk/components/table";
+@import "govuk-frontend/dist/govuk/components/tabs";
+@import "govuk-frontend/dist/govuk/components/tag";
+@import "govuk-frontend/dist/govuk/components/task-list";
+@import "govuk-frontend/dist/govuk/components/textarea";
+@import "govuk-frontend/dist/govuk/components/warning-text";
+
+/*
+// Alternatively, you can import all components:
+@import "govuk-frontend/dist/govuk/components";
+*/
+
+// Utilities, for example govuk-clearfix or govuk-visually-hidden.
+// Approximately 1% of the CSS output if you include everything.
+
+@import "govuk-frontend/dist/govuk/utilities";
+
+// Overrides, used to adjust things like the amount of spacing on an
+// element. Override classes always include `-!-` in the class name.
+// Approximately 15% of the CSS output if you include everything.
+
+@import "govuk-frontend/dist/govuk/overrides";
+
+/*
+// Alternatively, you can import the specific groups of overrides
+// you need for your project:
+
+// Display overrides - for example govuk-!-display-inline
+@import "govuk-frontend/dist/govuk/overrides/display";
+
+// Spacing overrides - for example govuk-!-margin-4, govuk-!-static-padding-4
+@import "govuk-frontend/dist/govuk/overrides/spacing";
+
+// Text align overrides - for example govuk-!-text-align-left
+@import "govuk-frontend/dist/govuk/overrides/text-align";
+
+// Typography overrides - for example govuk-!-font-size-19, govuk-!-font-weight-bold
+@import "govuk-frontend/dist/govuk/overrides/typography";
+
+// Width overrides - for example govuk-!-width-two-thirds
+@import "govuk-frontend/dist/govuk/overrides/width";
+*/
