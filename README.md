@@ -67,37 +67,58 @@ To run the tests:
 python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
+## Build
+
+```mermaid
+flowchart TB
+    compose(compose.yml)
+    nginx(nginx:stable-alpine)
+    node(node:jod-alpine)
+    python(python:3.13-slim)
+    redis(redis:7-alpine)
+
+    compose --> App & Cache & Web
+    App -- Depends on --> Cache
+    Web -- Depends on --> App
+
+    subgraph App
+        python
+    end
+
+    subgraph Cache
+        redis
+    end
+
+    subgraph Web
+        direction TB
+        node -- COPY /dist /static --> nginx
+    end
+```
+
 ## Environment
 
 ```mermaid
 flowchart TB
-    cache1(Redis):::CACHE
-    Client
-    prox1(NGINX):::PROXY
-    web1(Flask app):::WEB
-    web2[/Static files/]:::WEB
+    redis(Redis)
+    client(Client)
+    nginx(NGINX)
+    flask(Gunicorn/Flask)
+    static@{ shape: lin-cyl, label: "Static files" }
 
-    Client <-- https:443 --> prox1 <-- http:5000 --> web1
-    prox1 -- Read only --> web2
-    web1 -- Write --> web2
-    web1 <-- redis:6379 --> cache1
+    client -- https:443 --> nginx -- http:5000 --> flask
+    flask -- redis:6379 --> redis
 
-    subgraph Web container
-        prox1
+    subgraph Web
+        nginx -- Read --> static
     end
 
-    subgraph App container
-        web1
-        web2
+    subgraph App
+        flask
     end
 
-    subgraph Cache container
-        cache1
+    subgraph Cache
+        redis
     end
-
-    classDef CACHE fill:#F8CECC,stroke:#B85450,stroke-width:2px
-    classDef PROXY fill:#D5E8D4,stroke:#82B366,stroke-width:2px
-    classDef WEB fill:#FFF2CC,stroke:#D6B656,stroke-width:2px
 ```
 
 ## Features
