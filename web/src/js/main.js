@@ -1,4 +1,3 @@
-import "./styles.scss";
-
-import { initAll } from "govuk-frontend";
-initAll();
+import "./modules/cookie-banner";
+import "./modules/govuk-frontend";
+import "../scss/main.scss";
