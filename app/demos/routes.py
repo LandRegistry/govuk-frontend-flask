@@ -7,7 +7,13 @@ from werkzeug import Response
 from werkzeug.exceptions import NotFound
 
 from app.demos import bp
-from app.demos.forms import AutocompleteForm, BankDetailsForm, ConditionalRevealForm, CreateAccountForm, KitchenSinkForm
+from app.demos.forms import (
+    AutocompleteForm,
+    BankDetailsForm,
+    ConditionalRevealForm,
+    CreateAccountForm,
+    KitchenSinkForm,
+)
 
 
 @bp.route("/components", methods=["GET"])
