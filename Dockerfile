@@ -9,8 +9,8 @@ ENV FLASK_APP=govuk-frontend-flask.py \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-COPY app app
 COPY govuk-frontend-flask.py config.py requirements.txt ./
+COPY app app
 
 RUN pip install -r requirements.txt \
     && chown -R appuser:appuser ./
