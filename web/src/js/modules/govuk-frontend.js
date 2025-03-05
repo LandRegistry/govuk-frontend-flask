@@ -1,5 +1,16 @@
-import { Header, ServiceNavigation, SkipLink, createAll } from "govuk-frontend";
+import {
+  createAll,
+  Button,
+  ErrorSummary,
+  NotificationBanner,
+  Radios,
+  ServiceNavigation,
+  SkipLink,
+} from "govuk-frontend";
 
-createAll(Header);
+createAll(Button);
+createAll(ErrorSummary);
+createAll(NotificationBanner);
+createAll(Radios);
 createAll(ServiceNavigation);
 createAll(SkipLink);
