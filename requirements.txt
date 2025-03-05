@@ -26,7 +26,7 @@ flask-limiter[redis]==3.10.1
     # via -r requirements.in
 flask-wtf==1.2.2
     # via govuk-frontend-wtf
-govuk-frontend-jinja==3.4.1
+govuk-frontend-jinja==3.5.0
     # via
     #   -r requirements.in
     #   govuk-frontend-wtf
