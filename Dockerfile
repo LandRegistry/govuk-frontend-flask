@@ -1,18 +1,19 @@
 FROM python:3.13-slim
 
-RUN useradd appuser
-
-WORKDIR /home/appuser
+RUN addgroup --system app && adduser --system --group app
 
 # Set environment variables
 ENV FLASK_APP=govuk-frontend-flask.py \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
+WORKDIR /home/app
+
 COPY govuk-frontend-flask.py config.py requirements.txt ./
-COPY app app
 
 RUN pip install -r requirements.txt \
-    && chown -R appuser:appuser ./
+    && chown -R app:app ./
 
-USER appuser
+COPY app app
+
+USER app
