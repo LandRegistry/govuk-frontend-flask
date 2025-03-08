@@ -1,4 +1,10 @@
 services:
+  web:
+    build: ./web
+    ports:
+      - 443:443
+    depends_on:
+      - app
   app:
     build: .
     command: gunicorn --bind 0.0.0.0:5000 -w 4 --access-logfile - --error-logfile - govuk-frontend-flask:app
@@ -22,9 +28,3 @@ services:
     restart: always
     expose:
       - 6379
-  web:
-    build: ./web
-    ports:
-      - 443:443
-    depends_on:
-      - app
