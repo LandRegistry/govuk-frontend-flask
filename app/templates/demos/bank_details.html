@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{%- extends "base.html" -%}
 
-{% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Bank details – GOV.UK{% endblock %}
+{%- block pageTitle -%}{%- if form.errors -%}Error: {%- endif -%}Bank details – GOV.UK{%- endblock -%}
 
-{% block content %}
+{%- block content -%}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {{ super() }}
@@ -39,4 +39,4 @@
     </form>
   </div>
 </div>
-{% endblock %}
+{%- endblock -%}

@@ -1,17 +1,17 @@
-{% extends "base.html" %}
+{%- extends "base.html" -%}
 
-{% block content %}
+{%- block content -%}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <span class="govuk-caption-xl">Demo</span>
     <h1 class="govuk-heading-l">Components</h1>
     <ul class="govuk-list govuk-list--bullet govuk-list--spaced govuk-list--spaced">
-      {% for component in components %}
+      {%- for component in components -%}
       <li>
         <a class="govuk-link" href="{{ url_for('demos.component', component=component) }}">{{component | replace("-", " ") | capitalize}}</a>
       </li>
-      {% endfor %}
+      {%- endfor -%}
     </ul>
   </div>
 </div>
-{% endblock %}
+{%- endblock -%}

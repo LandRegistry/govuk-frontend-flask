@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{%- extends "base.html" -%}
 
-{% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Conditionally revealed inputs – GOV.UK{% endblock %}
+{%- block pageTitle -%}{%- if form.errors -%}Error: {%- endif -%}Conditionally revealed inputs – GOV.UK{%- endblock -%}
 
-{% block content %}
+{%- block content -%}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {{ super() }}
@@ -13,30 +13,30 @@
       {{ form.csrf_token }}
 
       <!-- Grab html for conditional fields -->
-      {% set emailHtml %}
+      {%- set emailHtml -%}
         {{ form.contact_by_email(params={
           'type': 'email',
           'autocomplete': 'email',
           'spellcheck': false,
           'classes': 'govuk-!-width-one-third'
         }) }}
-      {% endset %}
+      {%- endset -%}
 
-      {% set phoneHtml %}
+      {%- set phoneHtml -%}
         {{ form.contact_by_phone(params={
           'type': 'tel',
           'autocomplete': 'tel',
           'classes': 'govuk-!-width-one-third'
         }) }}
-      {% endset %}
+      {%- endset -%}
 
-      {% set textHtml %}
+      {%- set textHtml -%}
         {{ form.contact_by_text(params={
           'type': 'tel',
           'autocomplete': 'tel',
           'classes': 'govuk-!-width-one-third'
         }) }}
-      {% endset %}
+      {%- endset -%}
 
       <!--
       Render the radio buttons
@@ -73,4 +73,4 @@
     </form>
   </div>
 </div>
-{% endblock %}
+{%- endblock -%}

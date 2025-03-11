@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{%- extends "base.html" -%}
 
-{% block pageTitle %}{%- if form.errors %}Error: {% endif -%}Autocomplete – GOV.UK{% endblock %}
+{%- block pageTitle -%}{%- if form.errors -%}Error: {%- endif -%}Autocomplete – GOV.UK{%- endblock -%}
 
-{% block content %}
+{%- block content -%}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {{ super() }}
@@ -20,13 +20,13 @@
       }) }}
 
       <datalist id="countries">
-        {% for country in form.countries %}
+        {%- for country in form.countries -%}
           <option value="{{country}}">
-        {% endfor %}
+        {%- endfor -%}
       </datalist>
 
       {{ form.submit }}
     </form>
   </div>
 </div>
-{% endblock %}
+{%- endblock -%}
