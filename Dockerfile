@@ -16,3 +16,5 @@ RUN pip install -r requirements.txt
 COPY --chown=app:app app app
 
 USER app
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "-w", "4", "--access-logfile", "-", "govuk-frontend-flask:app"]
