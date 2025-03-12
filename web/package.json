@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/LandRegistry/govuk-frontend-flask#readme",
   "dependencies": {
-    "govuk-frontend": "^5.9.0"
+    "govuk-frontend": "5.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.9",
