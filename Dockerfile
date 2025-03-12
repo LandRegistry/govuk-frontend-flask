@@ -9,11 +9,10 @@ ENV FLASK_APP=govuk-frontend-flask.py \
 
 WORKDIR /home/app
 
-COPY govuk-frontend-flask.py config.py requirements.txt ./
+COPY --chown=app:app govuk-frontend-flask.py config.py requirements.txt ./
 
-RUN pip install -r requirements.txt \
-    && chown -R app:app ./
+RUN pip install -r requirements.txt
 
-COPY app app
+COPY --chown=app:app app app
 
 USER app
