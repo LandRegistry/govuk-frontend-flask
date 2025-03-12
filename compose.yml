@@ -5,9 +5,18 @@ services:
       - 443:443
     depends_on:
       - app
+    develop:
+      watch:
+        - action: rebuild
+          path: ./web/package-lock.json
+        - action: sync+restart
+          path: ./web/nginx.conf
+          target: /etc/nginx/conf.d/nginx.conf
+        - action: sync
+          path: ./web/dist
+          target: /app/static
   app:
     build: .
-    command: gunicorn --bind 0.0.0.0:5000 -w 4 --access-logfile - --error-logfile - govuk-frontend-flask:app
     restart: always
     environment:
       - CONTACT_EMAIL=[contact email]
@@ -23,6 +32,14 @@ services:
       - 5000
     depends_on:
       - cache
+    develop:
+      watch:
+        - action: rebuild
+          path: ./requirements.txt
+          target: /home/app/requirements.txt
+        - action: sync
+          path: ./app
+          target: /home/app
   cache:
     image: redis:7-alpine
     restart: always

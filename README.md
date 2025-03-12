@@ -44,7 +44,7 @@ python -c 'import secrets; print(secrets.token_hex())'
 ### Run containers
 
 ```shell
-docker compose up --build
+docker compose up --build --watch
 ```
 
 You should now have the app running on <https://localhost/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
