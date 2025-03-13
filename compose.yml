@@ -3,8 +3,6 @@ services:
     build: ./web
     ports:
       - 443:443
-    depends_on:
-      - app
     develop:
       watch:
         - action: rebuild
@@ -32,6 +30,7 @@ services:
       - 5000
     depends_on:
       - cache
+      - web
     develop:
       watch:
         - action: rebuild
