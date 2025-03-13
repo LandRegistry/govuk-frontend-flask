@@ -1,6 +1,7 @@
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
 
 module.exports = {
   mode: "production",
@@ -42,14 +43,14 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/images/[hash][ext][query]",
+          filename: "assets/images/[name][ext][query]",
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/fonts/[hash][ext][query]",
+          filename: "assets/fonts/[name][ext][query]",
         },
       },
     ],
@@ -57,6 +58,14 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "main.min.css",
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "./node_modules/govuk-frontend/dist/govuk/assets",
+          to: "assets",
+        },
+      ],
     }),
   ],
   resolve: {
