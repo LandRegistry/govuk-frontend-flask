@@ -12,7 +12,7 @@
 
 {%- block head -%}
   <meta name="description" content="{{config['SERVICE_NAME']}}">
-  <meta name="keywords" content="GOV.UK, govuk, gov, government, uk, frontend, ui, user interface, jinja, python, flask, port, template, templating, macro, component, design system, html, forms, wtf, wtforms, widget, widgets, demo, example">
+  <meta name="keywords" content="GOV.UK, govuk, gov, government, uk, frontend, ui, user interface, jinja, python, flask, port, template, templating, macro, component, design system, html, forms, wtf, wtforms, widget, widgets, skeleton, example">
   <meta name="author" content="{{config['DEPARTMENT_NAME']}}">
   <link rel="stylesheet" type="text/css" href="/static/main.min.css" />
 {%- endblock -%}
@@ -114,11 +114,7 @@
 
   {{ govukServiceNavigation({
     'serviceName': config['SERVICE_NAME'],
-    'serviceUrl': url_for('main.index'),
-    'navigation': [
-      {'href': url_for('demos.components'), 'text': 'Components'},
-      {'href': url_for('demos.forms'), 'text': 'Forms'}
-    ]
+    'serviceUrl': url_for('main.index')
   }) }}
 {%- endblock -%}
 

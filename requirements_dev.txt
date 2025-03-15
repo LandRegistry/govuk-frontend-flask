@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements_dev.in
 #
-attrs==25.2.0
+attrs==25.3.0
     # via flake8-bugbear
 bandit==1.8.3
     # via -r requirements_dev.in
@@ -33,7 +33,7 @@ cyclonedx-python-lib==8.9.0
     # via pip-audit
 defusedxml==0.7.1
     # via py-serializable
-filelock==3.17.0
+filelock==3.18.0
     # via cachecontrol
 flake8==7.1.2
     # via

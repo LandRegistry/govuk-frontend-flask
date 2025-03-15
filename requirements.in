@@ -4,6 +4,3 @@ flask-limiter[redis]
 govuk-frontend-jinja
 govuk-frontend-wtf
 gunicorn
-
-# This requirement is only used by the demos and can be removed
-pyyaml

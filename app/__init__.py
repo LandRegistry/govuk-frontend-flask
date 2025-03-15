@@ -51,10 +51,8 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     WTFormsHelpers(app)
 
     # Register blueprints. These define different sections of the application.
-    from app.demos import bp as demo_bp
     from app.main import bp as main_bp
 
-    app.register_blueprint(demo_bp)
     app.register_blueprint(main_bp)
 
     return app

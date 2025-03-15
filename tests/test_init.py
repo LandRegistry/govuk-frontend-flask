@@ -47,5 +47,4 @@ def test_extensions_initialized() -> None:
 def test_blueprints_registered() -> None:
     """Verify that blueprints are registered with the app."""
     app: Flask = create_app()
-    assert "demos" in app.blueprints
     assert "main" in app.blueprints
