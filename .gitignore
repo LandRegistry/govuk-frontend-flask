@@ -1,13 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode,sass
-# Edit at https://www.toptal.com/developers/gitignore?templates=git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode,sass
-
-### certificates ###
-*.pem
-*.key
-*.crt
-*.cer
-*.der
-*.priv
+# Created by https://www.toptal.com/developers/gitignore/api/git,venv,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode,sass,node
+# Edit at https://www.toptal.com/developers/gitignore?templates=git,venv,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode,sass,node
 
 ### Flask ###
 instance/*
@@ -618,4 +610,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode,sass
+# End of https://www.toptal.com/developers/gitignore/api/git,venv,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode,sass,node
