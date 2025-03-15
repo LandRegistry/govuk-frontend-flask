@@ -1,13 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode
-
-### GOV.UK Frontend ###
-app/static/fonts*
-app/static/govuk-frontend*
-app/static/images*
-app/static/VERSION.txt
-app/static/manifest.json
-govuk_components*
+# Created by https://www.toptal.com/developers/gitignore/api/git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode,sass
+# Edit at https://www.toptal.com/developers/gitignore?templates=git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode,sass
 
 ### certificates ###
 *.pem
@@ -563,6 +555,12 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+### Sass ###
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
 ### venv ###
 # Virtualenv
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
@@ -620,4 +618,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/git,node,venv,flask,linux,macos,python,windows,certificates,jetbrains+all,visualstudiocode,sass
