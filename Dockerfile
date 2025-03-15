@@ -7,7 +7,7 @@ ENV FLASK_APP=govuk-frontend-flask.py \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-WORKDIR /home/app
+WORKDIR /home/appuser
 
 COPY --chown=appuser:appgroup govuk-frontend-flask.py config.py requirements.txt ./
 

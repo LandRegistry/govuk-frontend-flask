@@ -35,10 +35,10 @@ services:
       watch:
         - action: rebuild
           path: ./requirements.txt
-          target: /home/app/requirements.txt
+          target: /home/appuser/requirements.txt
         - action: sync
           path: ./app
-          target: /home/app
+          target: /home/appuser
   cache:
     image: redis:7-alpine
     restart: always
