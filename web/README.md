@@ -54,7 +54,7 @@ The same approach applies to JS; the `govuk-frontend.mjs` file at `/web/src/js/m
 
 > **Note**: Although there is JS for the Header component, this is not needed if using the newer Service navigation component alongside it. If you're not using the Service navigation component, remove its JS import and replace it with the Header's.
 
-For comparison (using govuk-frontend v5.9.0):
+For comparison (using GOV.UK Frontend v5.9.0):
 
 | Asset         | Size (KB) |
 | ------------- | --------- |
@@ -89,7 +89,7 @@ npm run watch
 
 ### Update dependencies
 
-To update Node package dependencies (such as [govuk-frontend](https://www.npmjs.com/package/govuk-frontend)), use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates).
+To update Node package dependencies (such as [govuk-frontend](https://www.npmjs.com/package/govuk-frontend)), use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates):
 
 ```shell
 ncu -u
