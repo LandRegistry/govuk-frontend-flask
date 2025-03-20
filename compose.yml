@@ -12,7 +12,7 @@ services:
           target: /etc/nginx/conf.d/nginx.conf
         - action: sync
           path: ./web/dist
-          target: /app/static
+          target: /web/static
   app:
     build: .
     restart: always
