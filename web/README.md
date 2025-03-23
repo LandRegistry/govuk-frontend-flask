@@ -1,6 +1,12 @@
 # Building static assets
 
-Use [Webpack](https://webpack.js.org/) to bundle, compile and minify CSS, JS, fonts and images.
+Use [Webpack](https://webpack.js.org/) to bundle JavaScript, SCSS, images, and fonts, while optimising the output for performance. It uses various loaders and plugins to process files and generate the final build:
+
+- [**CSS Minimizer Webpack Plugin**](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/): Minimises the CSS output to reduce file size and improve page load times.
+- [**PostCSS Preset Env**](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env): Uses [Autoprefixer](https://github.com/postcss/autoprefixer) to add vendor prefixes and ensure compatibility with older browsers.
+- [**Babel Preset Env**](https://babeljs.io/docs/babel-preset-env): Transpiles ES6+ JavaScript for cross-browser compatibility while allowing the use of modern JavaScript features.
+- [**Copy Webpack Plugin**](https://webpack.js.org/plugins/copy-webpack-plugin/): Automates copying images and fonts from [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) to the output directory.
+- [**Webpack Dev Server**](https://webpack.js.org/configuration/dev-server/): Serves files from the output directory with live reloading for development workflows.
 
 ## Prerequisites
 
@@ -52,7 +58,7 @@ The same approach applies to JS; the `govuk-frontend.mjs` file at `/web/src/js/m
 - Service navigation
 - Skip link
 
-> **Note**: Although there is JS for the Header component, this is not needed if using the newer Service navigation component alongside it. If you're not using the Service navigation component, remove its JS import and replace it with the Header's.
+> **Note**: Although there is JS for the Header component, this is not needed when using the newer Service navigation component alongside it. If you're not using the Service navigation component, remove its JS import and replace it with the Header's.
 
 For comparison (using GOV.UK Frontend v5.9.0):
 
@@ -104,9 +110,3 @@ ncu --target patch -u
 ```shell
 ncu --target minor -u
 ```
-
-### Support Internet Explorer
-
-Versions of IE below 11 are not supported. IE 11 will not run GOV.UK JavaScript, but its CSS is compatible.
-
-If you need to change which browsers are targeted for JS transpilation, the `.browserslistrc` file contains those supported, taken directly from the GOV.UK supported list. Changing this is _probably_ not a good idea though and should be discouraged, see [GOV.UK Frontend browser support](https://frontend.design-system.service.gov.uk/browser-support/).

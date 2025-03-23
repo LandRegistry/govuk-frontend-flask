@@ -3,7 +3,7 @@ FROM node:jod-alpine AS builder
 WORKDIR /web
 
 COPY .browserslistrc babel.config.json package*.json webpack.config.js ./
-COPY src ./src
+COPY src src
 
 RUN npm install && \
     npm run build

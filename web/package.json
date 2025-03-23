@@ -12,7 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/LandRegistry/govuk-frontend-flask.git"
   },
-  "keywords": [],
   "author": "Matt Shaw",
   "license": "MIT",
   "bugs": {
@@ -30,7 +29,9 @@
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "mini-css-extract-plugin": "^2.9.2",
-    "npm-check-updates": "^17.1.15",
+    "npm-check-updates": "^17.1.16",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^10.1.5",
     "prettier": "^3.5.3",
     "sass": "^1.86.0",
     "sass-loader": "^16.0.5",

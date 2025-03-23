@@ -2,6 +2,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
+const postcssPresetEnv = require("postcss-preset-env");
 
 module.exports = {
   mode: "production",
@@ -19,6 +20,14 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [postcssPresetEnv],
+              },
+            },
+          },
           {
             loader: "sass-loader",
             options: {
