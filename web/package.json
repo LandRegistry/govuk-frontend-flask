@@ -12,7 +12,10 @@
     "type": "git",
     "url": "git+https://github.com/LandRegistry/govuk-frontend-flask.git"
   },
-  "author": "Matt Shaw",
+  "author": {
+    "name": "Matt Shaw",
+    "url": "https://matthew-shaw.github.io/"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/LandRegistry/govuk-frontend-flask/issues"
