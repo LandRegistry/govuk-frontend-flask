@@ -38,7 +38,7 @@ services:
           target: /home/appuser/requirements.txt
         - action: sync
           path: ./app
-          target: /home/appuser
+          target: /home/appuser/app
   cache:
     image: redis:7-alpine
     restart: always
