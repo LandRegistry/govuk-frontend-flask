@@ -6,7 +6,6 @@ Use [Webpack](https://webpack.js.org/) to bundle JavaScript, SCSS, images, and f
 - [**PostCSS Preset Env**](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env): Uses [Autoprefixer](https://github.com/postcss/autoprefixer) to add vendor prefixes and ensure compatibility with older browsers.
 - [**Babel Preset Env**](https://babeljs.io/docs/babel-preset-env): Transpiles ES6+ JavaScript for cross-browser compatibility while allowing the use of modern JavaScript features.
 - [**Copy Webpack Plugin**](https://webpack.js.org/plugins/copy-webpack-plugin/): Automates copying images and fonts from [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) to the output directory.
-- [**Webpack Dev Server**](https://webpack.js.org/configuration/dev-server/): Serves files from the output directory with live reloading for development workflows.
 
 ## Prerequisites
 
@@ -47,9 +46,9 @@ By default, the following components styling is imported, because they are used 
 - [Skip link](https://design-system.service.gov.uk/components/skip-link/)
 - [Table](https://design-system.service.gov.uk/components/table/)
 
-Simply comment out, or uncomment, any other components in `main.scss` that you need to exclude or include.
+Simply uncomment any other components in `main.scss` that you need to use.
 
-The same approach applies to JS; the `govuk-frontend.mjs` file at `/web/src/js/modules` only imports and creates the components that are used:
+The same approach applies to JS; the `main.mjs` file at `/src/js` only imports JS for the components being used:
 
 - Button
 - Error summary
@@ -58,7 +57,7 @@ The same approach applies to JS; the `govuk-frontend.mjs` file at `/web/src/js/m
 - Service navigation
 - Skip link
 
-> **Note**: Although there is JS for the Header component, this is not needed when using the newer Service navigation component alongside it. If you're not using the Service navigation component, remove its JS import and replace it with the Header's.
+> **Note**: The JS for the Header component is not needed when using the newer [Service navigation](https://design-system.service.gov.uk/components/service-navigation/) component alongside it.
 
 For comparison (using GOV.UK Frontend v5.9.0):
 
@@ -71,15 +70,39 @@ For comparison (using GOV.UK Frontend v5.9.0):
 
 ### Format source code
 
-Use [Prettier](https://prettier.io/), an opinionated code formatter, for consistency:
+Use [Prettier](https://prettier.io/), an opinionated code formatter, for consistency.
+
+To check formatting (without changing):
 
 ```shell
-npm run format
+npm run format:check
+```
+
+To reformat files:
+
+```shell
+npm run format:fix
+```
+
+### Lint source code
+
+Use [ESLint](https://eslint.org/) to statically analyse your code to quickly find problems.
+
+To check for issues:
+
+```shell
+npm run lint:check
+```
+
+To attempt to automatically fix issues:
+
+```shell
+npm run lint:fix
 ```
 
 ### Build assets
 
-Output compiled CSS, JS, fonts and images to `./dist`:
+Use [Webpack](https://webpack.js.org/) loaders and plugins to output CSS, JS, fonts and images to `./dist`:
 
 ```shell
 npm run build
@@ -95,7 +118,7 @@ npm run watch
 
 ### Update dependencies
 
-To update Node package dependencies (such as [govuk-frontend](https://www.npmjs.com/package/govuk-frontend)), use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates):
+Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to update Node package dependencies (such as [govuk-frontend](https://www.npmjs.com/package/govuk-frontend)):
 
 ```shell
 ncu -u
