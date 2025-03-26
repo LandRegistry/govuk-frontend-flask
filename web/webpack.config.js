@@ -9,7 +9,7 @@ module.exports = {
   devtool: "source-map",
   entry: ["./src/js/main.mjs", "./src/scss/main.scss"],
   output: {
-    filename: "main.min.js",
+    filename: "[name].min.js?[contenthash]",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
@@ -66,7 +66,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "main.min.css",
+      filename: "[name].min.css?[contenthash]",
     }),
     new CopyPlugin({
       patterns: [
