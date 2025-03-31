@@ -1,19 +1,22 @@
 # Building static assets
 
-Use [Webpack](https://webpack.js.org/) to bundle JavaScript, SCSS, images, and fonts, while optimising the output for performance. It uses various loaders and plugins to process files and generate the final build:
+Use [Webpack](https://webpack.js.org/) to bundle, compile and minify JavaScript, SCSS, images, and fonts, while optimising the output for performance. It uses various loaders and plugins to process files and generate the final build:
 
 - [**CSS Minimizer Webpack Plugin**](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/): Uses [CSSNANO](https://cssnano.github.io/cssnano/) to minimise the CSS output, reducing file size and improving page load times.
 - [**PostCSS Preset Env**](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env): Uses [Autoprefixer](https://github.com/postcss/autoprefixer) to add vendor prefixes and ensure compatibility with older browsers.
 - [**Babel Preset Env**](https://babeljs.io/docs/babel-preset-env): Transpiles ES6+ JavaScript for cross-browser compatibility while allowing the use of modern JavaScript features.
 - [**Copy Webpack Plugin**](https://webpack.js.org/plugins/copy-webpack-plugin/): Automates copying images and fonts from [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) to the output directory.
+- [**Webpack Dev Server**](https://webpack.js.org/configuration/dev-server/): Serves files from the output directory with live reloading for development workflows.
 
 ## Prerequisites
 
-- [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm)
+- A supported LTS version of [Node.js](https://nodejs.org/en)
+- [Node Version Manager](https://github.com/nvm-sh/nvm) (optional)
+- [Docker](https://www.docker.com/) (optional)
 
 ## Get started
 
-1. Install the correct version of [Node.js](https://nodejs.org/en). This is determined by the `.nvmrc` file and is typically the latest LTS release codename.
+1. Install Node, preferably using `nvm`. The version is set in the `.nvmrc` file and is typically the latest LTS release codename.
 
    ```shell
    nvm install
@@ -31,7 +34,7 @@ Use [Webpack](https://webpack.js.org/) to bundle JavaScript, SCSS, images, and f
 
 The `main.scss` file at `/web/src/scss` is highly selective about which `components` are imported above the required `base`, `core`, `objects`, `utilities` and `overrides`. Components account for around 70% of the output CSS, so should only be included if they are used in the service, in order to keep distributon file sizes small.
 
-By default, the following components styling is imported, because they are used in the template app:
+By default, the following components are imported:
 
 - [Back link](https://design-system.service.gov.uk/components/back-link/)
 - [Button](https://design-system.service.gov.uk/components/button/)
@@ -61,12 +64,12 @@ The same approach applies to JS; the `main.mjs` file at `/src/js` only imports J
 
 For comparison (using GOV.UK Frontend v5.9.0):
 
-| Asset         | Size (KB) |
-| ------------- | --------- |
-| All CSS       | 122       |
-| Selective CSS | 75 (-38%) |
-| All JS        | 46        |
-| Selective JS  | 11 (-76%) |
+| Asset           | Size (KB) |
+| --------------- | --------- |
+| Precompiled CSS | 127       |
+| Selective CSS   | 75 (-41%) |
+| Precompiled JS  | 49        |
+| Selective JS    | 11 (-78%) |
 
 ### Format source code
 
@@ -116,20 +119,20 @@ Rebuild distribution assets automatically when source is changed:
 npm run watch
 ```
 
-### Update dependencies
+### Upgrade dependencies
 
-Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to update Node package dependencies (such as [govuk-frontend](https://www.npmjs.com/package/govuk-frontend)):
+Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to upgrade Node package dependencies (such as [govuk-frontend](https://www.npmjs.com/package/govuk-frontend)):
 
 ```shell
-ncu -u
+npm run upgrade:latest
 ```
 
-If you want to be more cautious you can check only for patch or minor level updates:
+If you want to be more cautious you can apply only minor or patch level upgrades:
 
 ```shell
-ncu --target patch -u
+npm run upgrade:minor
 ```
 
 ```shell
-ncu --target minor -u
+npm run upgrade:patch
 ```
