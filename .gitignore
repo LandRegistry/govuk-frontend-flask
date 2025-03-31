@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/git,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=git,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/git,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode,venv
+# Edit at https://www.toptal.com/developers/gitignore?templates=git,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode,venv
 
 ### Flask ###
 instance/*
@@ -410,6 +410,18 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+### venv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+pip-selfcheck.json
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -455,4 +467,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/git,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/git,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode,venv
