@@ -4,13 +4,16 @@
   "description": "GOV.UK Frontend Flask",
   "private": true,
   "scripts": {
-    "prebuild": "npm run format:check && npm run lint:check",
-    "build": "webpack",
     "format:check": "prettier src --check",
     "format:fix": "prettier src --write",
     "lint:check": "eslint src",
     "lint:fix": "eslint src --fix",
-    "watch": "webpack --watch"
+    "prebuild": "npm run format:check && npm run lint:check",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "upgrade:latest": "ncu -u",
+    "upgrade:minor": "ncu -t minor -u",
+    "upgrade:patch": "ncu -t patch -u"
   },
   "repository": {
     "type": "git",
