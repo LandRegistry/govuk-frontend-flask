@@ -110,7 +110,7 @@ pyproject-hooks==1.2.0
     #   pip-tools
 pytest==8.3.3
     # via pytest-cov
-pytest-cov==6.0.0
+pytest-cov==6.1.0
     # via -r requirements_dev.in
 pyyaml==6.0.2
     # via bandit
