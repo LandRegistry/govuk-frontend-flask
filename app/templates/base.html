@@ -108,13 +108,26 @@
 
 {%- block header -%}
   {{ govukHeader({
-    'classes': 'govuk-header--full-width-border',
-    'homepageUrl': 'https://www.gov.uk/'
+    'classes': "govuk-header--full-width-border"
   }) }}
-
   {{ govukServiceNavigation({
     'serviceName': config['SERVICE_NAME'],
-    'serviceUrl': url_for('main.index')
+    'serviceUrl': url_for('main.index'),
+    'navigation': [
+      {
+        'href': "#",
+        'text': "Navigation item 1"
+      },
+      {
+        'href': "#",
+        'text': "Navigation item 2",
+        'active': true
+      },
+      {
+        'href': "#",
+        'text': "Navigation item 3"
+      }
+    ]
   }) }}
 {%- endblock -%}
 
