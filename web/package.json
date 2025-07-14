@@ -29,27 +29,27 @@
   },
   "homepage": "https://github.com/LandRegistry/govuk-frontend-flask#readme",
   "dependencies": {
-    "govuk-frontend": "5.9.0"
+    "govuk-frontend": "5.11.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.10",
-    "@babel/preset-env": "^7.26.9",
-    "@eslint/js": "^9.24.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@eslint/js": "^9.31.0",
     "babel-loader": "^10.0.0",
     "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
-    "eslint": "^9.24.0",
-    "eslint-config-prettier": "^10.1.1",
-    "globals": "^16.0.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.5",
+    "globals": "^16.3.0",
     "mini-css-extract-plugin": "^2.9.2",
-    "npm-check-updates": "^17.1.16",
+    "npm-check-updates": "^18.0.1",
     "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^10.1.5",
-    "prettier": "^3.5.3",
-    "sass": "^1.86.3",
+    "postcss-preset-env": "^10.2.4",
+    "prettier": "^3.6.2",
+    "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
-    "webpack": "^5.99.5",
+    "webpack": "^5.100.1",
     "webpack-cli": "^6.0.1"
   }
 }

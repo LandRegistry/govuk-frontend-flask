@@ -79,11 +79,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: "./src/assets/manifest.json",
-          to: "assets/manifest.json",
-        },
-        {
-          from: "./node_modules/govuk-frontend/dist/govuk/assets",
+          from: "./node_modules/govuk-frontend/dist/govuk/assets/rebrand",
           to: "assets",
         },
       ],

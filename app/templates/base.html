@@ -107,9 +107,7 @@
 {%- endblock -%}
 
 {%- block header -%}
-  {{ govukHeader({
-    'classes': "govuk-header--full-width-border"
-  }) }}
+  {{ govukHeader({}) }}
   {{ govukServiceNavigation({
     'serviceName': config['SERVICE_NAME'],
     'serviceUrl': url_for('main.index'),

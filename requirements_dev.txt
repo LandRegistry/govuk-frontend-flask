@@ -6,36 +6,36 @@
 #
 attrs==25.3.0
     # via flake8-bugbear
-bandit==1.8.3
+bandit==1.8.6
     # via -r requirements_dev.in
 black==25.1.0
     # via -r requirements_dev.in
-boolean-py==4.0
+boolean-py==5.0
     # via license-expression
 build==1.2.2.post1
     # via pip-tools
-cachecontrol[filecache]==0.14.2
+cachecontrol[filecache]==0.14.3
     # via
     #   cachecontrol
     #   pip-audit
-certifi==2025.1.31
+certifi==2025.7.14
     # via requests
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
     # via requests
-click==8.1.8
+click==8.2.1
     # via
     #   black
     #   pip-tools
     #   pur
-coverage[toml]==7.6.12
+coverage[toml]==7.9.2
     # via pytest-cov
-cyclonedx-python-lib==8.9.0
+cyclonedx-python-lib==9.1.0
     # via pip-audit
 defusedxml==0.7.1
     # via py-serializable
 filelock==3.18.0
     # via cachecontrol
-flake8==7.1.2
+flake8==7.3.0
     # via
     #   flake8-bugbear
     #   pep8-naming
@@ -43,11 +43,11 @@ flake8-bugbear==24.12.12
     # via -r requirements_dev.in
 idna==3.10
     # via requests
-iniconfig==2.0.0
+iniconfig==2.1.0
     # via pytest
 isort==6.0.1
     # via -r requirements_dev.in
-license-expression==30.4.1
+license-expression==30.4.3
     # via cyclonedx-python-lib
 markdown-it-py==3.0.0
     # via rich
@@ -55,17 +55,17 @@ mccabe==0.7.0
     # via flake8
 mdurl==0.1.2
     # via markdown-it-py
-msgpack==1.1.0
+msgpack==1.1.1
     # via cachecontrol
-mypy==1.15.0
+mypy==1.16.1
     # via -r requirements_dev.in
-mypy-extensions==1.0.0
+mypy-extensions==1.1.0
     # via
     #   black
     #   mypy
-packageurl-python==0.16.0
+packageurl-python==0.17.1
     # via cyclonedx-python-lib
-packaging==24.2
+packaging==25.0
     # via
     #   black
     #   build
@@ -73,52 +73,58 @@ packaging==24.2
     #   pip-requirements-parser
     #   pytest
 pathspec==0.12.1
-    # via black
+    # via
+    #   black
+    #   mypy
 pbr==6.1.1
     # via stevedore
-pep8-naming==0.14.1
+pep8-naming==0.15.1
     # via -r requirements_dev.in
 pip-api==0.0.34
     # via pip-audit
-pip-audit==2.8.0
+pip-audit==2.9.0
     # via -r requirements_dev.in
 pip-requirements-parser==32.0.1
     # via pip-audit
 pip-tools==7.4.1
     # via -r requirements_dev.in
-platformdirs==4.3.6
+platformdirs==4.3.8
     # via
     #   black
     #   pip-audit
-pluggy==1.5.0
-    # via pytest
+pluggy==1.6.0
+    # via
+    #   pytest
+    #   pytest-cov
 pur==7.3.3
     # via -r requirements_dev.in
-py-serializable==1.1.2
+py-serializable==2.0.0
     # via cyclonedx-python-lib
-pycodestyle==2.12.1
+pycodestyle==2.14.0
     # via flake8
-pyflakes==3.2.0
+pyflakes==3.4.0
     # via flake8
-pygments==2.19.1
-    # via rich
-pyparsing==3.2.1
+pygments==2.19.2
+    # via
+    #   pytest
+    #   rich
+pyparsing==3.2.3
     # via pip-requirements-parser
 pyproject-hooks==1.2.0
     # via
     #   build
     #   pip-tools
-pytest==8.3.5
+pytest==8.4.1
     # via pytest-cov
-pytest-cov==6.0.0
+pytest-cov==6.2.1
     # via -r requirements_dev.in
 pyyaml==6.0.2
     # via bandit
-requests==2.32.3
+requests==2.32.4
     # via
     #   cachecontrol
     #   pip-audit
-rich==13.9.4
+rich==14.0.0
     # via
     #   bandit
     #   pip-audit
@@ -128,9 +134,9 @@ stevedore==5.4.1
     # via bandit
 toml==0.10.2
     # via pip-audit
-typing-extensions==4.12.2
+typing-extensions==4.14.1
     # via mypy
-urllib3==2.3.0
+urllib3==2.5.0
     # via requests
 wheel==0.45.1
     # via pip-tools
