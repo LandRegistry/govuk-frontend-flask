@@ -1,3 +1,5 @@
+from typing import Generator
+
 import pytest
 from flask import Flask
 from flask.testing import FlaskClient
@@ -7,7 +9,7 @@ from config import TestConfig
 
 
 @pytest.fixture
-def app() -> FlaskClient:
+def app() -> Generator[FlaskClient, None, None]:
     """
     Create and configure a new app instance for each test.
 

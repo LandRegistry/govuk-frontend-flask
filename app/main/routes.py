@@ -38,13 +38,8 @@ def cookies() -> Union[str, Response]:
         response: Response = make_response(render_template("cookies.html", form=form))
 
         # Set individual cookies in the response
-        cookie_params = {
-            "max_age": 31557600,
-            "secure": True,
-            "samesite": "Lax",
-        }  # One year
-        response.set_cookie("functional", functional, **cookie_params)
-        response.set_cookie("analytics", analytics, **cookie_params)
+        response.set_cookie("functional", functional, max_age=31557600, secure=True, samesite="Lax")
+        response.set_cookie("analytics", analytics, max_age=31557600, secure=True, samesite="Lax")
 
         return response
     elif request.method == "GET":
@@ -66,19 +61,19 @@ def privacy() -> str:
 
 
 @bp.route("/health", methods=["GET"])
-def health() -> str:
+def health() -> Response:
     """Route for healthchecks"""
-    return "OK", 200
+    return make_response("OK", 200)
 
 
 @bp.app_errorhandler(HTTPException)
-def handle_http_exception(error: HTTPException) -> Tuple[str, int]:
+def handle_http_exception(error: HTTPException) -> Response:
     """Handle HTTP exceptions and render appropriate error template."""
-    return render_template(f"{error.code}.html"), error.code
+    return make_response(render_template(f"{error.code}.html"), error.code)
 
 
 @bp.app_errorhandler(CSRFError)
 def handle_csrf_error(error: CSRFError) -> Response:
     """Handle CSRF errors and display a flash message."""
     flash("The form you were submitting has expired. Please try again.")
-    return redirect(request.url)
+    return make_response(redirect(request.url))
