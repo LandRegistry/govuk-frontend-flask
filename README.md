@@ -1,6 +1,6 @@
 # GOV.UK Frontend Flask
 
-![govuk-frontend 5.9.0](https://img.shields.io/badge/govuk--frontend%20version-5.9.0-005EA5?logo=gov.uk&style=flat)
+![govuk-frontend 5.12.0](https://img.shields.io/badge/govuk--frontend%20version-5.12.0-005EA5?logo=gov.uk&style=flat)
 
 **GOV.UK Frontend Flask is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
 
@@ -9,7 +9,7 @@ This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV
 - [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) which provides Jinja macros of GOV.UK components
 - [GOV.UK Frontend WTForms](https://github.com/LandRegistry/govuk-frontend-wtf) which provides WTForms widgets to integrate the above Jinja macros into form generation and validation
 
-The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults. Please read the [next steps](#next-steps) section for guidance on how to start building out your app on top of this template.
+The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults.
 
 ## Prerequisites
 
@@ -115,16 +115,6 @@ flowchart TB
 
 Please refer to the specific packages documentation for more details.
 
-### Asset management
-
-Custom CSS and JavaScript files are merged and minified using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). This takes all `*.css` files in `app/static/src/css` and all `*.js` files in `app/static/src/js` and outputs a single minified file to both `app/static/dist/css` and `app/static/dist/js` respectively.
-
-CSS is [minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) using [CSSMin](https://github.com/zacharyvoase/cssmin) and JavaScript is minified using [JSMin](https://github.com/tikitu/jsmin/). This removes all whitespace characters, comments and line breaks to reduce the size of the source code, making its transmission over a network more efficient.
-
-### Cache busting
-
-Merged and minified assets are browser cache busted on update by modifying the filename with their MD5 hash using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). The MD5 hash is appended to the file name, for example `custom-d41d8cd9.css` instead of a query string, to support certain older browsers and proxies that ignore the querystring in their caching behaviour.
-
 ### Forms generation and validation
 
 Uses [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/) and [WTForms](https://wtforms.readthedocs.io) to define and validate forms. Forms are rendered in your template using regular Jinja syntax.
@@ -160,10 +150,6 @@ A strict [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/
 ### Permissions Policy
 
 A strict [Permissions Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy) is set to deny the use of browser features by default.
-
-### Response compression
-
-Uses [Flask Compress](https://github.com/colour-science/flask-compress) to compress response data. This inspects the `Accept-Encoding` request header, compresses using either gzip, deflate or brotli algorithms and sets the `Content-Encoding` response header. HTML, CSS, XML, JSON and JavaScript MIME types will all be compressed.
 
 ### Rate limiting
 
