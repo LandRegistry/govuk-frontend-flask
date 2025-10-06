@@ -39,8 +39,8 @@
     }
   ],
   "background_color": "#ffffff",
-  "display": "browser",
+  "display": "fullscreen",
   "orientation": "natural",
   "start_url": "/",
-  "theme_color": "#0b0c0c"
+  "theme_color": "#1d70b8"
 }

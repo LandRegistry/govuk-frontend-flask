@@ -1,36 +1,29 @@
 services:
-  web:
-    build: ./web
-    ports:
-      - 443:443
-    develop:
-      watch:
-        - action: rebuild
-          path: ./web/package-lock.json
-        - action: sync+restart
-          path: ./web/nginx.conf
-          target: /etc/nginx/conf.d/nginx.conf
-        - action: sync
-          path: ./web/dist
-          target: /web/static
   app:
     build: .
+    container_name: app
     restart: always
     environment:
-      - CONTACT_EMAIL=[contact email]
-      - CONTACT_PHONE=[contact phone]
-      - DEPARTMENT_NAME=[name of department]
-      - DEPARTMENT_URL=[url of department]
-      - REDIS_URL=redis://cache:6379
-      - SECRET_KEY=4f378500459bb58fecf903ea3c113069f11f150b33388f56fc89f7edce0e6a84
-      - SERVICE_NAME=[name of service]
-      - SERVICE_PHASE=[phase]
-      - SERVICE_URL=[url of service]
+      CONTACT_EMAIL: ${CONTACT_EMAIL}
+      CONTACT_PHONE: ${CONTACT_PHONE}
+      DEPARTMENT_NAME: ${DEPARTMENT_NAME}
+      DEPARTMENT_URL: ${DEPARTMENT_URL}
+      REDIS_URL: redis://${REDIS_HOST}:${REDIS_PORT}
+      SECRET_KEY: ${SECRET_KEY}
+      SERVICE_NAME: ${SERVICE_NAME}
+      SERVICE_PHASE: ${SERVICE_PHASE}
+      SERVICE_URL: ${SERVICE_URL}
     expose:
       - 5000
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     depends_on:
-      - cache
-      - web
+      cache:
+        condition: service_healthy
     develop:
       watch:
         - action: rebuild
@@ -39,8 +32,46 @@ services:
         - action: sync+restart
           path: ./app
           target: /home/appuser/app
+
   cache:
     image: redis:7-alpine
+    container_name: cache
     restart: always
     expose:
       - 6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "-h", "localhost", "ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - redis_data:/data
+
+  web:
+    build: ./web
+    container_name: web
+    restart: always
+    ports:
+      - 443:443
+    healthcheck:
+      test: ["CMD", "curl", "-kfs", "https://localhost/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      app:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./web/package.json
+        - action: sync+restart
+          path: ./web/nginx.conf
+          target: /etc/nginx/conf.d/nginx.conf
+        - action: rebuild
+          path: ./web/src
+
+volumes:
+  redis_data:

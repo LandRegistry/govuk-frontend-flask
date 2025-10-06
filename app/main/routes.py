@@ -65,6 +65,12 @@ def privacy() -> str:
     return render_template("privacy.html")
 
 
+@bp.route("/health", methods=["GET"])
+def health() -> str:
+    """Route for healthchecks"""
+    return "OK", 200
+
+
 @bp.app_errorhandler(HTTPException)
 def handle_http_exception(error: HTTPException) -> Tuple[str, int]:
     """Handle HTTP exceptions and render appropriate error template."""

@@ -1,4 +1,6 @@
 .coverage
+.env
+.flaskenv
 .git
 .github
 .mypy_cache

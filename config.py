@@ -17,14 +17,14 @@ class Config(object):
     SESSION_COOKIE_SECURE = True
 
 
-class TestConfig(object):
+class TestConfig(Config):
     CONTACT_EMAIL = "test@example.com"
     CONTACT_PHONE = "08081570000"
     DEBUG = True
     DEPARTMENT_NAME = "Department of Magical Law Enforcement"
     DEPARTMENT_URL = "https://www.example.com/"
     RATELIMIT_HEADERS_ENABLED = True
-    SECRET_KEY = "4f378500459bb58fecf903ea3c113069f11f150b33388f56fc89f7edce0e6a84"
+    SECRET_KEY = "4f378500459bb58fecf903ea3c113069f11f150b33388f56fc89f7edce0e6a84"  # nosec B105
     SERVICE_NAME = "Apply for a wand licence"
     SERVICE_PHASE = "Beta"
     SERVICE_URL = "https://wand-licence.service.gov.uk"

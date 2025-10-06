@@ -11,9 +11,7 @@ This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV
 
 The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults.
 
-## Prerequisites
-
-### Required
+## Requirements
 
 - Docker
 
@@ -25,17 +23,22 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 ### Set local environment variables
 
-In the `compose.yml` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific service information for the following:
+Create a `.env` file in the root of the repo and enter your specific config based on this example:
 
-- CONTACT_EMAIL
-- CONTACT_PHONE
-- DEPARTMENT_NAME
-- DEPARTMENT_URL
-- SERVICE_NAME
-- SERVICE_PHASE
-- SERVICE_URL
+```dotenv
+CONTACT_EMAIL=[contact email]
+CONTACT_PHONE=[contact phone]
+DEPARTMENT_NAME=[name of department]
+DEPARTMENT_URL=[url of department]
+REDIS_HOST=cache
+REDIS_PORT=6379
+SECRET_KEY=[see below]
+SERVICE_NAME=[name of service]
+SERVICE_PHASE=[phase]
+SERVICE_URL=[url of service]
+```
 
-You must also set a new unique `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python command to generate a new key:
+You **must** set a new `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python command to generate a new key:
 
 ```shell
 python -c 'import secrets; print(secrets.token_hex())'
@@ -57,7 +60,9 @@ To run the tests:
 python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
-## Build
+## Build process
+
+This project uses Docker Compose to provision containers:
 
 ```mermaid
 flowchart TB
@@ -67,9 +72,14 @@ flowchart TB
     python(python:3.13-slim)
     redis(redis:7-alpine)
 
-    compose --> App & Cache & Web
+    compose -- Creates --> App & Cache & Web
     App -- Depends on --> Cache
     Web -- Depends on --> App
+
+    subgraph Web
+        direction TB
+        node -- COPY /dist /static --> nginx
+    end
 
     subgraph App
         python
@@ -78,14 +88,9 @@ flowchart TB
     subgraph Cache
         redis
     end
-
-    subgraph Web
-        direction TB
-        node -- COPY /dist /static --> nginx
-    end
 ```
 
-## Environment
+## Architecture overview
 
 ```mermaid
 flowchart TB
