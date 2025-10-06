@@ -26,7 +26,7 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     """
     app: Flask = Flask(__name__)  # type: ignore[assignment]
     app.config.from_object(config_class)
-    app.jinja_env.globals['govukRebrand'] = True
+    app.jinja_env.globals["govukRebrand"] = True
     app.jinja_env.lstrip_blocks = True
     app.jinja_env.trim_blocks = True
 
