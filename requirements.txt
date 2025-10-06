@@ -6,27 +6,27 @@
 #
 blinker==1.9.0
     # via flask
-click==8.2.1
+click==8.3.0
     # via flask
 deepmerge==2.0
     # via govuk-frontend-wtf
 deprecated==1.2.18
     # via limits
-dnspython==2.7.0
+dnspython==2.8.0
     # via email-validator
-email-validator==2.2.0
+email-validator==2.3.0
     # via -r requirements.in
-flask==3.1.1
+flask==3.1.2
     # via
     #   -r requirements.in
     #   flask-limiter
     #   flask-wtf
     #   govuk-frontend-wtf
-flask-limiter[redis]==3.12
+flask-limiter[redis]==4.0.0
     # via -r requirements.in
 flask-wtf==1.2.2
     # via govuk-frontend-wtf
-govuk-frontend-jinja==3.6.0
+govuk-frontend-jinja==3.8.0
     # via
     #   -r requirements.in
     #   govuk-frontend-wtf
@@ -45,11 +45,11 @@ jinja2==3.1.6
     #   flask
     #   govuk-frontend-jinja
     #   govuk-frontend-wtf
-limits[redis]==5.4.0
+limits[redis]==5.6.0
     # via flask-limiter
-markdown-it-py==3.0.0
+markdown-it-py==4.0.0
     # via rich
-markupsafe==3.0.2
+markupsafe==3.0.3
     # via
     #   flask
     #   jinja2
@@ -65,17 +65,17 @@ packaging==25.0
     #   limits
 pygments==2.19.2
     # via rich
-pyjwt==2.9.0
-    # via redis
-redis==5.3.0
+redis==6.4.0
     # via limits
-rich==13.9.4
+rich==14.1.0
     # via flask-limiter
-typing-extensions==4.14.1
-    # via limits
+typing-extensions==4.15.0
+    # via
+    #   flask-limiter
+    #   limits
 werkzeug==3.1.3
     # via flask
-wrapt==1.17.2
+wrapt==1.17.3
     # via deprecated
 wtforms==3.2.1
     # via
