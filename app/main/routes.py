@@ -76,4 +76,4 @@ def handle_http_exception(error: HTTPException) -> Response:
 def handle_csrf_error(error: CSRFError) -> Response:
     """Handle CSRF errors and display a flash message."""
     flash("The form you were submitting has expired. Please try again.")
-    return make_response(redirect(request.url))
+    return make_response(redirect(request.path))
