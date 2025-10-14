@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/LandRegistry/govuk-frontend-flask#readme",
   "dependencies": {
-    "govuk-frontend": "5.12.0"
+    "govuk-frontend": "5.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
@@ -43,13 +43,13 @@
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.4.0",
     "mini-css-extract-plugin": "^2.9.4",
-    "npm-check-updates": "^19.0.0",
+    "npm-check-updates": "^19.1.0",
     "postcss-loader": "^8.2.0",
     "postcss-preset-env": "^10.4.0",
     "prettier": "^3.6.2",
     "sass": "^1.93.2",
     "sass-loader": "^16.0.5",
-    "webpack": "^5.102.0",
+    "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"
   }
 }
