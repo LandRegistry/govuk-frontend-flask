@@ -1,5 +1,5 @@
 # Stage 1: Build Python wheels
-FROM python:3.13-slim AS builder
+FROM python:3.14-slim AS builder
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ COPY requirements.txt ./
 RUN pip wheel --no-cache-dir --no-deps -r requirements.txt -w /wheels
 
 # Stage 2: Final runtime image
-FROM python:3.13-slim
+FROM python:3.14-slim
 
 # Create non-root user
 RUN addgroup --system appgroup && adduser --system --group appuser
