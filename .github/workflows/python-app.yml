@@ -38,7 +38,7 @@ jobs:
         run: mypy . --install-types --non-interactive
       - name: Check code formatting
         run: |
-          black . -t py313 -l 120 --check
+          black . -t py314 -l 120 --check
           isort . -c
       - name: Lint with flake8
         run: |
