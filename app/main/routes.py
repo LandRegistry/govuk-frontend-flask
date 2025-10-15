@@ -1,6 +1,14 @@
-from typing import Tuple, Union
+from typing import Union
 
-from flask import Response, flash, make_response, redirect, render_template, request
+from flask import (
+    Response,
+    flash,
+    make_response,
+    redirect,
+    render_template,
+    request,
+    url_for,
+)
 from flask_wtf.csrf import CSRFError  # type: ignore
 from werkzeug.exceptions import HTTPException
 
@@ -76,4 +84,4 @@ def handle_http_exception(error: HTTPException) -> Response:
 def handle_csrf_error(error: CSRFError) -> Response:
     """Handle CSRF errors and display a flash message."""
     flash("The form you were submitting has expired. Please try again.")
-    return make_response(redirect(request.path))
+    return make_response(redirect(url_for("main.index")))
