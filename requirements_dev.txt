@@ -118,7 +118,7 @@ pytest-cov==7.0.0
     # via -r requirements_dev.in
 python-dotenv==1.1.1
     # via -r requirements_dev.in
-pytokens==0.1.10
+pytokens==0.2.0
     # via black
 pyyaml==6.0.3
     # via bandit
