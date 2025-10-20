@@ -1,6 +1,6 @@
 # GOV.UK Frontend Flask
 
-![govuk-frontend 5.7.1](https://img.shields.io/badge/govuk--frontend%20version-5.7.1-005EA5?logo=gov.uk&style=flat)
+![govuk-frontend 5.13.0](https://img.shields.io/badge/govuk--frontend%20version-5.13.0-005EA5?logo=gov.uk&style=flat)
 
 **GOV.UK Frontend Flask is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
 
@@ -9,11 +9,9 @@ This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV
 - [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) which provides Jinja macros of GOV.UK components
 - [GOV.UK Frontend WTForms](https://github.com/LandRegistry/govuk-frontend-wtf) which provides WTForms widgets to integrate the above Jinja macros into form generation and validation
 
-The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults. Please read the [next steps](#next-steps) section for guidance on how to start building out your app on top of this template.
+The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults.
 
-## Prerequisites
-
-### Required
+## Requirements
 
 - Docker
 
@@ -25,39 +23,34 @@ The app is provided intentionally bare, with just the essential parts that all s
 
 ### Set local environment variables
 
-In the `compose.yml` file you will find a number of environment variables. These are injected as global variables into the app and pre-populated into page templates as appropriate. Enter your specific service information for the following:
+Create a `.env` file in the root of the repo and enter your specific config based on this example:
 
-- CONTACT_EMAIL
-- CONTACT_PHONE
-- DEPARTMENT_NAME
-- DEPARTMENT_URL
-- SERVICE_NAME
-- SERVICE_PHASE
-- SERVICE_URL
+```dotenv
+CONTACT_EMAIL=[contact email]
+CONTACT_PHONE=[contact phone]
+DEPARTMENT_NAME=[name of department]
+DEPARTMENT_URL=[url of department]
+REDIS_HOST=cache
+REDIS_PORT=6379
+SECRET_KEY=[see below]
+SERVICE_NAME=[name of service]
+SERVICE_PHASE=[phase]
+SERVICE_URL=[url of service]
+```
 
-You must also set a new unique `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python command to generate a new key:
+You **must** set a new `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python command to generate a new key:
 
 ```shell
 python -c 'import secrets; print(secrets.token_hex())'
 ```
 
-### Get the latest GOV.UK Frontend assets
-
-```shell
-./build.sh
-```
-
 ### Run containers
 
 ```shell
-docker compose up --build
+docker compose up --build --watch
 ```
 
 You should now have the app running on <https://localhost/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
-
-## Demos
-
-There are some helpful demos included by default that show all of the components available from GOV.UK Frontend Jinja and a selection of forms and validation patterns from GOV.UK Frontend WTForms. These are located in the `app/demos` and `app/templates/demos` directories, along with the `demos` blueprint. Use them for reference whilst building your service, but make sure to delete them, along with the relevant section in `build.sh`, before deploying the app.
 
 ## Testing
 
@@ -67,52 +60,65 @@ To run the tests:
 python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
-## Environment
+## Build process
+
+This project uses Docker Compose to provision containers:
 
 ```mermaid
 flowchart TB
-    cache1(Redis):::CACHE
-    Client
-    prox1(NGINX):::PROXY
-    web1(Flask app):::WEB
-    web2[/Static files/]:::WEB
+    compose(compose.yml)
+    nginx(nginx:stable-alpine)
+    node(node:jod-alpine)
+    python(python:3.14-slim)
+    redis(redis:7-alpine)
 
-    Client <-- https:443 --> prox1 <-- http:5000 --> web1
-    prox1 -- Read only --> web2
-    web1 -- Write --> web2
-    web1 <-- redis:6379 --> cache1
+    compose -- Creates --> App & Cache & Web
+    App -- Depends on --> Cache
+    Web -- Depends on --> App
 
-    subgraph Proxy container
-        prox1
+    subgraph Web
+        direction TB
+        node -- COPY /dist /static --> nginx
     end
 
-    subgraph Web container
-        web1
-        web2
+    subgraph App
+        python
     end
 
-    subgraph Cache container
-        cache1
+    subgraph Cache
+        redis
+    end
+```
+
+## Architecture overview
+
+```mermaid
+flowchart TB
+    redis(Redis)
+    client(Client)
+    nginx(NGINX)
+    flask(Gunicorn/Flask)
+    static@{ shape: lin-cyl, label: "Static files" }
+
+    client -- https:443 --> nginx -- http:5000 --> flask
+    flask -- redis:6379 --> redis
+
+    subgraph Web
+        nginx -- Read --> static
     end
 
-    classDef CACHE fill:#F8CECC,stroke:#B85450,stroke-width:2px
-    classDef PROXY fill:#D5E8D4,stroke:#82B366,stroke-width:2px
-    classDef WEB fill:#FFF2CC,stroke:#D6B656,stroke-width:2px
+    subgraph App
+        flask
+    end
+
+    subgraph Cache
+        redis
+    end
 ```
 
 ## Features
 
 Please refer to the specific packages documentation for more details.
-
-### Asset management
-
-Custom CSS and JavaScript files are merged and minified using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). This takes all `*.css` files in `app/static/src/css` and all `*.js` files in `app/static/src/js` and outputs a single minified file to both `app/static/dist/css` and `app/static/dist/js` respectively.
-
-CSS is [minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) using [CSSMin](https://github.com/zacharyvoase/cssmin) and JavaScript is minified using [JSMin](https://github.com/tikitu/jsmin/). This removes all whitespace characters, comments and line breaks to reduce the size of the source code, making its transmission over a network more efficient.
-
-### Cache busting
-
-Merged and minified assets are browser cache busted on update by modifying the filename with their MD5 hash using [Flask Assets](https://flask-assets.readthedocs.io/en/latest/) and [Webassets](https://webassets.readthedocs.io/en/latest/). The MD5 hash is appended to the file name, for example `custom-d41d8cd9.css` instead of a query string, to support certain older browsers and proxies that ignore the querystring in their caching behaviour.
 
 ### Forms generation and validation
 
@@ -149,10 +155,6 @@ A strict [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/
 ### Permissions Policy
 
 A strict [Permissions Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy) is set to deny the use of browser features by default.
-
-### Response compression
-
-Uses [Flask Compress](https://github.com/colour-science/flask-compress) to compress response data. This inspects the `Accept-Encoding` request header, compresses using either gzip, deflate or brotli algorithms and sets the `Content-Encoding` response header. HTML, CSS, XML, JSON and JavaScript MIME types will all be compressed.
 
 ### Rate limiting
 

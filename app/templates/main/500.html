@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{%- extends "base.html" -%}
 
-{% block pageTitle %}Sorry, there is a problem with the service – {{config['SERVICE_NAME']}} – GOV.UK{% endblock %}
+{%- block pageTitle -%}Sorry, there is a problem with the service – {{config['SERVICE_NAME']}} – GOV.UK{%- endblock -%}
 
-{% set mainClasses = "govuk-main-wrapper--l" %}
+{%- set mainClasses = "govuk-main-wrapper--l" -%}
 
-{% block content %}
+{%- block content -%}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">Sorry, there is a problem with the service</h1>
@@ -12,4 +12,4 @@
         <p class="govuk-body">We saved your answers. They will be available for 30 days.</p>
     </div>
 </div>
-{% endblock %}
+{%- endblock -%}

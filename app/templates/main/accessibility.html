@@ -1,35 +1,24 @@
-{% extends "base.html" %}
+{%- extends "base.html" -%}
 
 {%- from 'govuk_frontend_jinja/components/back-link/macro.html' import govukBackLink -%}
-{%- from 'govuk_frontend_jinja/components/inset-text/macro.html' import govukInsetText -%}
 
-{% block pageTitle %}Accessibility statement – {{config['SERVICE_NAME']}} – GOV.UK{% endblock %}
+{%- block pageTitle -%}Accessibility statement – {{config['SERVICE_NAME']}} – GOV.UK{%- endblock -%}
 
-{% block beforeContent %}
+{%- block beforeContent -%}
   {{ super() }}
   {{ govukBackLink({
     'text': "Back",
     'href': url_for('main.index')
   }) }}
-{% endblock %}
+{%- endblock -%}
 
-{% block content %}
+{%- block content -%}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {{ super() }}
     <h1 class="govuk-heading-xl">Accessibility statement for {{config['SERVICE_NAME']}}</h1>
 
-    {{ govukInsetText({
-      'text': "Note: start with a brief explanation of which websites or mobile apps the statement covers.
-
-      You can have a single accessibility statement that covers multiple domains, or a separate statement for each domain or subdomain. As long as the user can access relevant accessibility information easily from any page on your website."
-    }) }}
-
     <p class="govuk-body">This accessibility statement applies to {{config['SERVICE_URL']}}.</p>
-    
-    {{ govukInsetText({
-      'text': "Note: use this section to make a brief, general statement about what the website allows disabled users to do. Base it on the evaluation covered in detail in the ‘Technical information about this website’s accessibility’ section. If you’re not confident that something is accurate, leave it out. If you’re not confident enough to say anything specific here, leave this section out completely."
-    }) }}
     
     <p class="govuk-body">This website is run by {{config['DEPARTMENT_NAME']}}. We want as many people as possible to be able
       to use this website. For example, that means you should be able to:</p>
@@ -45,10 +34,6 @@
     <p class="govuk-body"><a class="govuk-link" href="https://mcmw.abilitynet.org.uk/">AbilityNet</a> has advice on making your device easier to use if you have a disability.</p>
 
     <h3 class="govuk-heading-m">How accessible this website is</h3>
-
-    {{ govukInsetText({
-      'text': "Note: use this section to provide information that a disabled user can act on - for example, avoid a particular section of the website, or request an alternative version rather than waste time trying to make it work with their assistive technology. Try to list in order of most impact to least impact."
-    }) }}
 
     <p class="govuk-body">We know some parts of this website are not fully accessible:</p>
     <ul class="govuk-list govuk-list--bullet">
@@ -89,10 +74,6 @@
         href="https://www.equalityadvisoryservice.com/">contact the Equality Advisory and
         Support Service (EASS)</a>.</p>
 
-    {{ govukInsetText({
-      'text': "Note: if your organisation is based in Northern Ireland, refer users who want to complain to the Equalities Commission for Northern Ireland (ECNI) instead of the EASS and EHRC."
-    }) }}
-
     <h2 class="govuk-heading-l">Contacting us by phone or visiting us in person</h2>
 
     <p class="govuk-body">We provide a text relay service for people who are D/deaf, hearing impaired or have a speech
@@ -103,26 +84,11 @@
 
     <h2 class="govuk-heading-l">Technical information about this website’s accessibility</h2>
 
-    {{ govukInsetText({
-      'text': "Note: this form of wording is legally required, so do not change it."
-    }) }}
-
     <p class="govuk-body">{{config['DEPARTMENT_NAME']}} is committed to making its website accessible, in accordance with the
       Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.</p>
     
     <h3 class="govuk-heading-m">Compliance status</h3>
 
-    {{ govukInsetText({
-      'html': "Note: say that the website is fully compliant if the website meets WCAG 2.1 AA standard in full. Say that it’s partially compliant if it meets most requirements of the WCAG 2.1 AA standard. If it does not meet most requirements of the WCAG 2.1 AA standard, say that it’s not compliant.<br><br>
-
-      If your website is either partially compliant or not compliant WCAG 2.1 AA standard, you’ll need to explain why. This will be due to one or both of the following:
-      <ul>
-        <li>non-compliances - this means the content in question is in scope of the regulations, but there’s an accessibility problem with it</li>
-        <li>an exemption - this means the inaccessible content is out of scope of the regulations, or it’d be a disproportionate burden for you to make it accessible</li>
-      </ul><br>
-      There’s a legally required way of expressing the compliance status of your website, so do not change it. The 3 options are as follows:"
-    }) }}
-    
     <p class="govuk-body">This website is fully compliant with the <a href="https://www.w3.org/TR/WCAG21/" class="govuk-link">Web Content Accessibility Guidelines version 2.1</a> AA
       standard.</p>
     <p class="govuk-body">This website is partially compliant with the <a href="https://www.w3.org/TR/WCAG21/" class="govuk-link">Web Content Accessibility Guidelines version 2.1</a>
@@ -132,35 +98,11 @@
       standard. The [insert one of the following: ‘non-compliances’, ‘exemptions’ or ‘non-compliances and exemptions’]
       are listed below.</p>
 
-    {{ govukInsetText({
-      'text': "Note: delete the options that do not apply."
-    }) }}
-
     <h2 class="govuk-heading-l">Non-accessible content</h2>
-
-    {{ govukInsetText({
-      'html': "Note: if the website is fully compliant with the WCAG 2.1 AA standard, you can leave the ‘Non-accessible content’ section out.<br><br>
-
-      Otherwise, do not change the ‘Non-accessible content’ heading or the ‘The content listed below is non-accessible for the following reasons’ sentence - they’re legally required.<br><br>
-      
-      Do not change the ‘Non-compliance with the accessibility regulations’, ‘Disproportionate burden’ and ‘Content that’s not within the scope of the accessibility regulations’ subheadings: they’re also legally required.<br><br>
-      
-      But if you need to list a lot of problems, you can break these subsections up with further subheadings - for example, ‘Navigation and accessing information’ or ‘Interactive tools and transactions’."
-    }) }}
 
     <p class="govuk-body">The content listed below is non-accessible for the following reasons.</p>
 
     <h3 class="govuk-heading-m">Non-compliance with the accessibility regulations</h3>
-
-    {{ govukInsetText({
-      'html': "Note: In this subsection, list:<br>
-      <ul>
-        <li>accessibility problems</li>
-        <li>which of the WCAG 2.1 AA success criteria the problem fails on</li>
-        <li>when you plan to fix the problem</li>
-      </ul><br>
-      Do not include any problems where you’re claiming disproportionate burden, or where the problem is outside the scope of the accessibility regulations (those should go in the subsections below)."
-    }) }}
 
     <p class="govuk-body">Some images do not have a text alternative, so people using a screen reader cannot access the
       information. This fails WCAG 2.1 success criterion 1.1.1 (non-text content).</p>
@@ -169,12 +111,6 @@
       we’ll make sure our use of images meets accessibility standards.</p>
     
     <h3 class="govuk-heading-m">Disproportionate burden</h3>
-
-    {{ govukInsetText({
-      'html': "Note: in this subsection list accessibility problems you’re claiming would be a disproportionate burden to fix<br><br>
-
-      Bear in mind that something which is a disproportionate burden now will not necessarily be a disproportionate burden forever. If the circumstances change, your ability to claim disproportionate burden may change too."
-    }) }}
 
     <h3 class="govuk-heading-s">Navigation and accessing information</h3>
 
@@ -201,10 +137,6 @@
 
     <h3 class="govuk-heading-m">Content that’s not within the scope of the accessibility regulations</h3>
 
-    {{ govukInsetText({
-      'text': "Note: in this subsection list accessibility problems that fall outside the scope of the accessibility regulations."
-    }) }}
-
     <h3 class="govuk-heading-s">PDFs and other documents</h3>
 
     <p class="govuk-body">Some of our PDFs and Word documents are essential to providing our services. For example, we
@@ -224,18 +156,10 @@
 
     <h2 class="govuk-heading-l">What we’re doing to improve accessibility</h2>
 
-    {{ govukInsetText({
-      'text': "Note: publishing an accessibility roadmap is optional. It’s a good idea to publish one if you want to be specific about the order you’re planning to tackle accessibility issues, and there’s no space to do so in the accessibility statement itself."
-    }) }}
-
     <p class="govuk-body">Our accessibility roadmap [add link to roadmap] shows how and when we plan to improve
       accessibility on this website.</p>
     
     <h2 class="govuk-heading-l">Preparation of this accessibility statement</h2>
-
-    {{ govukInsetText({
-      'text': "Note: the wording about when the statement was prepared is legally required, so do not change it."
-    }) }}
 
     <p class="govuk-body">This statement was prepared on [date when it was first published]. It was last reviewed on
       [date when it was last reviewed].</p>
@@ -246,15 +170,7 @@
     <p class="govuk-body">We used this approach to deciding on a sample of pages to test [add link to explanation of how
       you decided which pages to test].</p>
 
-    {{ govukInsetText({
-      'text': "Note: you do not have to use this approach to sampling, but you should link to a full explanation of what you tested and how you chose it. If you get a third party auditor to test your website for you, they should include sampling details in test report - so you can just to link to that."
-    }) }}
-
     <p class="govuk-body">You can read the full accessibility test report [add link to report].</p>
-
-    {{ govukInsetText({
-      'text': "Note: publishing the test report is optional, but doing so may allow you to make your accessibility statement shorter and more focused."
-    }) }}
   </div>
 </div>
-{% endblock %}
+{%- endblock -%}
