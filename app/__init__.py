@@ -48,7 +48,7 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     )
 
     # Use ProxyFix middleware to handle proxies correctly.
-    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)  # type: ignore[call-arg]
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)  # type: ignore[method-assign]
 
     # Initialize Flask extensions
     csrf.init_app(app)
