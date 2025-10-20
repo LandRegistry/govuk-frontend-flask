@@ -4,6 +4,8 @@
 #
 #    pip-compile requirements.in
 #
+alembic==1.17.0
+    # via flask-migrate
 blinker==1.9.0
     # via flask
 click==8.3.0
@@ -20,10 +22,18 @@ flask==3.1.2
     # via
     #   -r requirements.in
     #   flask-limiter
+    #   flask-migrate
+    #   flask-sqlalchemy
     #   flask-wtf
     #   govuk-frontend-wtf
 flask-limiter[redis]==4.0.0
     # via -r requirements.in
+flask-migrate==4.1.0
+    # via -r requirements.in
+flask-sqlalchemy==3.1.1
+    # via
+    #   -r requirements.in
+    #   flask-migrate
 flask-wtf==1.2.2
     # via govuk-frontend-wtf
 govuk-frontend-jinja==3.9.0
@@ -32,6 +42,8 @@ govuk-frontend-jinja==3.9.0
     #   govuk-frontend-wtf
 govuk-frontend-wtf==3.2.0
     # via -r requirements.in
+greenlet==3.2.4
+    # via sqlalchemy
 gunicorn==23.0.0
     # via -r requirements.in
 idna==3.11
@@ -47,12 +59,15 @@ jinja2==3.1.6
     #   govuk-frontend-wtf
 limits[redis]==5.6.0
     # via flask-limiter
+mako==1.3.10
+    # via alembic
 markdown-it-py==4.0.0
     # via rich
 markupsafe==3.0.3
     # via
     #   flask
     #   jinja2
+    #   mako
     #   werkzeug
     #   wtforms
 mdurl==0.1.2
@@ -63,16 +78,24 @@ packaging==25.0
     # via
     #   gunicorn
     #   limits
+psycopg2==2.9.11
+    # via -r requirements.in
 pygments==2.19.2
     # via rich
 redis==6.4.0
     # via limits
 rich==14.2.0
     # via flask-limiter
+sqlalchemy==2.0.44
+    # via
+    #   alembic
+    #   flask-sqlalchemy
 typing-extensions==4.15.0
     # via
+    #   alembic
     #   flask-limiter
     #   limits
+    #   sqlalchemy
 werkzeug==3.1.3
     # via flask
 wrapt==1.17.3

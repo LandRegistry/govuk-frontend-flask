@@ -1,6 +1,9 @@
 email_validator
 flask
 flask-limiter[redis]
+flask-migrate
+flask-sqlalchemy
 govuk-frontend-jinja
 govuk-frontend-wtf
 gunicorn
+psycopg2
