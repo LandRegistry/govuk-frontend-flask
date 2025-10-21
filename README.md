@@ -30,6 +30,11 @@ CONTACT_EMAIL=[contact email]
 CONTACT_PHONE=[contact phone]
 DEPARTMENT_NAME=[name of department]
 DEPARTMENT_URL=[url of department]
+POSTGRES_DB=db
+POSTGRES_HOST=db
+POSTGRES_PASSWORD=db_password
+POSTGRES_PORT=5432
+POSTGRES_USER=db_user
 REDIS_HOST=cache
 REDIS_PORT=6379
 SECRET_KEY=[see below]
@@ -69,11 +74,12 @@ flowchart TB
     compose(compose.yml)
     nginx(nginx:stable-alpine)
     node(node:jod-alpine)
+    postgres(postgres:18-alpine)
     python(python:3.14-slim)
     redis(redis:7-alpine)
 
-    compose -- Creates --> App & Cache & Web
-    App -- Depends on --> Cache
+    compose -- Creates --> App & Cache & Web & Database
+    App -- Depends on --> Cache & Database
     Web -- Depends on --> App
 
     subgraph Web
@@ -83,6 +89,10 @@ flowchart TB
 
     subgraph App
         python
+    end
+
+    subgraph Database
+        postgres
     end
 
     subgraph Cache
@@ -99,8 +109,9 @@ flowchart TB
     nginx(NGINX)
     flask(Gunicorn/Flask)
     static@{ shape: lin-cyl, label: "Static files" }
+    db@{ shape: cyl, label: "PostgreSQL" }
 
-    client -- https:443 --> nginx -- http:5000 --> flask
+    client -- https:443 --> nginx -- http:5000 --> flask -- postgres:5432 --> db
     flask -- redis:6379 --> redis
 
     subgraph Web
@@ -109,6 +120,10 @@ flowchart TB
 
     subgraph App
         flask
+    end
+
+    subgraph Database
+        db
     end
 
     subgraph Cache

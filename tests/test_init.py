@@ -26,25 +26,25 @@ def test_config_loaded() -> None:
 
 def test_jinja_env_config() -> None:
     """Verify Jinja environment configuration."""
-    app: Flask = create_app()
+    app: Flask = create_app(TestConfig)
     assert app.jinja_env.lstrip_blocks is True
     assert app.jinja_env.trim_blocks is True
 
 
 def test_middleware_applied() -> None:
     """Verify that the ProxyFix middleware is applied to the app."""
-    app: Flask = create_app()
+    app: Flask = create_app(TestConfig)
     assert isinstance(app.wsgi_app, ProxyFix)
 
 
 def test_extensions_initialized() -> None:
     """Verify that core Flask extensions are initialized."""
-    app: Flask = create_app()
+    app: Flask = create_app(TestConfig)
     assert "csrf" in app.extensions
     assert "limiter" in app.extensions
 
 
 def test_blueprints_registered() -> None:
     """Verify that blueprints are registered with the app."""
-    app: Flask = create_app()
+    app: Flask = create_app(TestConfig)
     assert "main" in app.blueprints
