@@ -1,15 +1,27 @@
-# GOV.UK Frontend Flask
+# GOV.UK Frontend - Flask App Template
 
-![govuk-frontend 5.13.0](https://img.shields.io/badge/govuk--frontend%20version-5.13.0-005EA5?logo=gov.uk&style=flat)
+![Static Badge](https://img.shields.io/badge/GOV.UK%20Frontend-v5.13.0-blue)
 
-**GOV.UK Frontend Flask is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
+> **GOV.UK Frontend Flask is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
 
-This is a template [Flask](https://flask.palletsprojects.com) app using the [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/) and [GOV.UK Design System](https://design-system.service.gov.uk/) which is designed to get a new project started quicker. It is also a reference implementation of two core packages:
+---
 
-- [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) which provides Jinja macros of GOV.UK components
-- [GOV.UK Frontend WTForms](https://github.com/LandRegistry/govuk-frontend-wtf) which provides WTForms widgets to integrate the above Jinja macros into form generation and validation
+This is a production-ready [Flask](https://flask.palletsprojects.com) application template that integrates the [GOV.UK Design System](https://design-system.service.gov.uk/) with a realistic, containerised development stack.
 
-The app is provided intentionally bare, with just the essential parts that all services need, such as error pages, accessibility statement, cookie banner, cookie page and privacy notice. It uses a number of other packages to provide the [features](#features) described below with sensible and best-practice defaults.
+This template gives you:
+
+- GOV.UK Frontend components through [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) and [GOV.UK Frontend WTForms](https://github.com/LandRegistry/govuk-frontend-wtf) for accessible, server-rendered UI and form widgets.
+- A Flask application skeleton with sensible defaults (CSRF, rate limiting, [SQLAlchemy](https://www.sqlalchemy.org/), migrations).
+- A fully containerised local environment (multi-stage Python image, Node build + [Nginx](https://nginx.org/en/) static server, [PostgreSQL](https://www.postgresql.org/), [Redis](https://redis.io/)) driven by [Docker Compose](https://docs.docker.com/compose/).
+- Production-friendly Dockerfile patterns: multi-stage builds, wheel caching, non-root runtime user, and an entrypoint for initialisation tasks.
+
+Why use this template?
+
+- **Realistic local environment**: the docker-compose setup mirrors a typical production stack (app, reverse proxy, DB, cache), reducing surprises when deploying.
+- **Accessibility & GOV.UK compliance**: templates and form helpers are built to the GOV.UK Design System and make it straightforward to follow their patterns.
+- **Secure defaults**: HTTPS, CSRF protection, security headers, CSP patterns and secure cookie recommendations are included.
+- **Developer productivity**: example forms, templates, Jinja macros and a Node/webpack pipeline for static assets reduce boilerplate.
+- **Minimal assets**: a selective frontend build pipeline so you only include the design system components you need.
 
 ## Requirements
 
