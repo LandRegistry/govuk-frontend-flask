@@ -1,39 +1,66 @@
-# GOV.UK Frontend - Flask App Template
-
 ![Static Badge](https://img.shields.io/badge/GOV.UK%20Frontend-v5.13.0-blue)
 
-> **GOV.UK Frontend Flask is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
+# GOV.UK Frontend - Flask App Template
 
----
+Start building **accessible**, **secure**, **production-ready** and **maintainable** GOV.UK-style services, fast.
 
-This is a production-ready [Flask](https://flask.palletsprojects.com) application template that integrates the [GOV.UK Design System](https://design-system.service.gov.uk/) with a realistic, containerised development stack.
+A [Flask](https://flask.palletsprojects.com) application integrating the [GOV.UK Design System](https://design-system.service.gov.uk/) with a realistic, containerised stack.
 
-This template gives you:
+> **GOV.UK Frontend Flask App Template is a [community tool](https://design-system.service.gov.uk/community/resources-and-tools/) of the [GOV.UK Design System](https://design-system.service.gov.uk/). The Design System team is not responsible for it and cannot support you with using it. Contact the [maintainers](#contributors) directly if you need [help](#support) or you want to request a feature.**
 
-- GOV.UK Frontend components through [GOV.UK Frontend Jinja](https://github.com/LandRegistry/govuk-frontend-jinja) and [GOV.UK Frontend WTForms](https://github.com/LandRegistry/govuk-frontend-wtf) for accessible, server-rendered UI and form widgets.
-- A Flask application skeleton with sensible defaults (CSRF, rate limiting, [SQLAlchemy](https://www.sqlalchemy.org/), migrations).
-- A fully containerised local environment (multi-stage Python image, Node build + [Nginx](https://nginx.org/en/) static server, [PostgreSQL](https://www.postgresql.org/), [Redis](https://redis.io/)) driven by [Docker Compose](https://docs.docker.com/compose/).
-- Production-friendly Dockerfile patterns: multi-stage builds, wheel caching, non-root runtime user, and an entrypoint for initialisation tasks.
+## Highlights
 
-Why use this template?
+- **GOV.UK components built in** – Accessible [Jinja templates](https://github.com/LandRegistry/govuk-frontend-jinja) and [WTForms helpers](https://github.com/LandRegistry/govuk-frontend-wtf) for compliant UI and forms.  
+- **Secure Flask foundation** – HTTPS, CSRF, CSP, rate limits, [SQLAlchemy](https://www.sqlalchemy.org/) and migrations ready to go.  
+- **Containerised by default** – [Nginx](https://nginx.org/en/) , [PostgreSQL](https://www.postgresql.org/), [Redis](https://redis.io/) and [Node](https://nodejs.org/en) pipeline managed via [Docker Compose](https://docs.docker.com/compose/).  
+- **Fast, lean builds** – Multi-stage Dockerfiles, wheel caching, non-root runtime, and CI via [GitHub Actions](https://github.com/features/actions).  
+- **Compliance-ready pages** – 404/500 errors, cookie banner, accessibility statement and privacy notice included.  
+- **Developer-first setup** – Example blueprints, templates, macros, and GOV.UK-style flash messages for instant feedback.
 
-- **Realistic local environment**: the docker-compose setup mirrors a typical production stack (app, reverse proxy, DB, cache), reducing surprises when deploying.
-- **Accessibility & GOV.UK compliance**: templates and form helpers are built to the GOV.UK Design System and make it straightforward to follow their patterns.
-- **Secure defaults**: HTTPS, CSRF protection, security headers, CSP patterns and secure cookie recommendations are included.
-- **Developer productivity**: example forms, templates, Jinja macros and a Node/webpack pipeline for static assets reduce boilerplate.
-- **Minimal assets**: a selective frontend build pipeline so you only include the design system components you need.
+## Security
+
+Secure by default with hardened containers, strong HTTP headers and built-in rate limiting.
+
+- Applies strict CSP, HSTS, and other security headers.
+- CSRF protection via Flask-WTF, with safe error handling.
+- Rate limiting backed by Redis using Flask-Limiter.
+- Non-root containers with read-only filesystem for runtime services.
+- Secrets and credentials injected via environment variables (no in-repo secrets).
+- Dependency scanning and Python version pinning via CI workflows.
+
+## Performance
+
+Optimised for speed and reliability through caching, minimal layers and lean builds.
+
+- Multi-stage Docker builds minimise image size and attack surface.
+- Static assets compiled once and cached efficiently.
+- Connection pooling for SQLAlchemy database access.
+- Redis caching support for transient or computed data.
+- Nginx configured for compression and cache control.
+- CI validates image build times and wheel caching efficiency.
+
+## Developer Experience
+
+Built to feel frictionless for rapid iteration, testing and deployment.
+
+- Works identically across local and production environments.
+- Uses docker compose watch for hot reloads of Python and static assets.
+- Includes blueprints, forms, templates and example routes to extend quickly.
+- Built-in error pages, logging and debug toolbar (development mode).
+- Extensive comments and .env.example for easy onboarding.
+- CI workflows for linting, tests, builds and security scans.
 
 ## Requirements
 
-- Docker
+- Docker (Engine & Compose)  
 
-## Getting started
+## Quick start
 
-### Create a new repository
+### 1. Create a new repository
 
 [Create a new repository](https://github.com/LandRegistry/govuk-frontend-flask/generate) using this template, with the same directory structure and files. Then clone a local copy of your newly created repository.
 
-### Set local environment variables
+### 2. Configure environment  
 
 Create a `.env` file in the root of the repo and enter your specific config based on this example:
 
@@ -61,23 +88,42 @@ You **must** set a new `SECRET_KEY`, which is used to securely sign the session 
 python -c 'import secrets; print(secrets.token_hex())'
 ```
 
-### Run containers
+### 3. Start the stack
 
 ```shell
-docker compose up --build --watch
+docker compose up --build
 ```
 
-You should now have the app running on <https://localhost/>. Accept the browsers security warning due to the self-signed HTTPS certificate to continue.
+Visit <https://localhost/> and accept the browser’s security warning.
+
+Hot reloading is supported via:
+
+```shell
+docker compose watch
+```
+
+> **Note**: `docker compose watch` requires Docker Compose v2.22 or newer.
 
 ## Testing
 
-To run the tests:
+Run unit tests and measure coverage locally:
 
 ```shell
 python -m pytest --cov=app --cov-report=term-missing --cov-branch
 ```
 
-## Build process
+## Environment
+
+| Service    | Role                              | Container | Port exposed     |
+| ---------- | --------------------------------- | --------- | ---------------- |
+| Nginx      | Reverse proxy + HTTPS termination | `web`     | 443 (HTTPS) / 80 |
+| Flask      | Web framework                     | `app`     | 5000             |
+| PostgreSQL | Relational database               | `db`      | 5432             |
+| Redis      | Caching + rate limiting backend   | `cache`   | 6379             |
+
+## Architecture
+
+### Container stack
 
 This project uses Docker Compose to provision containers:
 
@@ -112,18 +158,18 @@ flowchart TB
     end
 ```
 
-## Architecture overview
+### Request flow
 
 ```mermaid
 flowchart TB
-    redis(Redis)
-    client(Client)
-    nginx(NGINX)
-    flask(Gunicorn/Flask)
-    static@{ shape: lin-cyl, label: "Static files" }
+    browser([Browser])
     db@{ shape: cyl, label: "PostgreSQL" }
+    flask(Gunicorn/Flask)
+    nginx(NGINX)
+    redis(Redis)
+    static@{ shape: lin-cyl, label: "Static files" }
 
-    client -- https:443 --> nginx -- http:5000 --> flask -- postgres:5432 --> db
+    browser -- https:443 --> nginx -- http:5000 --> flask -- postgres:5432 --> db
     flask -- redis:6379 --> redis
 
     subgraph Web
@@ -143,60 +189,14 @@ flowchart TB
     end
 ```
 
-## Features
+## Maintainers
 
-Please refer to the specific packages documentation for more details.
-
-### Forms generation and validation
-
-Uses [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/) and [WTForms](https://wtforms.readthedocs.io) to define and validate forms. Forms are rendered in your template using regular Jinja syntax.
-
-### Form error handling
-
-If a submitted form has any validation errors, an [error summary component](https://design-system.service.gov.uk/components/error-summary/) is shown at the top of the page, along with individual field [error messages](https://design-system.service.gov.uk/components/error-message/). This follows the GOV.UK Design System [validation pattern](https://design-system.service.gov.uk/patterns/validation/) and is built into the base page template.
-
-### Flash messages
-
-Messages created with Flask's `flash` function will be rendered using the GOV.UK Design System [notification banner component](https://design-system.service.gov.uk/components/notification-banner/). By default the blue "important" banner style will be used, unless a category of "success" is passed to use the green version.
-
-### CSRF protection
-
-Uses [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/) to enable [Cross Site Request Forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection per form and for the whole app.
-
-CSRF errors are handled by creating a [flash message](#flash-messages) notification banner to inform the user that the form they submitted has expired.
-
-### HTTP security headers
-
-- Forces all connections to `https`.
-- Enables [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security).
-- Sets Flask's session cookie to `secure`, so it will never be set if your application is somehow accessed via a non-secure connection.
-- Sets Flask's session cookie to `httponly`, preventing JavaScript from being able to access its content.
-- Sets [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) to `SAMEORIGIN` to avoid [clickjacking](https://en.wikipedia.org/wiki/Clickjacking).
-- Sets [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options) to prevent content type sniffing.
-- Sets a strict [Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) of `strict-origin-when-cross-origin` that governs which referrer information should be included with requests made.
-
-### Content Security Policy
-
-A strict [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) is set to mitigate [Cross Site Scripting](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#cross-site_scripting_xss) (XSS) and packet sniffing attacks. This prevents loading any resources that are not in the same domain as the application by default.
-
-### Permissions Policy
-
-A strict [Permissions Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy) is set to deny the use of browser features by default.
-
-### Rate limiting
-
-Uses [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) to set request rate limits on routes. The default rate limit is 2 requests per second _and_ 60 requests per minute (whichever is hit first) based on the client's remote IP address. Every time a request exceeds the rate limit, the view function will not get called and instead a [HTTP 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) status will be returned.
-
-Rate limit storage can be backed by [Redis](https://redis.io/) using the `RATELIMIT_STORAGE_URL` config value in `config.py`, or fall back to in-memory if not present. Rate limit information will also be added to various [response headers](https://flask-limiter.readthedocs.io/en/stable/#rate-limiting-headers).
-
-## Contributors
-
-- [Matt Shaw](https://github.com/matthew-shaw) (Primary maintainer)
+- [Matt Shaw](https://github.com/matthew-shaw) - Principal Software Developer at HM Land Registry
 
 ## Support
 
 This software is provided _"as-is"_ without warranty. Support is provided on a _"best endeavours"_ basis by the maintainers and open source community.
 
-If you are a civil servant you can sign up to the [UK Government Digital Slack](https://ukgovernmentdigital.slack.com/signup) workspace to contact the maintainers listed [above](#contributors) and the community of people using this project in the [#govuk-design-system](https://ukgovernmentdigital.slack.com/archives/C6DMEH5R6) channel.
+For questions or suggestions, reach out to the maintainers listed [above](#maintainers) and the community of people using this project in the [#govuk-design-system](https://ukgovernmentdigital.slack.com/archives/C6DMEH5R6) Slack channel.
 
 Otherwise, please see the [contribution guidelines](CONTRIBUTING.md) for how to raise a bug report or feature request.
