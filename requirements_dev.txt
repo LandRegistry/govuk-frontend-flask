@@ -39,7 +39,7 @@ flake8==7.3.0
     # via
     #   flake8-bugbear
     #   pep8-naming
-flake8-bugbear==24.12.12
+flake8-bugbear==25.10.21
     # via -r requirements_dev.in
 idna==3.11
     # via requests
