@@ -116,7 +116,7 @@ pytest==8.4.2
     # via pytest-cov
 pytest-cov==7.0.0
     # via -r requirements_dev.in
-python-dotenv==1.1.1
+python-dotenv==1.2.1
     # via -r requirements_dev.in
 pytokens==0.2.0
     # via black
