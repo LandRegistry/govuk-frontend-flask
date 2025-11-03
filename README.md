@@ -131,7 +131,7 @@ This project uses Docker Compose to provision containers:
 flowchart TB
     compose(compose.yml)
     nginx(nginx:stable-alpine)
-    node(node:jod-alpine)
+    node(node:kyrpton-alpine)
     postgres(postgres:18-alpine)
     python(python:3.14-slim)
     redis(redis:7-alpine)

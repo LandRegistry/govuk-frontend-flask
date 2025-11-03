@@ -1,4 +1,4 @@
-FROM node:jod-alpine AS builder
+FROM node:krypton-alpine AS builder
 
 WORKDIR /web
 
