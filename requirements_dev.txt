@@ -8,7 +8,7 @@ attrs==25.4.0
     # via flake8-bugbear
 bandit==1.8.6
     # via -r requirements_dev.in
-black==25.9.0
+black==25.11.0
     # via -r requirements_dev.in
 boolean-py==5.0
     # via license-expression
@@ -118,7 +118,7 @@ pytest-cov==7.0.0
     # via -r requirements_dev.in
 python-dotenv==1.2.1
     # via -r requirements_dev.in
-pytokens==0.2.0
+pytokens==0.3.0
     # via black
 pyyaml==6.0.3
     # via bandit
