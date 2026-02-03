@@ -1,3 +1,4 @@
+authlib
 email_validator
 flask
 flask-limiter[redis]
