@@ -41,6 +41,9 @@ services:
         - action: sync+restart
           path: ./app
           target: /home/appuser/app
+        - action: rebuild
+          path: ./migrations
+          target: /home/appuser/migrations
 
   db:
     image: postgres:18-alpine
