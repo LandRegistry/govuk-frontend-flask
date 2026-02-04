@@ -1,5 +1,6 @@
 from typing import Type
 
+from authlib.integrations.flask_client import OAuth
 from flask import Flask
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -17,6 +18,7 @@ csrf: CSRFProtect = CSRFProtect()
 db: SQLAlchemy = SQLAlchemy()
 limiter: Limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per minute"])
 migrate: Migrate = Migrate()
+oauth = OAuth()
 
 
 def create_app(config_class: Type[Config] = Config) -> Flask:
@@ -55,11 +57,20 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     db.init_app(app)
     limiter.init_app(app)
     migrate.init_app(app, db)
+    oauth.init_app(app)
     WTFormsHelpers(app)
 
+    oauth.register(
+        name="one_login",
+        server_metadata_url="http://localhost:3000/.well-known/openid-configuration",
+        client_kwargs={"scope": "openid email phone"},
+    )
+
     # Register blueprints. These define different sections of the application.
+    from app.auth import bp as auth_bp
     from app.main import bp as main_bp
 
+    app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
 
     return app

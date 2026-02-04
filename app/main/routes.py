@@ -7,6 +7,7 @@ from flask import (
     redirect,
     render_template,
     request,
+    session,
     url_for,
 )
 from flask_wtf.csrf import CSRFError  # type: ignore
@@ -19,7 +20,8 @@ from app.main.forms import CookiesForm
 @bp.route("/", methods=["GET"])
 def index() -> str:
     """Render the index page."""
-    return render_template("index.html")
+    user = session.get("user")
+    return render_template("index.html", user=user)
 
 
 @bp.route("/accessibility", methods=["GET"])

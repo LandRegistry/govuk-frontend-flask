@@ -6,6 +6,7 @@ class Config(object):
     CONTACT_PHONE = os.environ.get("CONTACT_PHONE")
     DEPARTMENT_NAME = os.environ.get("DEPARTMENT_NAME")
     DEPARTMENT_URL = os.environ.get("DEPARTMENT_URL")
+    ONE_LOGIN_CLIENT_ID = os.environ.get("ONE_LOGIN_CLIENT_ID")
     RATELIMIT_HEADERS_ENABLED = True
     RATELIMIT_STORAGE_URI = os.environ.get("REDIS_URL")
     SECRET_KEY = os.environ.get("SECRET_KEY")
