@@ -8,7 +8,7 @@ class Config(object):
     DEPARTMENT_URL = os.environ.get("DEPARTMENT_URL")
     ONE_LOGIN_CLIENT_ID = os.environ.get("ONE_LOGIN_CLIENT_ID")
     RATELIMIT_HEADERS_ENABLED = True
-    RATELIMIT_STORAGE_URI = os.environ.get("REDIS_URL")
+    RATELIMIT_STORAGE_URI = os.environ.get("VALKEY_URL")
     SECRET_KEY = os.environ.get("SECRET_KEY")
     SERVICE_NAME = os.environ.get("SERVICE_NAME")
     SERVICE_PHASE = os.environ.get("SERVICE_PHASE")
@@ -16,13 +16,7 @@ class Config(object):
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
     SESSION_COOKIE_SECURE = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or (
-        f"postgresql://{os.environ.get('POSTGRES_USER')}:"
-        f"{os.environ.get('POSTGRES_PASSWORD')}@"
-        f"{os.environ.get('POSTGRES_HOST')}:"
-        f"{os.environ.get('POSTGRES_PORT')}/"
-        f"{os.environ.get('POSTGRES_DB')}"
-    )
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
 class TestConfig(Config):
