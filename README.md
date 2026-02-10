@@ -119,7 +119,7 @@ python -m pytest --cov=app --cov-report=term-missing --cov-branch
 | Nginx      | Reverse proxy + HTTPS termination | `web`     | 443 (HTTPS) / 80 |
 | Flask      | Web framework                     | `app`     | 5000             |
 | PostgreSQL | Relational database               | `db`      | 5432             |
-| Valkey     | Caching + rate limiting backend   | `cache`   | 6379             |
+| Valkey     | Server-side sessions and caching  | `cache`   | 6379             |
 
 ## Architecture
 
@@ -165,27 +165,31 @@ flowchart TB
     browser([Browser])
     db@{ shape: cyl, label: "PostgreSQL" }
     flask(Gunicorn/Flask)
-    nginx(NGINX)
-    valkey(Valkey)
+    nginx(Nginx)
     static@{ shape: lin-cyl, label: "Static files" }
+    valkey@{ shape: cyl, label: "Valkey" }
+    one-login(GOV.UK One Login)
 
     browser -- https:443 --> nginx -- http:5000 --> flask -- postgres:5432 --> db
-    flask -- valkey:6379 --> valkey
+    flask -- redis:6379 --> valkey
+    flask & browser -- https:443 --> one-login
 
-    subgraph Web
-        nginx -- Read --> static
-    end
+    subgraph Docker Network
+        subgraph Web
+            nginx -- Read --> static
+        end
 
-    subgraph App
-        flask
-    end
+        subgraph App
+            flask
+        end
 
-    subgraph Database
-        db
-    end
+        subgraph Database
+            db
+        end
 
-    subgraph Cache
-        valkey
+        subgraph Cache
+            valkey
+        end
     end
 ```
 
