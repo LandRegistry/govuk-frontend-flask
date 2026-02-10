@@ -10,11 +10,11 @@ A [Flask](https://flask.palletsprojects.com) application integrating the [GOV.UK
 
 ## Highlights
 
-- **GOV.UK components built in** – Accessible [Jinja templates](https://github.com/LandRegistry/govuk-frontend-jinja) and [WTForms helpers](https://github.com/LandRegistry/govuk-frontend-wtf) for compliant UI and forms.  
-- **Secure Flask foundation** – HTTPS, CSRF, CSP, rate limits, [SQLAlchemy](https://www.sqlalchemy.org/) and migrations ready to go.  
-- **Containerised by default** – [Nginx](https://nginx.org/en/) , [PostgreSQL](https://www.postgresql.org/), [Valkey](https://valkey.io/) and [Node](https://nodejs.org/en) pipeline managed via [Docker Compose](https://docs.docker.com/compose/).  
-- **Fast, lean builds** – Multi-stage Dockerfiles, wheel caching, non-root runtime, and CI via [GitHub Actions](https://github.com/features/actions).  
-- **Compliance-ready pages** – 404/500 errors, cookie banner, accessibility statement and privacy notice included.  
+- **GOV.UK components built in** – Accessible [Jinja templates](https://github.com/LandRegistry/govuk-frontend-jinja) and [WTForms helpers](https://github.com/LandRegistry/govuk-frontend-wtf) for compliant UI and forms.
+- **Secure Flask foundation** – HTTPS, CSRF, CSP, rate limits, [SQLAlchemy](https://www.sqlalchemy.org/) and migrations ready to go.
+- **Containerised by default** – [Nginx](https://nginx.org/en/) , [PostgreSQL](https://www.postgresql.org/), [Valkey](https://valkey.io/) and [Node](https://nodejs.org/en) pipeline managed via [Docker Compose](https://docs.docker.com/compose/).
+- **Fast, lean builds** – Multi-stage Dockerfiles, wheel caching, non-root runtime, and CI via [GitHub Actions](https://github.com/features/actions).
+- **Compliance-ready pages** – 404/500 errors, cookie banner, accessibility statement and privacy notice included.
 - **Developer-first setup** – Example blueprints, templates, macros, and GOV.UK-style flash messages for instant feedback.
 
 ## Security
@@ -52,7 +52,7 @@ Built to feel frictionless for rapid iteration, testing and deployment.
 
 ## Requirements
 
-- Docker (Engine & Compose)  
+- Docker (Engine & Compose)
 
 ## Quick start
 
@@ -60,7 +60,7 @@ Built to feel frictionless for rapid iteration, testing and deployment.
 
 [Create a new repository](https://github.com/LandRegistry/govuk-frontend-flask/generate) using this template, with the same directory structure and files. Then clone a local copy of your newly created repository.
 
-### 2. Configure environment  
+### 2. Configure environment
 
 Create a `.env` file in the root of the repo and enter your specific config based on this example:
 
@@ -119,7 +119,7 @@ python -m pytest --cov=app --cov-report=term-missing --cov-branch
 | Nginx      | Reverse proxy + HTTPS termination | `web`     | 443 (HTTPS) / 80 |
 | Flask      | Web framework                     | `app`     | 5000             |
 | PostgreSQL | Relational database               | `db`      | 5432             |
-| Valkey      | Caching + rate limiting backend   | `cache`   | 6379             |
+| Valkey     | Caching + rate limiting backend   | `cache`   | 6379             |
 
 ## Architecture
 
