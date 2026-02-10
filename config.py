@@ -1,5 +1,7 @@
 import os
 
+import redis
+
 
 class Config(object):
     CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL")
@@ -16,6 +18,8 @@ class Config(object):
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
     SESSION_COOKIE_SECURE = True
+    SESSION_REDIS = redis.from_url(os.environ.get("VALKEY_URL"))
+    SESSION_TYPE = "redis"
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
