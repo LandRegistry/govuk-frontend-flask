@@ -104,3 +104,5 @@ wtforms==3.2.1
     # via
     #   flask-wtf
     #   govuk-frontend-wtf
+flask-session[redis]==0.8.0
+requests==2.32.5
