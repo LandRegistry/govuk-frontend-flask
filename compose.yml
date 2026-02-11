@@ -106,6 +106,12 @@ services:
         - action: rebuild
           path: ./web/src
 
+  govuk-one-login:
+    container_name: govuk-one-login
+    image: ghcr.io/govuk-one-login/simulator:latest
+    ports:
+      - "3000:3000"
+
 volumes:
   valkey_data:
   pg_data:
