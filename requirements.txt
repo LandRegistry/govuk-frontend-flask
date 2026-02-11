@@ -4,17 +4,23 @@
 #
 #    pip-compile requirements.in
 #
-alembic==1.18.3
+alembic==1.18.4
     # via flask-migrate
-authlib==1.6.6
+authlib==1.6.7
     # via -r requirements.in
 blinker==1.9.0
     # via flask
+cachelib==0.13.0
+    # via flask-session
+certifi==2026.1.4
+    # via requests
 cffi==2.0.0
     # via cryptography
+charset-normalizer==3.4.4
+    # via requests
 click==8.3.1
     # via flask
-cryptography==46.0.4
+cryptography==46.0.5
     # via authlib
 deepmerge==2.0
     # via govuk-frontend-wtf
@@ -29,12 +35,15 @@ flask==3.1.2
     #   -r requirements.in
     #   flask-limiter
     #   flask-migrate
+    #   flask-session
     #   flask-sqlalchemy
     #   flask-wtf
     #   govuk-frontend-wtf
 flask-limiter[redis]==4.1.1
     # via -r requirements.in
 flask-migrate==4.1.0
+    # via -r requirements.in
+flask-session[redis]==0.8.0
     # via -r requirements.in
 flask-sqlalchemy==3.1.1
     # via
@@ -50,10 +59,12 @@ govuk-frontend-wtf==3.2.0
     # via -r requirements.in
 greenlet==3.3.1
     # via sqlalchemy
-gunicorn==25.0.1
+gunicorn==25.0.3
     # via -r requirements.in
 idna==3.11
-    # via email-validator
+    # via
+    #   email-validator
+    #   requests
 itsdangerous==2.2.0
     # via
     #   flask
@@ -63,7 +74,7 @@ jinja2==3.1.6
     #   flask
     #   govuk-frontend-jinja
     #   govuk-frontend-wtf
-limits[redis]==5.6.0
+limits[redis]==5.8.0
     # via flask-limiter
 mako==1.3.10
     # via alembic
@@ -74,6 +85,8 @@ markupsafe==3.0.3
     #   mako
     #   werkzeug
     #   wtforms
+msgspec==0.20.0
+    # via flask-session
 ordered-set==4.1.0
     # via flask-limiter
 packaging==26.0
@@ -84,8 +97,12 @@ psycopg2==2.9.11
     # via -r requirements.in
 pycparser==3.0
     # via cffi
-redis==6.4.0
-    # via limits
+redis==7.1.1
+    # via
+    #   flask-session
+    #   limits
+requests==2.32.5
+    # via -r requirements.in
 sqlalchemy==2.0.46
     # via
     #   alembic
@@ -96,6 +113,8 @@ typing-extensions==4.15.0
     #   flask-limiter
     #   limits
     #   sqlalchemy
+urllib3==2.6.3
+    # via requests
 werkzeug==3.1.5
     # via flask
 wrapt==2.1.1
@@ -104,5 +123,3 @@ wtforms==3.2.1
     # via
     #   flask-wtf
     #   govuk-frontend-wtf
-flask-session[redis]==0.8.0
-requests==2.32.5
