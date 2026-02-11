@@ -176,9 +176,9 @@ flowchart TB
     one-login(GOV.UK One Login)
 
     browser -- https:443 --> nginx -- http:5000 --> flask -- postgres:5432 --> db
+    browser -- https:443 --> one-login
     flask -- redis:6379 --> valkey
-    browser -- https://localhost/authorize --> one-login
-    flask -- http://govuk-one-login:3000/token --> one-login
+    flask -- http:3000 --> one-login
 
     subgraph Docker Network
         subgraph Web
@@ -197,6 +197,74 @@ flowchart TB
             valkey
         end
     end
+```
+
+## GOV.UK One Login
+
+This template uses the GOV.UK One Login Simulator to provide realistic OIDC authentication.
+
+### Configure
+
+Once the `govuk-one-login` container is up and running:
+
+```shell
+curl --request POST \
+  --url http://localhost:3000/config \
+  --header 'content-type: application/json' \
+  --data '{
+    "clientConfiguration": {
+      "redirectUrls": ["https://localhost/callback"],
+      "postLogoutRedirectUrls": ["https://localhost/logged-out"]
+    }
+  }'
+```
+
+### Login
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Browser
+    participant Web as Nginx
+    participant App as Flask
+    participant Simulator
+
+    Browser->>Web: GET https://localhost/login
+    Web->>App: GET http://app:5000/login
+    App-->>Browser: Redirect to http://localhost:3000/authorize
+    
+    Browser->>Simulator: GET http://localhost:3000/authorize?client_id=...&redirect_uri=https://localhost/callback&state=...&nonce=...
+    Simulator-->>Browser: Show login page
+    Browser->>Simulator: User submits credentials
+    Simulator-->>Browser: Redirect to https://localhost/callback?code=...&state=...
+    
+    Browser->>Web: GET https://localhost/callback?code=...&state=...
+    Web->>App: GET http://app:5000/callback?code=...&state=...
+    App->>Simulator: POST http://govuk-one-login:3000/token
+    Simulator-->>App: Return tokens (id_token, access_token)
+    App->>Simulator: GET http://govuk-one-login:3000/.well-known/jwks.json
+    Simulator-->>App: JWKS
+    App-->>Browser: Redirect to https://localhost/
+```
+
+### Logout
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Browser
+    participant Web as Nginx
+    participant App as Flask
+    participant Simulator
+
+    Browser->>Web: GET https://localhost/logout
+    Web->>App: GET http://app:5000/logout
+    App-->>Browser: Redirect to http://localhost:3000/logout
+    Browser->>Simulator: GET http://localhost:3000/logout?id_token_hint=...&post_logout_redirect_uri=https://localhost/logged-out&state=...
+    Simulator-->>Browser: Redirect to https://localhost/logged-out
+    Browser->>Web: GET https://localhost/logged-out?state=...
+    Web->>App: GET http://app:5000/logged-out?state=...
+    App-->>Browser: Show logged out page
 ```
 
 ## Maintainers
