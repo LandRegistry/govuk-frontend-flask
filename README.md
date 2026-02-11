@@ -132,11 +132,12 @@ flowchart TB
     compose(compose.yml)
     nginx(nginx:stable-alpine)
     node(node:kyrpton-alpine)
+    one-login(govuk-one-login/simulator:latest)
     postgres(postgres:18-alpine)
     python(python:3.14-slim)
-    valkey(valkey:7-alpine)
+    valkey(valkey/valkey:9-alpine)
 
-    compose -- Creates --> App & Cache & Web & Database
+    compose -- Creates --> App & Cache & Web & Database & onelogin
     App -- Depends on --> Cache & Database
     Web -- Depends on --> App
 
@@ -156,6 +157,10 @@ flowchart TB
     subgraph Cache
         valkey
     end
+
+    subgraph onelogin [One Login]
+        one-login
+    end
 ```
 
 ### Request flow
@@ -172,7 +177,8 @@ flowchart TB
 
     browser -- https:443 --> nginx -- http:5000 --> flask -- postgres:5432 --> db
     flask -- redis:6379 --> valkey
-    flask & browser -- https:443 --> one-login
+    browser -- https://localhost/authorize --> one-login
+    flask -- http://govuk-one-login:3000/token --> one-login
 
     subgraph Docker Network
         subgraph Web
