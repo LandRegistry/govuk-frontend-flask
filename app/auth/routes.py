@@ -6,12 +6,12 @@ from app.auth import bp
 
 @bp.route("/login")
 def login():
-    redirect_uri = url_for("auth.authorize", _external=True)
+    redirect_uri = url_for("auth.callback", _external=True)
     return oauth.one_login.authorize_redirect(redirect_uri)
 
 
-@bp.route("/authorize")
-def authorize():
+@bp.route("/callback")
+def callback():
     token = oauth.one_login.authorize_access_token()
     session["user"] = token["userinfo"]
     return redirect(url_for("main.index"))
