@@ -33,7 +33,7 @@
     "npm": "11.x"
   },
   "dependencies": {
-    "govuk-frontend": "5.14.0"
+    "govuk-frontend": "6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

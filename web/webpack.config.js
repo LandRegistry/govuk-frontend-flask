@@ -83,7 +83,7 @@ module.exports = {
           to: "assets/manifest.json",
         },
         {
-          from: "./node_modules/govuk-frontend/dist/govuk/assets/rebrand",
+          from: "./node_modules/govuk-frontend/dist/govuk/assets",
           to: "assets",
         },
       ],
