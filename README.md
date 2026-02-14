@@ -228,9 +228,11 @@ sequenceDiagram
     participant Web as Nginx
     participant App as Flask
     participant Simulator
+    participant Cache as Valkey
 
     Browser->>Web: GET https://localhost/login
     Web->>App: GET http://app:5000/login
+    App->>Cache: SET session[state, nonce]
     App-->>Browser: Redirect to http://localhost:3000/authorize
     
     Browser->>Simulator: GET http://localhost:3000/authorize?client_id=...&redirect_uri=https://localhost/callback&state=...&nonce=...
@@ -240,10 +242,12 @@ sequenceDiagram
     
     Browser->>Web: GET https://localhost/callback?code=...&state=...
     Web->>App: GET http://app:5000/callback?code=...&state=...
+    App->>Cache: GET session[state]
     App->>Simulator: POST http://govuk-one-login:3000/token
     Simulator-->>App: Return tokens (id_token, access_token)
     App->>Simulator: GET http://govuk-one-login:3000/.well-known/jwks.json
     Simulator-->>App: JWKS
+    App->>Cache: SET session[user, tokens]
     App-->>Browser: Redirect to https://localhost/
 ```
 
@@ -256,14 +260,17 @@ sequenceDiagram
     participant Web as Nginx
     participant App as Flask
     participant Simulator
+    participant Cache as Valkey
 
     Browser->>Web: GET https://localhost/logout
     Web->>App: GET http://app:5000/logout
+    App->>Cache: GET session[user]
     App-->>Browser: Redirect to http://localhost:3000/logout
     Browser->>Simulator: GET http://localhost:3000/logout?id_token_hint=...&post_logout_redirect_uri=https://localhost/logged-out&state=...
     Simulator-->>Browser: Redirect to https://localhost/logged-out
     Browser->>Web: GET https://localhost/logged-out?state=...
     Web->>App: GET http://app:5000/logged-out?state=...
+    App->>Cache: DELETE session
     App-->>Browser: Show logged out page
 ```
 
