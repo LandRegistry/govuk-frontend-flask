@@ -227,8 +227,8 @@ sequenceDiagram
     participant Browser
     participant Web as Nginx
     participant App as Flask
-    participant Simulator
     participant Cache as Valkey
+    participant Simulator
 
     Browser->>Web: GET https://localhost/login
     Web->>App: GET http://app:5000/login
@@ -259,8 +259,8 @@ sequenceDiagram
     participant Browser
     participant Web as Nginx
     participant App as Flask
-    participant Simulator
     participant Cache as Valkey
+    participant Simulator
 
     Browser->>Web: GET https://localhost/logout
     Web->>App: GET http://app:5000/logout
