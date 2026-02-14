@@ -113,17 +113,12 @@
     'serviceUrl': url_for('main.index'),
     'navigation': [
       {
-        'href': "#",
-        'text': "Navigation item 1"
+        'href': url_for('auth.login'),
+        'text': "Login"
       },
       {
-        'href': "#",
-        'text': "Navigation item 2",
-        'active': true
-      },
-      {
-        'href': "#",
-        'text': "Navigation item 3"
+        'href': url_for('auth.logout'),
+        'text': "Logout"
       }
     ]
   }) }}
