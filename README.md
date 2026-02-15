@@ -176,7 +176,7 @@ flowchart TB
     one-login(GOV.UK One Login)
 
     browser -- https:443 --> nginx -- http:5000 --> flask -- postgres:5432 --> db
-    browser -- https:443 --> one-login
+    browser -- http:3000 --> one-login
     flask -- redis:6379 --> valkey
     flask -- http:3000 --> one-login
 
@@ -265,12 +265,12 @@ sequenceDiagram
     Browser->>Web: GET https://localhost/logout
     Web->>App: GET http://app:5000/logout
     App->>Cache: GET session[user]
+    App->>Cache: DELETE session
     App-->>Browser: Redirect to http://localhost:3000/logout
     Browser->>Simulator: GET http://localhost:3000/logout?id_token_hint=...&post_logout_redirect_uri=https://localhost/logged-out&state=...
     Simulator-->>Browser: Redirect to https://localhost/logged-out
     Browser->>Web: GET https://localhost/logged-out?state=...
     Web->>App: GET http://app:5000/logged-out?state=...
-    App->>Cache: DELETE session
     App-->>Browser: Show logged out page
 ```
 
