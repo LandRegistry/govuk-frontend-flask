@@ -33,7 +33,7 @@ cyclonedx-python-lib==11.6.0
     # via pip-audit
 defusedxml==0.7.1
     # via py-serializable
-filelock==3.20.3
+filelock==3.24.2
     # via cachecontrol
 flake8==7.3.0
     # via
@@ -47,7 +47,7 @@ iniconfig==2.3.0
     # via pytest
 isort==7.0.0
     # via -r requirements_dev.in
-librt==0.7.8
+librt==0.8.0
     # via mypy
 license-expression==30.4.4
     # via cyclonedx-python-lib
@@ -87,9 +87,9 @@ pip-audit==2.10.0
     # via -r requirements_dev.in
 pip-requirements-parser==32.0.1
     # via pip-audit
-pip-tools==7.5.2
+pip-tools==7.5.3
     # via -r requirements_dev.in
-platformdirs==4.5.1
+platformdirs==4.9.2
     # via
     #   black
     #   pip-audit
