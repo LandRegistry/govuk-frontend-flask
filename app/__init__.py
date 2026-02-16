@@ -65,6 +65,7 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
 
     oauth.register(
         name="one_login",
+        client_id="HGIOgho9HIRhgoepdIOPFdIUWgewi0jw",
         authorize_url="http://localhost:3000/authorize",  # browser uses localhost
         access_token_url="http://govuk-one-login:3000/token",  # container uses Docker DNS
         jwks_uri="http://govuk-one-login:3000/.well-known/jwks.json",
