@@ -62,12 +62,18 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     sess.init_app(app)
     WTFormsHelpers(app)
 
+    try:
+        with open(app.config["ONE_LOGIN_PRIVATE_KEY_PATH"]) as f:
+            private_key = f.read()
+    except FileNotFoundError:
+        raise ValueError(f"Private key file not found at {app.config['ONE_LOGIN_PRIVATE_KEY_PATH']}")
+
     oauth.register(
         name="one_login",
-        client_id="HGIOgho9HIRhgoepdIOPFdIUWgewi0jw",
-        client_secret=open("app/one_login_private_key.pem").read(),
-        access_token_url="http://govuk-one-login:3000/token",  # container uses Docker DNS
-        authorize_url="http://localhost:3000/authorize",  # browser uses localhost
+        client_id=app.config["ONE_LOGIN_CLIENT_ID"],
+        client_secret=private_key,
+        access_token_url=app.config["ONE_LOGIN_ACCESS_TOKEN_URL"],
+        authorize_url=app.config["ONE_LOGIN_AUTHORIZE_URL"],
         client_kwargs={
             "scope": "openid email phone",
             "token_endpoint_auth_method": "private_key_jwt",
