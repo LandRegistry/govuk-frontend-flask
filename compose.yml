@@ -34,6 +34,8 @@ services:
         condition: service_healthy
       cache:
         condition: service_healthy
+      govuk-one-login:
+        condition: service_started
     develop:
       watch:
         - action: rebuild
