@@ -114,12 +114,13 @@ python -m pytest --cov=app --cov-report=term-missing --cov-branch
 
 ## Environment
 
-| Service    | Role                              | Container | Port exposed     |
-| ---------- | --------------------------------- | --------- | ---------------- |
-| Nginx      | Reverse proxy + HTTPS termination | `web`     | 443 (HTTPS) / 80 |
-| Flask      | Web framework                     | `app`     | 5000             |
-| PostgreSQL | Relational database               | `db`      | 5432             |
-| Valkey     | Server-side sessions and caching  | `cache`   | 6379             |
+| Service          | Role                              | Container         | Port exposed     |
+| ---------------- | --------------------------------- | ----------------- | ---------------- |
+| Nginx            | Reverse proxy + HTTPS termination | `web`             | 443 (HTTPS) / 80 |
+| Flask            | Web framework                     | `app`             | 5000             |
+| PostgreSQL       | Relational database               | `db`              | 5432             |
+| Valkey           | Server-side sessions and caching  | `cache`           | 6379             |
+| GOV.UK One Login | OIDC Provider                     | `govuk-one-login` | 3000             |
 
 ## Architecture
 
@@ -234,12 +235,12 @@ sequenceDiagram
     Web->>App: GET http://app:5000/login
     App->>Cache: SET session[state, nonce]
     App-->>Browser: Redirect to http://localhost:3000/authorize
-    
+
     Browser->>Simulator: GET http://localhost:3000/authorize?client_id=...&redirect_uri=https://localhost/callback&state=...&nonce=...
     Simulator-->>Browser: Show login page
     Browser->>Simulator: User submits credentials
     Simulator-->>Browser: Redirect to https://localhost/callback?code=...&state=...
-    
+
     Browser->>Web: GET https://localhost/callback?code=...&state=...
     Web->>App: GET http://app:5000/callback?code=...&state=...
     App->>Cache: GET session[state]
