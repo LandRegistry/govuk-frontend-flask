@@ -51,7 +51,7 @@ flask-sqlalchemy==3.1.1
     #   flask-migrate
 flask-wtf==1.2.2
     # via govuk-frontend-wtf
-govuk-frontend-jinja==3.10.0
+govuk-frontend-jinja==4.0.0
     # via
     #   -r requirements.in
     #   govuk-frontend-wtf
