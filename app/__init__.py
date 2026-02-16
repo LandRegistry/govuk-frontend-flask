@@ -66,10 +66,13 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     oauth.register(
         name="one_login",
         client_id="HGIOgho9HIRhgoepdIOPFdIUWgewi0jw",
-        authorize_url="http://localhost:3000/authorize",  # browser uses localhost
+        client_secret=open("app/one_login_private_key.pem").read(),
         access_token_url="http://govuk-one-login:3000/token",  # container uses Docker DNS
-        jwks_uri="http://govuk-one-login:3000/.well-known/jwks.json",
-        client_kwargs={"scope": "openid email phone"},
+        authorize_url="http://localhost:3000/authorize",  # browser uses localhost
+        client_kwargs={
+            "scope": "openid email phone",
+            "token_endpoint_auth_method": "private_key_jwt",
+        },
     )
 
     # Register blueprints. These define different sections of the application.
