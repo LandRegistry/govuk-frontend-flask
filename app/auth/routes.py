@@ -59,8 +59,13 @@ def callback():
     nonce = session.pop("oauth_nonce", None)
     keys = requests.get(current_app.config["ONE_LOGIN_JWKS_URL"]).json()
 
-    claims = jwt.decode(token["id_token"], keys, claims_cls=CodeIDToken)
-    claims.validate(nonce=nonce)
+    claims = jwt.decode(
+        token["id_token"],
+        keys,
+        claims_cls=CodeIDToken,
+        claims_options={"nonce": {"values": [nonce]}},
+    )
+    claims.validate()
 
     client.token = token
     userinfo = client.get(current_app.config["ONE_LOGIN_USERINFO_URL"]).json()
