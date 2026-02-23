@@ -1,6 +1,7 @@
 from typing import Type
 
-from authlib.integrations.flask_client import OAuth
+# from authlib.integrations.flask_client import OAuth
+# from authlib.oauth2.rfc7523 import PrivateKeyJWT
 from flask import Flask
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -19,7 +20,7 @@ csrf: CSRFProtect = CSRFProtect()
 db: SQLAlchemy = SQLAlchemy()
 limiter: Limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per minute"])
 migrate: Migrate = Migrate()
-oauth = OAuth()
+# oauth = OAuth()
 sess = Session()
 
 
@@ -58,27 +59,31 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     db.init_app(app)
     limiter.init_app(app)
     migrate.init_app(app, db)
-    oauth.init_app(app)
+    # oauth.init_app(app)
     sess.init_app(app)
     WTFormsHelpers(app)
 
-    try:
-        with open(app.config["ONE_LOGIN_PRIVATE_KEY_PATH"]) as f:
-            private_key = f.read()
-    except FileNotFoundError:
-        raise ValueError(f"Private key file not found at {app.config['ONE_LOGIN_PRIVATE_KEY_PATH']}")
+    # try:
+    #     with open(app.config["ONE_LOGIN_PRIVATE_KEY_PATH"], "rb") as f:
+    #         private_key = f.read()
+    # except FileNotFoundError:
+    #     raise ValueError(f"Private key file not found at {app.config['ONE_LOGIN_PRIVATE_KEY_PATH']}")
 
-    oauth.register(
-        name="one_login",
-        client_id=app.config["ONE_LOGIN_CLIENT_ID"],
-        client_secret=private_key,
-        access_token_url=app.config["ONE_LOGIN_ACCESS_TOKEN_URL"],
-        authorize_url=app.config["ONE_LOGIN_AUTHORIZE_URL"],
-        client_kwargs={
-            "scope": "openid email phone",
-            "token_endpoint_auth_method": "private_key_jwt",
-        },
-    )
+    # oauth.register(
+    #     name="one_login",
+    #     client_id=app.config["ONE_LOGIN_CLIENT_ID"],
+    #     client_secret=private_key,
+    #     access_token_url=app.config["ONE_LOGIN_ACCESS_TOKEN_URL"],
+    #     authorize_url=app.config["ONE_LOGIN_AUTHORIZE_URL"],
+    #     client_kwargs={
+    #         "scope": "openid email phone",
+    #         "token_endpoint_auth_method": "private_key_jwt",
+    #     },
+    # )
+
+    # with app.app_context():
+    #     one_login = oauth.create_client("one_login")
+    #     one_login.register_client_auth_method(PrivateKeyJWT(app.config["ONE_LOGIN_ACCESS_TOKEN_URL"]))
 
     # Register blueprints. These define different sections of the application.
     from app.auth import bp as auth_bp

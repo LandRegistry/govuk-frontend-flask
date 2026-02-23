@@ -11,7 +11,9 @@ class Config(object):
     ONE_LOGIN_ACCESS_TOKEN_URL = os.environ.get("ONE_LOGIN_ACCESS_TOKEN_URL")
     ONE_LOGIN_AUTHORIZE_URL = os.environ.get("ONE_LOGIN_AUTHORIZE_URL")
     ONE_LOGIN_CLIENT_ID = os.environ.get("ONE_LOGIN_CLIENT_ID")
+    ONE_LOGIN_JWKS_URL = os.environ.get("ONE_LOGIN_JWKS_URL")
     ONE_LOGIN_PRIVATE_KEY_PATH = os.environ.get("ONE_LOGIN_PRIVATE_KEY_PATH")
+    ONE_LOGIN_USERINFO_URL = os.environ.get("ONE_LOGIN_USERINFO_URL")
     RATELIMIT_HEADERS_ENABLED = True
     RATELIMIT_STORAGE_URI = os.environ.get("VALKEY_URL")
     SECRET_KEY = os.environ.get("SECRET_KEY")
