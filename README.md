@@ -74,6 +74,7 @@ ONE_LOGIN_AUTHORIZE_URL=http://localhost:3000/authorize
 ONE_LOGIN_CLIENT_ID=HGIOgho9HIRhgoepdIOPFdIUWgewi0jw
 ONE_LOGIN_JWKS_URL=http://govuk-one-login:3000/.well-known/jwks.json
 ONE_LOGIN_PRIVATE_KEY_PATH=app/govuk_one_login_private_key.pem
+ONE_LOGIN_PUBLIC_TOKEN_URL=http://localhost:3000/token
 ONE_LOGIN_USERINFO_URL=http://govuk-one-login:3000/userinfo
 POSTGRES_DB=db
 POSTGRES_HOST=db

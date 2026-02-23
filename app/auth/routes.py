@@ -20,7 +20,7 @@ def _oauth2_session() -> OAuth2Session:
         client_id=current_app.config["ONE_LOGIN_CLIENT_ID"],
         client_secret=private_key,
         scope="openid email phone",
-        token_endpoint_auth_method=PrivateKeyJWT(current_app.config["ONE_LOGIN_ACCESS_TOKEN_URL"]),
+        token_endpoint_auth_method=PrivateKeyJWT(current_app.config["ONE_LOGIN_PUBLIC_TOKEN_URL"]),
     )
 
     return session
