@@ -78,7 +78,29 @@ def callback():
 
 @bp.route("/logout")
 def logout():
-    pass
+    # The ID token used to authenticate the session
+    id_token = session.pop("id_token", None)
+
+    # Clear session userinfo
+    session.pop("userinfo", None)
+
+    # If no ID token, just go to local logged-out page
+    if not id_token:
+        return redirect(url_for("auth.logged_out"))
+
+    # Build end-session redirect URL
+    end_session_url = current_app.config["ONE_LOGIN_LOGOUT_URL"]
+    post_logout = url_for("auth.logged_out", _external=True)
+
+    # Construct RP-initiated logout URL
+    logout_url = (
+        f"{end_session_url}"
+        f"?id_token_hint={id_token}"
+        f"&post_logout_redirect_uri={post_logout}"
+    )
+
+    return redirect(logout_url)
+
 
 
 @bp.route("/logged-out")
