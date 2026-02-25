@@ -65,29 +65,36 @@ Built to feel frictionless for rapid iteration, testing and deployment.
 Create a `.env` file in the root of the repo and enter your specific config based on this example:
 
 ```dotenv
-CONTACT_EMAIL=[contact email]
-CONTACT_PHONE=[contact phone]
-DEPARTMENT_NAME=[name of department]
-DEPARTMENT_URL=[url of department]
-ONE_LOGIN_ACCESS_TOKEN_URL=http://govuk-one-login:3000/token
-ONE_LOGIN_AUTHORIZE_URL=http://localhost:3000/authorize
-ONE_LOGIN_CLIENT_ID=HGIOgho9HIRhgoepdIOPFdIUWgewi0jw
-ONE_LOGIN_JWKS_URL=http://govuk-one-login:3000/.well-known/jwks.json
-ONE_LOGIN_LOGOUT_URL=http://govuk-one-login:3000/logout
-ONE_LOGIN_PRIVATE_KEY_PATH=app/govuk_one_login_private_key.pem
-ONE_LOGIN_PUBLIC_TOKEN_URL=http://localhost:3000/token
-ONE_LOGIN_USERINFO_URL=http://govuk-one-login:3000/userinfo
+# Flask
+SECRET_KEY=[see below]
+
+# Backing services
 POSTGRES_DB=db
 POSTGRES_HOST=db
 POSTGRES_PASSWORD=db_password
 POSTGRES_PORT=5432
 POSTGRES_USER=db_user
-SECRET_KEY=[see below]
+VALKEY_HOST=cache
+VALKEY_PORT=6379
+
+# Service metadata
+CONTACT_EMAIL=[contact email]
+CONTACT_PHONE=[contact phone]
+DEPARTMENT_NAME=[name of department]
+DEPARTMENT_URL=[url of department]
 SERVICE_NAME=[name of service]
 SERVICE_PHASE=[phase]
 SERVICE_URL=[url of service]
-VALKEY_HOST=cache
-VALKEY_PORT=6379
+
+# GOV.UK One Login
+ONE_LOGIN_ACCESS_TOKEN_URL=http://govuk-one-login:3000/token
+ONE_LOGIN_AUTHORIZE_URL=http://localhost:3000/authorize
+ONE_LOGIN_CLIENT_ID=HGIOgho9HIRhgoepdIOPFdIUWgewi0jw
+ONE_LOGIN_JWKS_URL=http://govuk-one-login:3000/.well-known/jwks.json
+ONE_LOGIN_LOGOUT_URL=http://localhost:3000/logout
+ONE_LOGIN_PRIVATE_KEY_PATH=app/govuk_one_login_private_key.pem
+ONE_LOGIN_PUBLIC_TOKEN_URL=http://localhost:3000/token
+ONE_LOGIN_USERINFO_URL=http://govuk-one-login:3000/userinfo
 ```
 
 You **must** set a new `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python command to generate a new key:
