@@ -1,5 +1,7 @@
 {%- extends "base.html" -%}
 
+{%- from 'govuk_frontend_jinja/components/summary-list/macro.html' import govukSummaryList -%}
+
 {%- block beforeContent -%}
 {{ super() }}
 {%- endblock -%}
@@ -8,11 +10,29 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-xl">User</h1>
-    <ul class="govuk-list">
+    {% set rows = [] %}
     {% for key, value in userinfo.items() %}
-        <li><strong>{{ key }}:</strong> {{ value }}</li>
+        {% set rows = rows.append(
+            {
+                'key': {
+                    'text': key
+                },
+                'value': {
+                    'text': value
+                }
+            },
+        ) %}
+            
     {% endfor %}
-    </ul>
+
+    {{ govukSummaryList({
+        'card': {
+            'title': {
+                'text': "Scopes"
+            }
+        },
+        'rows': rows
+    }) }}
   </div>
 </div>
 {%- endblock -%}
