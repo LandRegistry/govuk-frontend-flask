@@ -1,3 +1,5 @@
+import json
+
 import requests
 from authlib.common.security import generate_token
 from authlib.integrations.requests_client import OAuth2Session
@@ -30,10 +32,14 @@ def _oauth2_session() -> OAuth2Session:
 def login():
     client = _oauth2_session()
     nonce = generate_token()
+    claims = json.dumps({"userinfo": {"https://vocab.account.gov.uk/v1/address": None}})
+    vtr = json.dumps(["Cl.Cm.P2"])
     uri, state = client.create_authorization_url(
         url=current_app.config["ONE_LOGIN_AUTHORIZE_URL"],
         redirect_uri=url_for("auth.callback", _external=True),
         nonce=nonce,
+        claims=claims,
+        vtr=vtr,
     )
     session["oauth_state"] = state
     session["oauth_nonce"] = nonce
@@ -73,7 +79,17 @@ def callback():
     session["id_token"] = token["id_token"]
     session["userinfo"] = userinfo
 
-    return redirect(url_for("main.index"))
+    return redirect(url_for("auth.user"))
+
+
+@bp.route("/user")
+def user():
+    userinfo = session.get("userinfo")
+
+    if not userinfo:
+        return redirect(url_for("auth.login"))
+
+    return render_template("user.html", userinfo=userinfo)
 
 
 @bp.route("/logout")
