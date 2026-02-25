@@ -20,8 +20,8 @@ from app.main.forms import CookiesForm
 @bp.route("/", methods=["GET"])
 def index() -> str:
     """Render the index page."""
-    user = session.get("userinfo")
-    return render_template("index.html", user=user)
+    userinfo = session.get("userinfo")
+    return render_template("index.html", userinfo=userinfo)
 
 
 @bp.route("/accessibility", methods=["GET"])
