@@ -1,0 +1,18 @@
+{%- extends "base.html" -%}
+
+{%- block beforeContent -%}
+{{ super() }}
+{%- endblock -%}
+
+{%- block content -%}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">User</h1>
+    <ul class="govuk-list">
+    {% for key, value in userinfo.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{%- endblock -%}
