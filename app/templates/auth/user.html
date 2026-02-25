@@ -9,7 +9,7 @@
 {%- block content -%}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">User</h1>
+    <h1 class="govuk-heading-xl">User info</h1>
     {{ govukSummaryList({
         'card': {
             'title': {
@@ -60,11 +60,13 @@
         ]
     }) }}
 
+    <h2 class="govuk-heading-l">Claims</h2>
+
     {% set address = userinfo["https://vocab.account.gov.uk/v1/address"][0] %}
     {{ govukSummaryList({
         'card': {
             'title': {
-                'text': "Address claim"
+                'text': "Address"
             }
         },
         'rows': [
