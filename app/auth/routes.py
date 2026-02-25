@@ -7,6 +7,7 @@ from authlib.jose import jwt
 from authlib.oauth2.rfc7523 import PrivateKeyJWT
 from authlib.oidc.core import CodeIDToken
 from flask import current_app, redirect, render_template, request, session, url_for
+from werkzeug.exceptions import Unauthorized
 
 from app.auth import bp
 
@@ -87,7 +88,7 @@ def user():
     userinfo = session.get("userinfo")
 
     if not userinfo:
-        return redirect(url_for("auth.login"))
+        raise Unauthorized
 
     return render_template("user.html", userinfo=userinfo)
 
