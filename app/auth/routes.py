@@ -22,14 +22,14 @@ def _oauth2_session() -> OAuth2Session:
         client_id=current_app.config["ONE_LOGIN_CLIENT_ID"],
         client_secret=private_key,
         scope="openid email phone",
-        token_endpoint_auth_method=PrivateKeyJWT(current_app.config["ONE_LOGIN_PUBLIC_TOKEN_URL"]),
+        token_endpoint_auth_method=PrivateKeyJWT(f"{current_app.config["ONE_LOGIN_EXTERNAL_HOST"]}/token"),
     )
 
     return session
 
 
 def _verify_core_identity_jwt(core_identity_jwt: str) -> dict:
-    did = requests.get(current_app.config["ONE_LOGIN_DID_URL"]).json()
+    did = requests.get(f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/.well-known/did.json").json()
 
     keys = []
 
@@ -60,7 +60,7 @@ def login():
     )
     vtr = json.dumps(["Cl.Cm.P2"])
     uri, state = client.create_authorization_url(
-        url=current_app.config["ONE_LOGIN_AUTHORIZE_URL"],
+        url=f"{current_app.config["ONE_LOGIN_EXTERNAL_HOST"]}/authorize",
         redirect_uri=url_for("auth.callback", _external=True),
         nonce=nonce,
         claims=claims,
@@ -81,14 +81,14 @@ def callback():
     client = _oauth2_session()
 
     token = client.fetch_token(
-        url=current_app.config["ONE_LOGIN_ACCESS_TOKEN_URL"],
+        url=f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/token",
         redirect_uri=url_for("auth.callback", _external=True),
         code=request.args["code"],
         grant_type="authorization_code",
     )
 
     nonce = session.pop("oauth_nonce", None)
-    jwks = requests.get(current_app.config["ONE_LOGIN_JWKS_URL"]).json()
+    jwks = requests.get(f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/.well-known/jwks.json").json()
 
     claims = jwt.decode(
         token["id_token"],
@@ -99,7 +99,7 @@ def callback():
     claims.validate()
 
     client.token = token
-    userinfo = client.get(current_app.config["ONE_LOGIN_USERINFO_URL"]).json()
+    userinfo = client.get(f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/userinfo").json()
 
     identity = _verify_core_identity_jwt(userinfo.get("https://vocab.account.gov.uk/v1/coreIdentityJWT"))
 
@@ -129,13 +129,14 @@ def logout():
 
     # Clear session userinfo
     session.pop("userinfo", None)
+    session.pop("identity", None)
 
     # If no ID token, just go to local logged-out page
     if not id_token:
         return redirect(url_for("auth.logged_out"))
 
     # Build end-session redirect URL
-    end_session_url = current_app.config["ONE_LOGIN_LOGOUT_URL"]
+    end_session_url = f"{current_app.config["ONE_LOGIN_EXTERNAL_HOST"]}/logout"
     post_logout = url_for("auth.logged_out", _external=True)
 
     # Construct RP-initiated logout URL

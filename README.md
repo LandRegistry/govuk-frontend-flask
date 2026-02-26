@@ -87,14 +87,10 @@ SERVICE_PHASE=[phase]
 SERVICE_URL=[url of service]
 
 # GOV.UK One Login
-ONE_LOGIN_ACCESS_TOKEN_URL=http://govuk-one-login:3000/token
-ONE_LOGIN_AUTHORIZE_URL=http://localhost:3000/authorize
 ONE_LOGIN_CLIENT_ID=HGIOgho9HIRhgoepdIOPFdIUWgewi0jw
-ONE_LOGIN_JWKS_URL=http://govuk-one-login:3000/.well-known/jwks.json
-ONE_LOGIN_LOGOUT_URL=http://localhost:3000/logout
+ONE_LOGIN_EXTERNAL_HOST=http://localhost:3000
+ONE_LOGIN_INTERNAL_HOST=http://govuk-one-login:3000
 ONE_LOGIN_PRIVATE_KEY_PATH=app/govuk_one_login_private_key.pem
-ONE_LOGIN_PUBLIC_TOKEN_URL=http://localhost:3000/token
-ONE_LOGIN_USERINFO_URL=http://govuk-one-login:3000/userinfo
 ```
 
 You **must** set a new `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python command to generate a new key:
