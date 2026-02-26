@@ -8,7 +8,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <span class="govuk-caption-xl">{{ config['SERVICE_NAME'] }}</span>
-    <h1 class="govuk-heading-xl">Hello, {% if userinfo %}Friend{% else %}Stranger{% endif %}!</h1>
+    <h1 class="govuk-heading-xl">Hello, {% if identity %}{{ identity["vc"]["credentialSubject"]["name"][0]["nameParts"][0].value | title }}{% else %}Stranger{% endif %}!</h1>
     <p class="govuk-body-l">This is a template <a href="https://flask.palletsprojects.com" class="govuk-link">Flask</a>
       app using the <a href="https://frontend.design-system.service.gov.uk/" class="govuk-link">GOV.UK Frontend</a> and
       <a href="https://design-system.service.gov.uk/" class="govuk-link">GOV.UK Design System</a> which is designed to

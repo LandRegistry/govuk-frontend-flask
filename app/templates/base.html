@@ -110,7 +110,7 @@
   {{ govukHeader({}) }}
   
   {% set nav = [] %}
-  {% if userinfo %}
+  {% if identity %}
     {% set nav = [
     {
       'href': url_for('auth.user'),
