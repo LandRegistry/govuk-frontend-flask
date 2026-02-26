@@ -30,6 +30,7 @@ class Config(object):
     ONE_LOGIN_ACCESS_TOKEN_URL = os.environ.get("ONE_LOGIN_ACCESS_TOKEN_URL")
     ONE_LOGIN_AUTHORIZE_URL = os.environ.get("ONE_LOGIN_AUTHORIZE_URL")
     ONE_LOGIN_CLIENT_ID = os.environ.get("ONE_LOGIN_CLIENT_ID")
+    ONE_LOGIN_DID_URL = os.environ.get("ONE_LOGIN_DID_URL")
     ONE_LOGIN_JWKS_URL = os.environ.get("ONE_LOGIN_JWKS_URL")
     ONE_LOGIN_LOGOUT_URL = os.environ.get("ONE_LOGIN_LOGOUT_URL")
     ONE_LOGIN_PRIVATE_KEY_PATH = os.environ.get("ONE_LOGIN_PRIVATE_KEY_PATH")

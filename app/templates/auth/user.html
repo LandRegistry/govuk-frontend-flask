@@ -62,6 +62,40 @@
 
     <h2 class="govuk-heading-l">Claims</h2>
 
+    {{ govukSummaryList({
+        'card': {
+            'title': {
+                'text': "Identity"
+            }
+        },
+        'rows': [
+            {
+                'key': {
+                    'text': "GivenName"
+                },
+                'value': {
+                    'text': identity["vc"]["credentialSubject"]["name"][0]["nameParts"][0].value
+                }
+            },
+            {
+                'key': {
+                    'text': "FamilyName"
+                },
+                'value': {
+                    'text': identity["vc"]["credentialSubject"]["name"][0]["nameParts"][1].value
+                }
+            },
+            {
+                'key': {
+                    'text': "birthDate"
+                },
+                'value': {
+                    'text': identity["vc"]["credentialSubject"]["birthDate"][0].value
+                }
+            }
+        ]
+    }) }}
+
     {% set address = userinfo["https://vocab.account.gov.uk/v1/address"][0] %}
     {{ govukSummaryList({
         'card': {

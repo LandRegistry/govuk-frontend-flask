@@ -28,11 +28,36 @@ def _oauth2_session() -> OAuth2Session:
     return session
 
 
+def _verify_core_identity_jwt(core_identity_jwt: str) -> dict:
+    did = requests.get(current_app.config["ONE_LOGIN_DID_URL"]).json()
+
+    keys = []
+
+    for method in did.get("assertionMethod", []):
+        jwk = method["publicKeyJwk"].copy()
+        jwk["kid"] = method["id"]
+        keys.append(jwk)
+
+    jwks = {"keys": keys}
+
+    claims = jwt.decode(core_identity_jwt, key=jwks)
+    claims.validate()
+
+    return claims
+
+
 @bp.route("/login")
 def login():
     client = _oauth2_session()
     nonce = generate_token()
-    claims = json.dumps({"userinfo": {"https://vocab.account.gov.uk/v1/address": None}})
+    claims = json.dumps(
+        {
+            "userinfo": {
+                "https://vocab.account.gov.uk/v1/coreIdentityJWT": None,
+                "https://vocab.account.gov.uk/v1/address": None,
+            }
+        }
+    )
     vtr = json.dumps(["Cl.Cm.P2"])
     uri, state = client.create_authorization_url(
         url=current_app.config["ONE_LOGIN_AUTHORIZE_URL"],
@@ -63,11 +88,11 @@ def callback():
     )
 
     nonce = session.pop("oauth_nonce", None)
-    keys = requests.get(current_app.config["ONE_LOGIN_JWKS_URL"]).json()
+    jwks = requests.get(current_app.config["ONE_LOGIN_JWKS_URL"]).json()
 
     claims = jwt.decode(
         token["id_token"],
-        keys,
+        key=jwks,
         claims_cls=CodeIDToken,
         claims_options={"nonce": {"values": [nonce]}},
     )
@@ -76,8 +101,11 @@ def callback():
     client.token = token
     userinfo = client.get(current_app.config["ONE_LOGIN_USERINFO_URL"]).json()
 
+    identity = _verify_core_identity_jwt(userinfo.get("https://vocab.account.gov.uk/v1/coreIdentityJWT"))
+
     session["id_token"] = token["id_token"]
     session["userinfo"] = userinfo
+    session["identity"] = identity
 
     return redirect(url_for("auth.user"))
 
@@ -89,7 +117,9 @@ def user():
     if not userinfo:
         return redirect(url_for("auth.login"))
 
-    return render_template("user.html", userinfo=userinfo)
+    identity = session.get("identity")
+
+    return render_template("user.html", userinfo=userinfo, identity=identity)
 
 
 @bp.route("/logout")
