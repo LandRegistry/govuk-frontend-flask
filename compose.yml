@@ -3,6 +3,8 @@ services:
     build: .
     container_name: app
     restart: always
+    secrets:
+      - one_login_private_key
     environment:
       CONTACT_EMAIL: ${CONTACT_EMAIL}
       CONTACT_PHONE: ${CONTACT_PHONE}
@@ -12,7 +14,7 @@ services:
       ONE_LOGIN_CLIENT_ID: ${ONE_LOGIN_CLIENT_ID}
       ONE_LOGIN_EXTERNAL_HOST: ${ONE_LOGIN_EXTERNAL_HOST}
       ONE_LOGIN_INTERNAL_HOST: ${ONE_LOGIN_INTERNAL_HOST}
-      ONE_LOGIN_PRIVATE_KEY_PATH: ${ONE_LOGIN_PRIVATE_KEY_PATH}
+      ONE_LOGIN_PRIVATE_KEY_PATH: /run/secrets/one_login_private_key
       SECRET_KEY: ${SECRET_KEY}
       SERVICE_NAME: ${SERVICE_NAME}
       SERVICE_PHASE: ${SERVICE_PHASE}
@@ -116,6 +118,10 @@ services:
     image: ghcr.io/govuk-one-login/simulator:latest
     ports:
       - "3000:3000"
+
+secrets:
+  one_login_private_key:
+    file: ./secrets/govuk_one_login_private_key.pem
 
 volumes:
   valkey_data:
