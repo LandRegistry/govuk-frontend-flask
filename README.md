@@ -1,4 +1,4 @@
-![Static Badge](https://img.shields.io/badge/GOV.UK%20Frontend-v5.13.0-blue)
+![Static Badge](https://img.shields.io/badge/GOV.UK%20Frontend-v5.14.0-blue)
 
 # GOV.UK Frontend - Flask App Template
 
@@ -10,11 +10,11 @@ A [Flask](https://flask.palletsprojects.com) application integrating the [GOV.UK
 
 ## Highlights
 
-- **GOV.UK components built in** – Accessible [Jinja templates](https://github.com/LandRegistry/govuk-frontend-jinja) and [WTForms helpers](https://github.com/LandRegistry/govuk-frontend-wtf) for compliant UI and forms.  
-- **Secure Flask foundation** – HTTPS, CSRF, CSP, rate limits, [SQLAlchemy](https://www.sqlalchemy.org/) and migrations ready to go.  
-- **Containerised by default** – [Nginx](https://nginx.org/en/) , [PostgreSQL](https://www.postgresql.org/), [Redis](https://redis.io/) and [Node](https://nodejs.org/en) pipeline managed via [Docker Compose](https://docs.docker.com/compose/).  
-- **Fast, lean builds** – Multi-stage Dockerfiles, wheel caching, non-root runtime, and CI via [GitHub Actions](https://github.com/features/actions).  
-- **Compliance-ready pages** – 404/500 errors, cookie banner, accessibility statement and privacy notice included.  
+- **GOV.UK components built in** – Accessible [Jinja templates](https://github.com/LandRegistry/govuk-frontend-jinja) and [WTForms helpers](https://github.com/LandRegistry/govuk-frontend-wtf) for compliant UI and forms.
+- **Secure Flask foundation** – HTTPS, CSRF, CSP, rate limits, [SQLAlchemy](https://www.sqlalchemy.org/) and migrations ready to go.
+- **Containerised by default** – [Nginx](https://nginx.org/en/) , [PostgreSQL](https://www.postgresql.org/), [Valkey](https://valkey.io/) and [Node](https://nodejs.org/en) pipeline managed via [Docker Compose](https://docs.docker.com/compose/).
+- **Fast, lean builds** – Multi-stage Dockerfiles, wheel caching, non-root runtime, and CI via [GitHub Actions](https://github.com/features/actions).
+- **Compliance-ready pages** – 404/500 errors, cookie banner, accessibility statement and privacy notice included.
 - **Developer-first setup** – Example blueprints, templates, macros, and GOV.UK-style flash messages for instant feedback.
 
 ## Security
@@ -23,7 +23,7 @@ Secure by default with hardened containers, strong HTTP headers and built-in rat
 
 - Applies strict CSP, HSTS, and other security headers.
 - CSRF protection via Flask-WTF, with safe error handling.
-- Rate limiting backed by Redis using Flask-Limiter.
+- Rate limiting backed by Valkey using Flask-Limiter.
 - Non-root containers with read-only filesystem for runtime services.
 - Secrets and credentials injected via environment variables (no in-repo secrets).
 - Dependency scanning and Python version pinning via CI workflows.
@@ -35,7 +35,7 @@ Optimised for speed and reliability through caching, minimal layers and lean bui
 - Multi-stage Docker builds minimise image size and attack surface.
 - Static assets compiled once and cached efficiently.
 - Connection pooling for SQLAlchemy database access.
-- Redis caching support for transient or computed data.
+- Valkey caching support for transient or computed data.
 - Nginx configured for compression and cache control.
 - CI validates image build times and wheel caching efficiency.
 
@@ -52,7 +52,7 @@ Built to feel frictionless for rapid iteration, testing and deployment.
 
 ## Requirements
 
-- Docker (Engine & Compose)  
+- Docker (Engine & Compose)
 
 ## Quick start
 
@@ -60,26 +60,36 @@ Built to feel frictionless for rapid iteration, testing and deployment.
 
 [Create a new repository](https://github.com/LandRegistry/govuk-frontend-flask/generate) using this template, with the same directory structure and files. Then clone a local copy of your newly created repository.
 
-### 2. Configure environment  
+### 2. Configure environment
 
 Create a `.env` file in the root of the repo and enter your specific config based on this example:
 
 ```dotenv
-CONTACT_EMAIL=[contact email]
-CONTACT_PHONE=[contact phone]
-DEPARTMENT_NAME=[name of department]
-DEPARTMENT_URL=[url of department]
+# Flask
+SECRET_KEY=[see below]
+
+# Backing services
 POSTGRES_DB=db
 POSTGRES_HOST=db
 POSTGRES_PASSWORD=db_password
 POSTGRES_PORT=5432
 POSTGRES_USER=db_user
-REDIS_HOST=cache
-REDIS_PORT=6379
-SECRET_KEY=[see below]
+VALKEY_HOST=cache
+VALKEY_PORT=6379
+
+# Service metadata
+CONTACT_EMAIL=[contact email]
+CONTACT_PHONE=[contact phone]
+DEPARTMENT_NAME=[name of department]
+DEPARTMENT_URL=[url of department]
 SERVICE_NAME=[name of service]
 SERVICE_PHASE=[phase]
 SERVICE_URL=[url of service]
+
+# GOV.UK One Login
+ONE_LOGIN_CLIENT_ID=HGIOgho9HIRhgoepdIOPFdIUWgewi0jw
+ONE_LOGIN_EXTERNAL_HOST=http://localhost:3000
+ONE_LOGIN_INTERNAL_HOST=http://govuk-one-login:3000
 ```
 
 You **must** set a new `SECRET_KEY`, which is used to securely sign the session cookie and CSRF tokens. It should be a long random `bytes` or `str`. You can use the output of this Python command to generate a new key:
@@ -114,12 +124,13 @@ python -m pytest --cov=app --cov-report=term-missing --cov-branch
 
 ## Environment
 
-| Service    | Role                              | Container | Port exposed     |
-| ---------- | --------------------------------- | --------- | ---------------- |
-| Nginx      | Reverse proxy + HTTPS termination | `web`     | 443 (HTTPS) / 80 |
-| Flask      | Web framework                     | `app`     | 5000             |
-| PostgreSQL | Relational database               | `db`      | 5432             |
-| Redis      | Caching + rate limiting backend   | `cache`   | 6379             |
+| Service          | Role                              | Container         | Port exposed     |
+| ---------------- | --------------------------------- | ----------------- | ---------------- |
+| Nginx            | Reverse proxy + HTTPS termination | `web`             | 443 (HTTPS) / 80 |
+| Flask            | Web framework                     | `app`             | 5000             |
+| PostgreSQL       | Relational database               | `db`              | 5432             |
+| Valkey           | Server-side sessions and caching  | `cache`           | 6379             |
+| GOV.UK One Login | OIDC Provider                     | `govuk-one-login` | 3000             |
 
 ## Architecture
 
@@ -132,11 +143,12 @@ flowchart TB
     compose(compose.yml)
     nginx(nginx:stable-alpine)
     node(node:kyrpton-alpine)
+    one-login(govuk-one-login/simulator:latest)
     postgres(postgres:18-alpine)
     python(python:3.14-slim)
-    redis(redis:7-alpine)
+    valkey(valkey/valkey:9-alpine)
 
-    compose -- Creates --> App & Cache & Web & Database
+    compose -- Creates --> App & Cache & Web & Database & onelogin
     App -- Depends on --> Cache & Database
     Web -- Depends on --> App
 
@@ -154,7 +166,11 @@ flowchart TB
     end
 
     subgraph Cache
-        redis
+        valkey
+    end
+
+    subgraph onelogin [One Login]
+        one-login
     end
 ```
 
@@ -165,28 +181,118 @@ flowchart TB
     browser([Browser])
     db@{ shape: cyl, label: "PostgreSQL" }
     flask(Gunicorn/Flask)
-    nginx(NGINX)
-    redis(Redis)
+    nginx(Nginx)
     static@{ shape: lin-cyl, label: "Static files" }
+    valkey@{ shape: cyl, label: "Valkey" }
+    one-login(GOV.UK One Login)
 
     browser -- https:443 --> nginx -- http:5000 --> flask -- postgres:5432 --> db
-    flask -- redis:6379 --> redis
+    browser -- http:3000 --> one-login
+    flask -- redis:6379 --> valkey
+    flask -- http:3000 --> one-login
 
-    subgraph Web
-        nginx -- Read --> static
-    end
+    subgraph Docker Network
+        subgraph Web
+            nginx -- Read --> static
+        end
 
-    subgraph App
-        flask
-    end
+        subgraph App
+            flask
+        end
 
-    subgraph Database
-        db
-    end
+        subgraph Database
+            db
+        end
 
-    subgraph Cache
-        redis
+        subgraph Cache
+            valkey
+        end
     end
+```
+
+## GOV.UK One Login
+
+This template uses the GOV.UK One Login Simulator to provide realistic OIDC authentication.
+
+### Configure
+
+Once the `govuk-one-login` container is up and running:
+
+```shell
+curl --request POST \
+  --url http://localhost:3000/config \
+  --header 'content-type: application/json' \
+  --data '{
+    "clientConfiguration": {
+      "redirectUrls": ["https://localhost/callback"],
+      "postLogoutRedirectUrls": ["https://localhost/logged-out"]
+    }
+  }'
+```
+
+### Login
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Browser
+    participant Web as Nginx
+    participant App as Flask
+    participant Session as Valkey
+    participant Simulator
+
+    Browser->>Web: GET https://localhost/login
+    Web->>App: GET http://app:5000/login
+    App->>App: Generate nonce
+    App->>App: Build authorize URL (redirect_uri, claims, vtr, state, nonce)
+    App->>Session: session["oauth_state"] = state
+    App->>Session: session["oauth_nonce"] = nonce
+    App-->>Browser: 302 Redirect to http://localhost:3000/authorize?...&state=...&nonce=...
+
+    Browser->>Simulator: GET http://localhost:3000/authorize?client_id=...&redirect_uri=https://localhost/callback&state=...&nonce=...
+    Simulator-->>Browser: 302 Redirect to https://localhost/callback?code=...&state=...
+
+    Browser->>Web: GET https://localhost/callback?code=...&state=...
+    Web->>App: GET http://app:5000/callback?code=...&state=...
+    App->>Session: stored_state = session.pop("oauth_state")
+    App->>App: Validate state == stored_state
+    App->>Simulator: POST http://govuk-one-login:3000/token (authorization_code, redirect_uri)
+    Simulator-->>App: id_token, access_token, ...
+    App->>Session: nonce = session.pop("oauth_nonce")
+    App->>Simulator: GET http://govuk-one-login:3000/.well-known/jwks.json
+    Simulator-->>App: JWKS
+    App->>App: Validate id_token (incl. nonce)
+    App->>Simulator: GET http://govuk-one-login:3000/userinfo (with access token)
+    Simulator-->>App: userinfo (incl. coreIdentityJWT, etc.)
+    App->>App: Verify coreIdentityJWT -> identity (or None)
+    App->>Session: session["id_token"] = id_token
+    App->>Session: session["userinfo"] = userinfo
+    App->>Session: session["identity"] = identity
+    App-->>Browser: 302 Redirect to https://localhost/
+```
+
+### Logout
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Browser
+    participant Web as Nginx
+    participant App as Flask
+    participant Session as Valkey
+    participant Simulator
+
+    Browser->>Web: GET https://localhost/logout
+    Web->>App: GET http://app:5000/logout
+    App->>Session: id_token = session.pop("id_token")
+    App->>Session: session.pop("userinfo")
+    App->>Session: session.pop("identity")
+    App-->>Browser: 302 Redirect to http://localhost:3000/logout?id_token_hint=...&post_logout_redirect_uri=https://localhost/logged-out
+    Browser->>Simulator: GET http://localhost:3000/logout?id_token_hint=...&post_logout_redirect_uri=https://localhost/logged-out
+    Simulator-->>Browser: 302 Redirect to https://localhost/logged-out
+    Browser->>Web: GET https://localhost/logged-out
+    Web->>App: GET http://app:5000/logged-out
+    App-->>Browser: 200 logged-out page
 ```
 
 ## Maintainers

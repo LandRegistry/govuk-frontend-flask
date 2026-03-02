@@ -108,24 +108,30 @@
 
 {%- block header -%}
   {{ govukHeader({}) }}
+  
+  {% set nav = [] %}
+  {% if identity %}
+    {% set nav = [
+    {
+      'href': url_for('auth.user'),
+      'text': "User",
+      'active': true if url_for('auth.user') in request.path else false
+    },
+    {
+      'href': url_for('auth.logout'),
+      'text': "Logout"
+    }] %}
+  {% else %}
+    {% set nav = [{
+      'href': url_for('auth.login'),
+      'text': "Login"
+    }] %}
+  {% endif %}
+
   {{ govukServiceNavigation({
     'serviceName': config['SERVICE_NAME'],
     'serviceUrl': url_for('main.index'),
-    'navigation': [
-      {
-        'href': "#",
-        'text': "Navigation item 1"
-      },
-      {
-        'href': "#",
-        'text': "Navigation item 2",
-        'active': true
-      },
-      {
-        'href': "#",
-        'text': "Navigation item 3"
-      }
-    ]
+    'navigation': nav
   }) }}
 {%- endblock -%}
 

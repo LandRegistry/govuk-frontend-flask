@@ -7,41 +7,13 @@
 {%- block content -%}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-xl">Hello, World!</h1>
+    <span class="govuk-caption-xl">{{ config['SERVICE_NAME'] }}</span>
+    <h1 class="govuk-heading-xl">Hello, {% if identity %}{{ identity["vc"]["credentialSubject"]["name"][0]["nameParts"][0].value | title }}{% else %}Stranger{% endif %}!</h1>
     <p class="govuk-body-l">This is a template <a href="https://flask.palletsprojects.com" class="govuk-link">Flask</a>
       app using the <a href="https://frontend.design-system.service.gov.uk/" class="govuk-link">GOV.UK Frontend</a> and
       <a href="https://design-system.service.gov.uk/" class="govuk-link">GOV.UK Design System</a> which is designed to
       get a new project started quicker.
     </p>
-    <p class="govuk-body">It is also the reference implementation of two core packages:</p>
-    <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
-      <li><a class="govuk-link" href="https://github.com/LandRegistry/govuk-frontend-jinja">GOV.UK Frontend Jinja</a>
-        which provides Jinja macros of GOV.UK components</li>
-      <li><a class="govuk-link" href="https://github.com/LandRegistry/govuk-frontend-wtf">GOV.UK Frontend WTForms</a>
-        which provides WTForms widgets to integrate the above Jinja macros into form generation and validation</li>
-    </ul>
-    <p class="govuk-body">The app is provided intentionally bare, with just the essential parts that all services need,
-      such as error pages, accessibility statement, cookie banner, cookie page and privacy notice.</p>
-
-    <h2 class="govuk-heading-m">Features</h2>
-    <p class="govuk-body">A number of other packages are used to provide the features listed below with sensible and
-      best-practice defaults:</p>
-    <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
-      <li>Asset management</li>
-      <li>Cache busting</li>
-      <li>Form generation and validation</li>
-      <li>Form error handing</li>
-      <li>Flash messages</li>
-      <li>CSRF protection</li>
-      <li>HTTP security headers</li>
-      <li>Content Security Policy (CSP)</li>
-      <li>Response compression</li>
-      <li>Rate limiting</li>
-    </ul>
-
-    <h2 class="govuk-heading-m">Documentation</h2>
-    <p class="govuk-body">Detailed documentation on the features listed above and the next steps to start building out your app on top of this template is on <a class="govuk-link"
-        href="https://github.com/LandRegistry/govuk-frontend-flask#readme">GitHub</a></p>
   </div>
 </div>
 {%- endblock -%}

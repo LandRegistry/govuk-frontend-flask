@@ -33,27 +33,27 @@
     "npm": "11.x"
   },
   "dependencies": {
-    "govuk-frontend": "5.13.0"
+    "govuk-frontend": "6.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@eslint/js": "^9.39.0",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "@eslint/js": "^10.0.1",
     "babel-loader": "^10.0.0",
     "copy-webpack-plugin": "^13.0.1",
-    "css-loader": "^7.1.2",
-    "css-minimizer-webpack-plugin": "^7.0.2",
-    "eslint": "^9.39.0",
+    "css-loader": "^7.1.4",
+    "css-minimizer-webpack-plugin": "^7.0.4",
+    "eslint": "^10.0.1",
     "eslint-config-prettier": "^10.1.8",
-    "globals": "^16.5.0",
-    "mini-css-extract-plugin": "^2.9.4",
-    "npm-check-updates": "^19.1.2",
-    "postcss-loader": "^8.2.0",
-    "postcss-preset-env": "^10.4.0",
-    "prettier": "^3.6.2",
-    "sass": "^1.93.3",
-    "sass-loader": "^16.0.6",
-    "webpack": "^5.102.1",
+    "globals": "^17.3.0",
+    "mini-css-extract-plugin": "^2.10.0",
+    "npm-check-updates": "^19.4.1",
+    "postcss-loader": "^8.2.1",
+    "postcss-preset-env": "^11.2.0",
+    "prettier": "^3.8.1",
+    "sass": "^1.97.3",
+    "sass-loader": "^16.0.7",
+    "webpack": "^5.105.2",
     "webpack-cli": "^6.0.1"
   }
 }

@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/git,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,flask,linux,macos,python,windows,jetbrains+all,visualstudiocode,venv
 
+### Secrets ###
+secrets/
+*.pem
+
 ### Flask ###
 instance/*
 !instance/.gitignore

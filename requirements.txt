@@ -4,31 +4,46 @@
 #
 #    pip-compile requirements.in
 #
-alembic==1.17.0
+alembic==1.18.4
     # via flask-migrate
+authlib==1.6.9
+    # via -r requirements.in
 blinker==1.9.0
     # via flask
-click==8.3.0
+cachelib==0.13.0
+    # via flask-session
+certifi==2026.2.25
+    # via requests
+cffi==2.0.0
+    # via cryptography
+charset-normalizer==3.4.4
+    # via requests
+click==8.3.1
     # via flask
+cryptography==46.0.5
+    # via authlib
 deepmerge==2.0
     # via govuk-frontend-wtf
-deprecated==1.2.18
+deprecated==1.3.1
     # via limits
 dnspython==2.8.0
     # via email-validator
 email-validator==2.3.0
     # via -r requirements.in
-flask==3.1.2
+flask==3.1.3
     # via
     #   -r requirements.in
     #   flask-limiter
     #   flask-migrate
+    #   flask-session
     #   flask-sqlalchemy
     #   flask-wtf
     #   govuk-frontend-wtf
-flask-limiter[redis]==4.0.0
+flask-limiter[redis]==4.1.1
     # via -r requirements.in
 flask-migrate==4.1.0
+    # via -r requirements.in
+flask-session[redis]==0.8.0
     # via -r requirements.in
 flask-sqlalchemy==3.1.1
     # via
@@ -36,18 +51,20 @@ flask-sqlalchemy==3.1.1
     #   flask-migrate
 flask-wtf==1.2.2
     # via govuk-frontend-wtf
-govuk-frontend-jinja==3.9.0
+govuk-frontend-jinja==4.0.0
     # via
     #   -r requirements.in
     #   govuk-frontend-wtf
 govuk-frontend-wtf==3.2.0
     # via -r requirements.in
-greenlet==3.2.4
+greenlet==3.3.2
     # via sqlalchemy
-gunicorn==23.0.0
+gunicorn==25.1.0
     # via -r requirements.in
 idna==3.11
-    # via email-validator
+    # via
+    #   email-validator
+    #   requests
 itsdangerous==2.2.0
     # via
     #   flask
@@ -57,12 +74,10 @@ jinja2==3.1.6
     #   flask
     #   govuk-frontend-jinja
     #   govuk-frontend-wtf
-limits[redis]==5.6.0
+limits[redis]==5.8.0
     # via flask-limiter
 mako==1.3.10
     # via alembic
-markdown-it-py==4.0.0
-    # via rich
 markupsafe==3.0.3
     # via
     #   flask
@@ -70,23 +85,25 @@ markupsafe==3.0.3
     #   mako
     #   werkzeug
     #   wtforms
-mdurl==0.1.2
-    # via markdown-it-py
+msgspec==0.20.0
+    # via flask-session
 ordered-set==4.1.0
     # via flask-limiter
-packaging==25.0
+packaging==26.0
     # via
     #   gunicorn
     #   limits
 psycopg2==2.9.11
     # via -r requirements.in
-pygments==2.19.2
-    # via rich
-redis==6.4.0
-    # via limits
-rich==14.2.0
-    # via flask-limiter
-sqlalchemy==2.0.44
+pycparser==3.0
+    # via cffi
+redis==7.2.1
+    # via
+    #   flask-session
+    #   limits
+requests==2.32.5
+    # via -r requirements.in
+sqlalchemy==2.0.47
     # via
     #   alembic
     #   flask-sqlalchemy
@@ -96,9 +113,11 @@ typing-extensions==4.15.0
     #   flask-limiter
     #   limits
     #   sqlalchemy
-werkzeug==3.1.3
+urllib3==2.6.3
+    # via requests
+werkzeug==3.1.6
     # via flask
-wrapt==1.17.3
+wrapt==2.1.1
     # via deprecated
 wtforms==3.2.1
     # via

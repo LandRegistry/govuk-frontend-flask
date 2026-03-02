@@ -4,6 +4,7 @@ from flask import Flask
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_migrate import Migrate
+from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect  # type: ignore[import]
 from govuk_frontend_wtf.main import WTFormsHelpers  # type: ignore[import]
@@ -17,6 +18,7 @@ csrf: CSRFProtect = CSRFProtect()
 db: SQLAlchemy = SQLAlchemy()
 limiter: Limiter = Limiter(get_remote_address, default_limits=["2 per second", "60 per minute"])
 migrate: Migrate = Migrate()
+sess = Session()
 
 
 def create_app(config_class: Type[Config] = Config) -> Flask:
@@ -30,7 +32,6 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     """
     app: Flask = Flask(__name__)  # type: ignore[assignment]
     app.config.from_object(config_class)
-    app.jinja_env.globals["govukRebrand"] = True
     app.jinja_env.lstrip_blocks = True
     app.jinja_env.trim_blocks = True
 
@@ -48,18 +49,21 @@ def create_app(config_class: Type[Config] = Config) -> Flask:
     )
 
     # Use ProxyFix middleware to handle proxies correctly.
-    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)  # type: ignore[method-assign]
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)  # type: ignore[method-assign]
 
     # Initialize Flask extensions
     csrf.init_app(app)
     db.init_app(app)
     limiter.init_app(app)
     migrate.init_app(app, db)
+    sess.init_app(app)
     WTFormsHelpers(app)
 
     # Register blueprints. These define different sections of the application.
+    from app.auth import bp as auth_bp
     from app.main import bp as main_bp
 
+    app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
 
     return app

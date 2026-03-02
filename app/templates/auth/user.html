@@ -1,0 +1,183 @@
+{%- extends "base.html" -%}
+
+{%- from 'govuk_frontend_jinja/components/summary-list/macro.html' import govukSummaryList -%}
+
+{%- block beforeContent -%}
+{{ super() }}
+{%- endblock -%}
+
+{%- block content -%}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">User info</h1>
+    {{ govukSummaryList({
+        'card': {
+            'title': {
+                'text': "Scopes"
+            }
+        },
+        'rows': [
+            {
+                'key': {
+                    'text': "sub"
+                },
+                'value': {
+                    'text': userinfo["sub"]
+                }
+            },
+            {
+                'key': {
+                    'text': "email"
+                },
+                'value': {
+                    'text': userinfo["email"]
+                }
+            },
+            {
+                'key': {
+                    'text': "email_verified"
+                },
+                'value': {
+                    'text': userinfo["email_verified"]
+                }
+            },
+            {
+                'key': {
+                    'text': "phone_number"
+                },
+                'value': {
+                    'text': userinfo["phone_number"]
+                }
+            },
+            {
+                'key': {
+                    'text': "phone_number_verified"
+                },
+                'value': {
+                    'text': userinfo["phone_number_verified"]
+                }
+            },
+        ]
+    }) }}
+
+    <h2 class="govuk-heading-l">Claims</h2>
+
+    {{ govukSummaryList({
+        'card': {
+            'title': {
+                'text': "Identity"
+            }
+        },
+        'rows': [
+            {
+                'key': {
+                    'text': "GivenName"
+                },
+                'value': {
+                    'text': identity["vc"]["credentialSubject"]["name"][0]["nameParts"][0].value
+                }
+            },
+            {
+                'key': {
+                    'text': "FamilyName"
+                },
+                'value': {
+                    'text': identity["vc"]["credentialSubject"]["name"][0]["nameParts"][1].value
+                }
+            },
+            {
+                'key': {
+                    'text': "birthDate"
+                },
+                'value': {
+                    'text': identity["vc"]["credentialSubject"]["birthDate"][0].value
+                }
+            }
+        ]
+    }) }}
+
+    {% set address = userinfo["https://vocab.account.gov.uk/v1/address"][0] %}
+    {{ govukSummaryList({
+        'card': {
+            'title': {
+                'text': "Address"
+            }
+        },
+        'rows': [
+            {
+                'key': {
+                    'text': "subBuildingName"
+                },
+                'value': {
+                    'text': address["subBuildingName"]
+                }
+            },
+            {
+                'key': {
+                    'text': "buildingName"
+                },
+                'value': {
+                    'text': address["buildingName"]
+                }
+            },
+            {
+                'key': {
+                    'text': "buildingNumber"
+                },
+                'value': {
+                    'text': address["buildingNumber"]
+                }
+            },
+            {
+                'key': {
+                    'text': "streetName"
+                },
+                'value': {
+                    'text': address["streetName"]
+                }
+            },
+            {
+                'key': {
+                    'text': "addressLocality"
+                },
+                'value': {
+                    'text': address["addressLocality"]
+                }
+            },
+            {
+                'key': {
+                    'text': "postalCode"
+                },
+                'value': {
+                    'text': address["postalCode"]
+                }
+            },
+            {
+                'key': {
+                    'text': "addressCountry"
+                },
+                'value': {
+                    'text': address["addressCountry"]
+                }
+            },
+            {
+                'key': {
+                    'text': "validFrom"
+                },
+                'value': {
+                    'text': address["validFrom"]
+                }
+            },
+            {
+                'key': {
+                    'text': "uprn"
+                },
+                'value': {
+                    'text': address["uprn"]
+                }
+            },
+        ]
+    }) }}
+  </div>
+</div>
+{%- endblock -%}

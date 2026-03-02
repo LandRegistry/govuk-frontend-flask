@@ -3,17 +3,23 @@ services:
     build: .
     container_name: app
     restart: always
+    secrets:
+      - one_login_private_key
     environment:
       CONTACT_EMAIL: ${CONTACT_EMAIL}
       CONTACT_PHONE: ${CONTACT_PHONE}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       DEPARTMENT_NAME: ${DEPARTMENT_NAME}
       DEPARTMENT_URL: ${DEPARTMENT_URL}
-      REDIS_URL: redis://${REDIS_HOST}:${REDIS_PORT}
+      ONE_LOGIN_CLIENT_ID: ${ONE_LOGIN_CLIENT_ID}
+      ONE_LOGIN_EXTERNAL_HOST: ${ONE_LOGIN_EXTERNAL_HOST}
+      ONE_LOGIN_INTERNAL_HOST: ${ONE_LOGIN_INTERNAL_HOST}
+      ONE_LOGIN_PRIVATE_KEY_PATH: /run/secrets/one_login_private_key
       SECRET_KEY: ${SECRET_KEY}
       SERVICE_NAME: ${SERVICE_NAME}
       SERVICE_PHASE: ${SERVICE_PHASE}
       SERVICE_URL: ${SERVICE_URL}
+      VALKEY_URL: redis://${VALKEY_HOST}:${VALKEY_PORT}
     expose:
       - 5000
     healthcheck:
@@ -33,6 +39,8 @@ services:
         condition: service_healthy
       cache:
         condition: service_healthy
+      govuk-one-login:
+        condition: service_started
     develop:
       watch:
         - action: rebuild
@@ -69,19 +77,19 @@ services:
       start_period: 10s
 
   cache:
-    image: redis:7-alpine
+    image: valkey/valkey:9-alpine
     container_name: cache
     restart: always
     expose:
       - 6379
     healthcheck:
-      test: ["CMD", "redis-cli", "-h", "localhost", "ping"]
+      test: ["CMD", "valkey-cli", "ping"]
       interval: 30s
       timeout: 3s
       retries: 5
       start_period: 10s
     volumes:
-      - redis_data:/data
+      - valkey_data:/data
 
   web:
     build: ./web
@@ -108,6 +116,16 @@ services:
         - action: rebuild
           path: ./web/src
 
+  govuk-one-login:
+    container_name: govuk-one-login
+    image: ghcr.io/govuk-one-login/simulator:latest
+    ports:
+      - "3000:3000"
+
+secrets:
+  one_login_private_key:
+    file: ./secrets/govuk_one_login_private_key.pem
+
 volumes:
-  redis_data:
+  valkey_data:
   pg_data:
