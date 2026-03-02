@@ -15,17 +15,17 @@ def oauth2_session() -> OAuth2Session:
     # Load the private signing key used for client authentication.
     # This is mounted via Docker secret and not stored in source control.
     with open(current_app.config["ONE_LOGIN_PRIVATE_KEY_PATH"], "rb") as f:
-        private_key = f.read()
+        private_key: bytes = f.read()
 
     return OAuth2Session(
-        client_id=current_app.config["ONE_LOGIN_CLIENT_ID"],
+        client_id=str(current_app.config["ONE_LOGIN_CLIENT_ID"]),
         client_secret=private_key,
         scope="openid email phone",
         token_endpoint_auth_method=PrivateKeyJWT(f"{current_app.config["ONE_LOGIN_EXTERNAL_HOST"]}/token"),
     )
 
 
-def verify_core_identity_jwt(core_identity_jwt: str) -> dict:
+def verify_core_identity_jwt(core_identity_jwt: str) -> dict[str, object]:
     """
     Verify and decode the coreIdentityJWT received from the userinfo endpoint.
 
@@ -65,4 +65,4 @@ def verify_core_identity_jwt(core_identity_jwt: str) -> dict:
     claims = jwt.decode(core_identity_jwt, key=jwks)
     claims.validate()
 
-    return claims
+    return dict(claims)
