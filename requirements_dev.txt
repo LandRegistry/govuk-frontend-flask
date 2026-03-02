@@ -6,7 +6,7 @@
 #
 attrs==25.4.0
     # via flake8-bugbear
-bandit==1.9.3
+bandit==1.9.4
     # via -r requirements_dev.in
 black==26.1.0
     # via -r requirements_dev.in
@@ -18,7 +18,7 @@ cachecontrol[filecache]==0.14.4
     # via
     #   cachecontrol
     #   pip-audit
-certifi==2026.1.4
+certifi==2026.2.25
     # via requests
 charset-normalizer==3.4.4
     # via requests
@@ -33,7 +33,7 @@ cyclonedx-python-lib==11.6.0
     # via pip-audit
 defusedxml==0.7.1
     # via py-serializable
-filelock==3.24.3
+filelock==3.25.0
     # via cachecontrol
 flake8==7.3.0
     # via
@@ -45,7 +45,7 @@ idna==3.11
     # via requests
 iniconfig==2.3.0
     # via pytest
-isort==8.0.0
+isort==8.0.1
     # via -r requirements_dev.in
 librt==0.8.1
     # via mypy
@@ -119,7 +119,7 @@ pytest==9.0.2
     # via pytest-cov
 pytest-cov==7.0.0
     # via -r requirements_dev.in
-python-dotenv==1.2.1
+python-dotenv==1.2.2
     # via -r requirements_dev.in
 pytokens==0.4.1
     # via black

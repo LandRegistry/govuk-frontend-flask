@@ -6,13 +6,13 @@
 #
 alembic==1.18.4
     # via flask-migrate
-authlib==1.6.8
+authlib==1.6.9
     # via -r requirements.in
 blinker==1.9.0
     # via flask
 cachelib==0.13.0
     # via flask-session
-certifi==2026.1.4
+certifi==2026.2.25
     # via requests
 cffi==2.0.0
     # via cryptography
@@ -97,13 +97,13 @@ psycopg2==2.9.11
     # via -r requirements.in
 pycparser==3.0
     # via cffi
-redis==7.2.0
+redis==7.2.1
     # via
     #   flask-session
     #   limits
 requests==2.32.5
     # via -r requirements.in
-sqlalchemy==2.0.46
+sqlalchemy==2.0.47
     # via
     #   alembic
     #   flask-sqlalchemy
