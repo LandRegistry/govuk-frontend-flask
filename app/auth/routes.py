@@ -14,6 +14,7 @@ from flask import (
     session,
     url_for,
 )
+from werkzeug.exceptions import BadRequest
 
 from app.auth import bp
 from app.auth.utils import oauth2_session, verify_core_identity_jwt
@@ -81,12 +82,12 @@ def callback() -> Response:
 
     # Protect against CSRF attacks.
     if not stored or stored != state:
-        return 400
+        raise BadRequest("Invalid OAuth state")
 
     client: OAuth2Session = oauth2_session()
 
     # Exchange authorization code for tokens.
-    token = client.fetch_token(
+    token: dict[str, object] = client.fetch_token(
         url=f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/token",
         redirect_uri=url_for("auth.callback", _external=True),
         code=request.args["code"],
@@ -97,11 +98,13 @@ def callback() -> Response:
     nonce: str | None = session.pop("oauth_nonce", None)
 
     # Fetch JWKS for ID token signature verification.
-    jwks = requests.get(f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/.well-known/jwks.json").json()
+    jwks: dict[str, object] = requests.get(
+        f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/.well-known/jwks.json"
+    ).json()
 
     # Decode and validate ID token.
     claims = jwt.decode(
-        token["id_token"],
+        str(token["id_token"]),
         key=jwks,
         claims_cls=CodeIDToken,
         claims_options={"nonce": {"values": [nonce] if nonce else []}},
@@ -109,13 +112,16 @@ def callback() -> Response:
     claims.validate()
 
     # Attach token to client for authenticated requests.
-    client.token = token
+    client.token = token  # type: ignore[assignment]
 
     # Retrieve userinfo claims.
-    userinfo = client.get(f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/userinfo").json()
+    userinfo: dict[str, object] = client.get(f"{current_app.config["ONE_LOGIN_INTERNAL_HOST"]}/userinfo").json()
 
-    # Verify the core identity credential JWT.
-    identity = verify_core_identity_jwt(userinfo.get("https://vocab.account.gov.uk/v1/coreIdentityJWT"))
+    # Verify the core identity credential JWT if present and a string.
+    core_identity_jwt = userinfo.get("https://vocab.account.gov.uk/v1/coreIdentityJWT")
+    identity: dict[str, object] | None = None
+    if isinstance(core_identity_jwt, str):
+        identity = verify_core_identity_jwt(core_identity_jwt)
 
     # Persist session information.
     session["id_token"] = token["id_token"]
@@ -132,8 +138,7 @@ def user() -> str | Response:
 
     If no session data exists, the user is redirected to login.
     """
-    userinfo: str | None = session.get("userinfo")
-
+    userinfo = session.get("userinfo")
     if userinfo is None:
         return redirect(url_for("auth.login"))
 
@@ -150,13 +155,13 @@ def logout() -> Response:
     This clears local session data and redirects to the One Login
     end-session endpoint with the required ID token hint.
     """
-    id_token: str | None = session.pop("id_token", None)
+    id_token = session.pop("id_token", None)
 
     # Clear remaining session data.
     session.pop("userinfo", None)
     session.pop("identity", None)
 
-    if id_token is None:
+    if not isinstance(id_token, str):
         return redirect(url_for("auth.logged_out"))
 
     end_session_url = f"{current_app.config["ONE_LOGIN_EXTERNAL_HOST"]}/logout"
